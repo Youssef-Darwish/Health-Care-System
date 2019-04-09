@@ -1,19 +1,23 @@
 package model.functionalities;
 
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
 import model.records.Record;
 
-public class Medication implements Functionality {
+public class Medication extends Functionality {
 
 	@Override
 	public int add(Record record) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int edit(String key, String value, String att, String newValue) {
-		// TODO Auto-generated method stub
 		return 0;
+		
+		
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package model.functionalities;
 
 import model.records.Record;
 
-public class Appointment implements Functionality {
+public class Appointment extends Functionality {
 
 	@Override
 	public int add(Record record) {

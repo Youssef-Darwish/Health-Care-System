@@ -2,7 +2,7 @@ package model.functionalities;
 
 import model.records.Record;
 
-public class PatientRegistry implements Functionality {
+public class PatientRegistry extends Functionality {
 
 	@Override
 	public int add(Record record) {

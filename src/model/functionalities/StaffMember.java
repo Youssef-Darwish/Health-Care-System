@@ -1,19 +1,30 @@
 package model.functionalities;
 
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
 import model.records.Record;
 
-public class StaffMember implements Functionality {
+public class StaffMember extends Functionality {
 
-	@Override
-	public int add(Record record) {
+	public  int add(Record record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int edit(String key, String value, String att, String newValue) {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			Statement stat = (Statement) con.createStatement();
+			String query = "update STAFF set "+ att +" = '"+ newValue +
+					"' Where "+ key + " = '"+ value+"';";
+			stat.executeUpdate(query);
+			return 1;
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			return -1;
+		}
 	}
 
 	@Override
