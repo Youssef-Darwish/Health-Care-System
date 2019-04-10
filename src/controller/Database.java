@@ -11,7 +11,7 @@ public class Database {
 	public Connection getCon(){
 	try {
 	Class.forName("com.mysql.jdbc.Driver");
-	con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_db", "root", "12345");
+	con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital_db", "root", "1234abcd");
 	} catch (ClassNotFoundException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
