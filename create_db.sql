@@ -36,13 +36,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `hospital_db`.`STAFF`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `hospital_db`.`STAFF` (
   `ID` INT NOT NULL,
   `NAME` VARCHAR(45) NOT NULL,
   `ROLE` INT NOT NULL,
   `TELEPHONE` VARCHAR(12) NOT NULL,
   `SALARY` DOUBLE NOT NULL,
+  `PASS` INT DEFAULT 1,
   PRIMARY KEY (`ID`))
+  
 ENGINE = InnoDB;
 
 
