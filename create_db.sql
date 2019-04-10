@@ -1,5 +1,5 @@
 -- MySQL Workbench Forward Engineering
-
+DROP schema `hospital_db`;
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -17,6 +17,12 @@ USE `hospital_db` ;
 -- -----------------------------------------------------
 -- Table `hospital_db`.`Patient`
 -- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital_db`.`Role` (
+  `ID` INT NOT NULL,
+  `NAME` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+  
 CREATE TABLE IF NOT EXISTS `hospital_db`.`Patient` (
   `ID` INT NOT NULL,
   `NAME` VARCHAR(100) NOT NULL,
@@ -33,9 +39,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `hospital_db`.`STAFF` (
   `ID` INT NOT NULL,
   `NAME` VARCHAR(45) NOT NULL,
-  `ROLE` VARCHAR(15) NOT NULL,
+  `ROLE` INT NOT NULL,
   `TELEPHONE` VARCHAR(12) NOT NULL,
-  `SALARY` INT NOT NULL,
+  `SALARY` DOUBLE NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 

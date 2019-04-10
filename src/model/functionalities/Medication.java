@@ -14,7 +14,7 @@ public class Medication extends Functionality {
 	}
 
 	@Override
-	public int edit(String key, String value, String att, String newValue) {
+	public int edit(String key, String value, Record record) {
 		return 0;
 		
 		

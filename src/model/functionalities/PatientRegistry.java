@@ -11,7 +11,7 @@ public class PatientRegistry extends Functionality {
 	}
 
 	@Override
-	public int edit(String key, String value, String att, String newValue) {
+	public int edit(String key, String value,  Record record) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

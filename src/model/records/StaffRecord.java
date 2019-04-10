@@ -4,10 +4,18 @@ public class StaffRecord implements Record {
 
 	private int id;
 	private String name;
-	private String role;
+	private int role;
 	private String telephone;
-	private int salary;
-
+	private double salary;
+	
+	public StaffRecord (int id, String name, int role, String telephone, double salary) {
+		this.id = id;
+		this.name = name;
+		this.role = role;
+		this.telephone = telephone;
+		this.salary = salary;
+		
+	}
 	public int getId() {
 		return id;
 	}
@@ -24,11 +32,11 @@ public class StaffRecord implements Record {
 		this.name = name;
 	}
 
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 
@@ -40,7 +48,7 @@ public class StaffRecord implements Record {
 		this.telephone = telephone;
 	}
 
-	public int getSalary() {
+	public double getSalary() {
 		return salary;
 	}
 

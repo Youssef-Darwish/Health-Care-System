@@ -1,25 +1,34 @@
 package model.functionalities;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Statement;
-
+import controller.Database;
+import model.records.StaffRecord;
 import model.records.Record;
 
-public class StaffMember extends Functionality {
 
+public class StaffMember extends Functionality {
+	@Override
 	public  int add(Record record) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
-	public int edit(String key, String value, String att, String newValue) {
+	public int edit(String key, String value, Record record) {
+		StaffRecord r = (StaffRecord) record;
 		try {
-			Statement stat = (Statement) con.createStatement();
-			String query = "update STAFF set "+ att +" = '"+ newValue +
-					"' Where "+ key + " = '"+ value+"';";
-			stat.executeUpdate(query);
+			PreparedStatement stmt = con.prepareStatement("Update STAFF SET ID = ? , NAME = ? , ROLE = ?, "
+					+ "TELEPHONE = ? , SALARY = ? "
+					+ " WHERE "+key+" = ? ;" );
+			stmt.setInt(1, r.getId());
+			stmt.setString(2, r.getName());
+			stmt.setInt(3, r.getRole());
+			stmt.setString(4, r.getTelephone());
+			stmt.setDouble(5, r.getSalary());
+			stmt.setString(6, value);
+			stmt.executeUpdate();
 			return 1;
 		} catch (SQLException e) {
 			System.out.println(e.toString());
