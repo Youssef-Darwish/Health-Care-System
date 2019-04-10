@@ -7,15 +7,19 @@ public class StaffRecord implements Record {
 	private int role;
 	private String telephone;
 	private double salary;
-	
-	public StaffRecord (int id, String name, int role, String telephone, double salary) {
+
+	private String password;
+
+	public StaffRecord(int id, String name, int role, String telephone, double salary, String pass) {
 		this.id = id;
 		this.name = name;
 		this.role = role;
 		this.telephone = telephone;
 		this.salary = salary;
-		
+		this.password = pass;
+
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -54,6 +58,14 @@ public class StaffRecord implements Record {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

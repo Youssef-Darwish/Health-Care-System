@@ -16,7 +16,8 @@ import model.users.Receptionist;
 public class Controller {
 	private static Database db = new Database();
 	private Connection con = db.getCon();
-	private User loggedIn;
+	// change it in login
+	private User loggedIn = new Admin();
 	
 	
 	@SuppressWarnings("Untested")
@@ -56,4 +57,15 @@ public class Controller {
 	public int editStaffMember (String key, String value, Record r) {
 		return ((Admin) loggedIn).editStaffMember(key, value, r);
 	}
+	
+	public int deleteStaffMember (String key, String value) {
+		System.out.println();
+		return ((Admin) loggedIn).deleteStaffMember(key, value);
+	}
+
+	public int addStaffMember (Record record) {
+		System.out.println("in controller");
+		return ((Admin) loggedIn).addStaffMember(record);
+	}
+
 }
