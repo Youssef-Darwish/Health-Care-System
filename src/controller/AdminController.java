@@ -55,6 +55,8 @@ public class AdminController implements Initializable {
 	@FXML // fx:id="deleteStaffButton
 	private Button deleteStaffButton;
 
+	public static StaffRecord selectedRecord;
+
 	public void buildStaffTable() throws SQLException {
 
 		// button.disableProperty().bind(Bindings.isEmpty(tableView.getSelectionModel().getSelectedItems()));
@@ -103,24 +105,25 @@ public class AdminController implements Initializable {
 		Parent pageParent = FXMLLoader.load(getClass().getResource(uml));
 		Scene adminPageScene = new Scene(pageParent);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
 		stage.setScene(adminPageScene);
 
 		stage.show();
 	}
 
-	// public int editStaffMember (String key, String value) {
-	// //form new record before sending
-	// Record r;
-	// return ((Admin) LoginController.loggedIn).editStaffMember(key, value, r);
-	// }
-	//
+	@FXML
+	public void editStaffMember(ActionEvent event) throws IOException {
+		System.out.println("here");
+		selectedRecord = (StaffRecord) staffTable.getSelectionModel().getSelectedItem();
+		show("/view/EditStaffMember.fxml", event);
+	}
+
 	@FXML
 	public void deleteStaffMember(ActionEvent event) throws SQLException {
 
-		
-		StaffRecord r = (StaffRecord) staffTable.getSelectionModel().getSelectedItem();
-		 ((Admin) LoginController.loggedIn).deleteStaffMember("id", String.valueOf(r.getId()));
-		 this.buildStaffTable();
+		selectedRecord = (StaffRecord) staffTable.getSelectionModel().getSelectedItem();
+		((Admin) LoginController.loggedIn).deleteStaffMember("id", String.valueOf(selectedRecord.getId()));
+		this.buildStaffTable();
 	}
 
 	@FXML

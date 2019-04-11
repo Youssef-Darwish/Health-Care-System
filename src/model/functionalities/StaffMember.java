@@ -36,16 +36,16 @@ public class StaffMember extends Functionality {
 	public int edit(String key, String value, Record record) {
 		StaffRecord r = (StaffRecord) record;
 		try {
-			PreparedStatement stmt = con.prepareStatement("Update STAFF SET ID = ? , NAME = ? , ROLE = ?, "
+			PreparedStatement stmt = con.prepareStatement("Update STAFF SET  NAME = ? , ROLE = ?, "
 					+ "TELEPHONE = ? , SALARY = ? " + " WHERE " + key + " = ? ;");
-			stmt.setInt(1, r.getId());
-			stmt.setString(2, r.getName());
-			stmt.setInt(3, r.getRole());
-			stmt.setString(4, r.getTelephone());
-			stmt.setDouble(5, r.getSalary());
-			stmt.setString(6, value);
-			stmt.executeUpdate();
-			return 1;
+	
+			stmt.setString(1, r.getName());
+			stmt.setInt(2, r.getRole());
+			stmt.setString(3, r.getTelephone());
+			stmt.setDouble(4, r.getSalary());
+			stmt.setString(5, value);
+			return stmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 			return -1;
