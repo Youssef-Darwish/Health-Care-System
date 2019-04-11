@@ -10,8 +10,7 @@ public class StaffRecord implements Record {
 
 	private String password;
 
-	public StaffRecord(int id, String name, int role, String telephone, double salary, String pass) {
-		this.id = id;
+	public StaffRecord(String name, int role, String telephone, double salary, String pass) {
 		this.name = name;
 		this.role = role;
 		this.telephone = telephone;
