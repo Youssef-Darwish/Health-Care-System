@@ -6,11 +6,11 @@ import java.sql.Statement;
 import com.mysql.jdbc.ResultSet;
 
 import model.records.Record;
-import model.users.User;
 import model.users.Admin;
 import model.users.Doctor;
 import model.users.Manager;
 import model.users.Receptionist;
+import model.users.User;
 
 
 public class Controller {
@@ -18,6 +18,7 @@ public class Controller {
 	private Connection con = db.getCon();
 	// change it in login
 	private User loggedIn ;
+
 	
 	
 	@SuppressWarnings("Untested")
