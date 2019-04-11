@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import com.mysql.jdbc.ResultSet;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +19,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.records.Record;
+import model.records.StaffRecord;
 import model.users.Admin;
 import model.users.Doctor;
 import model.users.Manager;
@@ -27,9 +33,11 @@ import model.users.Receptionist;
 import model.users.User;
 
 public class LoginController implements Initializable {
-	 private static Database db = new Database();
-	 private Connection con = db.getCon();
+	public static Database db = new Database();
+	public static Connection con = db.getCon();
+	private HelperPlugin plugin = new HelperPlugin();
 	
+
 	// change it in login
 	public static User loggedIn;
 
@@ -38,16 +46,19 @@ public class LoginController implements Initializable {
 
 	@FXML // fx:id="passwordText"
 	private PasswordField passwordText;
+	
+	
 
 	@FXML
-	public int login(ActionEvent event) throws IOException {
-		Parent pageParent = null; 
+	public int login(ActionEvent event) throws IOException, SQLException {
+		Parent pageParent = null;
 		System.out.println(emailText.getText());
 		System.out.println(passwordText.getText());
 		try {
 			Statement stat = con.createStatement();
 			String query = "";
-			query += "select Role from STAFF where Name = '" + emailText.getText() + "' and pass = MD5('" + passwordText.getText() + "');";
+			query += "select Role from STAFF where Name = '" + emailText.getText() + "' and pass = MD5('"
+					+ passwordText.getText() + "');";
 
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			if (!result.next()) { // empty set
@@ -71,14 +82,18 @@ public class LoginController implements Initializable {
 
 			return -2;
 		}
-		
+
 		Scene adminPageScene = new Scene(pageParent);
-		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(adminPageScene);
+	
 		stage.show();
 
 		return 1;
 	}
+	
+		
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

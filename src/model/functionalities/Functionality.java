@@ -9,19 +9,11 @@ public abstract class Functionality {
 	private static Database db = new Database();
 	protected Connection con = db.getCon();
 
-	public int add(Record record) {
-		return 0;
-	}
+	public abstract int add(Record record);
 
-	public int edit(String key, String value, Record record) {
-		return 0;
-	}
+	public abstract int edit(String key, String value, Record record);
 
-	public int delete(String key, String value) {
-		return 0;
-	}
+	public abstract int delete(String key, String value);
 
-	public Record get(String key, String value) {
-		return null;
-	}
+	public abstract Record get(String key, String value);
 }

@@ -18,6 +18,14 @@ public class StaffRecord implements Record {
 		this.password = pass;
 
 	}
+	
+	public StaffRecord(int id, String name, int role, String telephone, double salary) {
+		this.id = id;
+		this.name = name;
+		this.role = role;
+		this.telephone = telephone;
+		this.salary = salary;
+	}
 
 	public int getId() {
 		return id;
