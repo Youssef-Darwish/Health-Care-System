@@ -65,13 +65,13 @@ public class AdminController implements Initializable {
 //	}
 
 	@FXML
-	public void addStaffMember(ActionEvent event) throws IOException {
+	public int addStaffMember(ActionEvent event) throws IOException {
 		System.out.println("in controller");
 		show("/view/AddStaffMember.fxml", event);
-//		Record record = new StaffRecord(name.getText(), role.getValue(), telephone.getText(), Integer.parseInt(salary.getText()),
-//				password.getText());
-//
-//		return ((Admin) LoginController.loggedIn).addStaffMember(record);
+		Record record = new StaffRecord(name.getText(), 1, telephone.getText(), Integer.parseInt(salary.getText()),
+				password.getText());
+
+		return ((Admin) LoginController.loggedIn).addStaffMember(record);
 	}
 
 }

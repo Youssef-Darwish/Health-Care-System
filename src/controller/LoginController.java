@@ -27,33 +27,34 @@ import model.users.Receptionist;
 import model.users.User;
 
 public class LoginController implements Initializable {
-	// private static Database db = new Database();
-	// private Connection con = db.getCon();
+	 private static Database db = new Database();
+	 private Connection con = db.getCon();
 	
 	// change it in login
 	public static User loggedIn;
 
 	@FXML // fx:id="emailText"
-	private TextField email;
+	private TextField emailText;
 
 	@FXML // fx:id="passwordText"
-	private PasswordField password;
+	private PasswordField passwordText;
 
 	@FXML
 	public int login(ActionEvent event) throws IOException {
 		Parent pageParent = null; 
-//		try {
-//			Statement stat = con.createStatement();
-//			String query = "";
-//			query += "select Role from STAFF where Name = '" + userName + "' and pass = MD5('" + password + "');";
-//
-//			ResultSet result = (ResultSet) stat.executeQuery(query);
-//			if (!result.next()) { // empty set
-//				return -1;
-//			}
+		System.out.println(emailText.getText());
+		System.out.println(passwordText.getText());
+		try {
+			Statement stat = con.createStatement();
+			String query = "";
+			query += "select Role from STAFF where Name = '" + emailText.getText() + "' and pass = MD5('" + passwordText.getText() + "');";
 
-			//int Role = result.getInt("Role");
-			int Role = 1;
+			ResultSet result = (ResultSet) stat.executeQuery(query);
+			if (!result.next()) { // empty set
+				return -1;
+			}
+
+			int Role = result.getInt("Role");
 
 			if (Role == 1) {
 				pageParent = FXMLLoader.load(getClass().getResource("/view/AdminScene.fxml"));
@@ -66,10 +67,10 @@ public class LoginController implements Initializable {
 				loggedIn = new Receptionist();
 			}
 
-//		} catch (SQLException e) {
-//
-//			return -2;
-//		}
+		} catch (SQLException e) {
+
+			return -2;
+		}
 		
 		Scene adminPageScene = new Scene(pageParent);
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
