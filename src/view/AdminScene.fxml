@@ -21,9 +21,9 @@
                      </columns>
                   </TableView>
                   <Button fx:id="addStaff" layoutX="14.0" layoutY="442.0" mnemonicParsing="false" onAction="#addStaffMember" prefHeight="25.0" prefWidth="86.0" text="Add" />
-                  <Button fx:id="editStaff" disable="true" layoutX="107.0" layoutY="442.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Edit" />
-                  <Button fx:id="deleteStaff" disable="true" layoutX="203.0" layoutY="442.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Delete" />
-                  <Button fx:id="LOG_OUT" layoutX="387.0" layoutY="442.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Log out" />
+                  <Button fx:id="editStaffButton" disable="true" layoutX="107.0" layoutY="442.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Edit" />
+                  <Button fx:id="deleteStaffButton" disable="true" layoutX="203.0" layoutY="442.0" mnemonicParsing="false" onAction="#deleteStaffMember" prefHeight="25.0" prefWidth="77.0" text="Delete" />
+                  <Button fx:id="staffLogout" layoutX="387.0" layoutY="442.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="73.0" text="Log out" />
                </children>
             </AnchorPane>
          </content>

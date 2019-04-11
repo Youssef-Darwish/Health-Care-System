@@ -10,7 +10,7 @@
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="471.0">
          <children>
-            <Button id="signUp" layoutX="283.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Sign up" />
+            <Button id="signUp" layoutX="283.0" layoutY="230.0" mnemonicParsing="false" onAction="#quit" prefHeight="25.0" prefWidth="77.0" text="Quit" />
             <Label layoutX="50.0" layoutY="133.0" prefHeight="15.0" prefWidth="56.0" text="Email" />
             <Label layoutX="50.0" layoutY="183.0" text="Password" />
             <PasswordField id="passwordText" fx:id="passwordText" layoutX="170.0" layoutY="177.0" prefHeight="25.0" prefWidth="247.0" />

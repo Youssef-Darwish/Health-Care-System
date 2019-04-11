@@ -91,7 +91,12 @@ public class LoginController implements Initializable {
 
 		return 1;
 	}
-	
+
+	@FXML
+	public void quit(ActionEvent event){
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+	}
 		
 	
 
