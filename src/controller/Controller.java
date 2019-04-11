@@ -17,7 +17,7 @@ public class Controller {
 	private static Database db = new Database();
 	private Connection con = db.getCon();
 	// change it in login
-	private User loggedIn = new Admin();
+	private User loggedIn ;
 	
 	
 	@SuppressWarnings("Untested")

@@ -13,8 +13,10 @@ public class StaffMember extends Functionality {
 	public int add(Record record) {
 		StaffRecord r = (StaffRecord) record;
 		System.out.println("entered");
+
 		try {
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO STAFF Values(?,?,?,?,?,?);");
+//		    String sql = "INSERT INTO Users  VALUES (MD5(CONCAT(?,CURRENT_TIMESTAMP), ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO STAFF Values(?,?,?,?,?,MD5(?));");
 			stmt.setInt(1, r.getId());
 			stmt.setString(2, r.getName());
 			stmt.setInt(3, r.getRole());
