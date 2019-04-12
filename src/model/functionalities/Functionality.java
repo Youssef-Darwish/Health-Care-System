@@ -18,4 +18,6 @@ public abstract class Functionality {
 	public abstract int delete(String key, String value);
 
 	public abstract ResultSet get(String key, String value);
+
+	public abstract ResultSet search(String value);
 }

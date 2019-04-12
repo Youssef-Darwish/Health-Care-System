@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
-import controller.Database;
 import model.records.StaffRecord;
 import model.records.Record;
 
@@ -48,6 +47,7 @@ public class StaffMember extends Functionality {
 			stmt.setDouble(4, r.getSalary());
 			stmt.setString(5, value);
 			return stmt.executeUpdate();
+			
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -65,6 +65,25 @@ public class StaffMember extends Functionality {
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 			return -1;
+		}
+	}
+	
+	@Override
+	public ResultSet search (String value) {
+
+		try {
+			Statement stat = (Statement) con.createStatement();
+			String query = "";
+			query += "SELECT * from STAFF WHERE NAME = " +value+ " OR ROLE = " + value + ""
+					+ " OR TELEPHONE = "+value +" OR SALARY = "+value+" ;";
+			
+			
+			ResultSet result = (ResultSet) stat.executeQuery(query);
+			//System.out.println(query+ "   "+result.getRow());
+			//result.getFetchSize()
+			return result;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 

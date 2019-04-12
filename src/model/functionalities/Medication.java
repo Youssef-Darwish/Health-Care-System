@@ -33,4 +33,10 @@ public class Medication extends Functionality {
 		return null;
 	}
 
+	@Override
+	public ResultSet search(String value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -41,13 +41,13 @@ public class EditStaffController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
 		editStaffName.setText(AdminController.selectedRecord.getName());
 		editStaffRole.setText(String.valueOf(AdminController.selectedRecord.getRole()));
 		editStaffSalary.setText(String.valueOf(AdminController.selectedRecord.getSalary()));
 		editStaffTele.setText(AdminController.selectedRecord.getTelephone());
 		editStaffPass.setText(AdminController.selectedRecord.getPassword());
-
+		
 	}
 
 	@FXML

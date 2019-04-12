@@ -28,5 +28,10 @@ public class Admin implements User {
 		return f.get(key, value);
 	}
 	
+	public ResultSet searchStaffMember(String value){
+		
+		return f.search(value);
+	}
+	
 
 }
