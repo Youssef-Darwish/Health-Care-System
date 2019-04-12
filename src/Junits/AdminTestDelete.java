@@ -12,10 +12,9 @@ public class AdminTestDelete {
 
 	@Test
 	public void deleteStaffMemberTest4 () {
-		int add = admin.addStaffMember(new StaffRecord("user2","Admin","012012",250,"pass"));
-		int output = admin.deleteStaffMember("NAME", "user2");
+		int output = admin.deleteStaffMember("NAME", "Ahmed");
 		// one row affected
-		assertEquals(1, output);
+		assertEquals(2, output);
 	}
 	@Test
 	public void deleteStaffMemberTest2 () {

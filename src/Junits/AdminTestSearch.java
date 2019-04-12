@@ -16,7 +16,7 @@ public class AdminTestSearch {
 	public void searchStaffMemberTest1 () {
 		int counter = 0;
 		try {
-			ResultSet rs = admin.searchStaffMember("2");
+			ResultSet rs = admin.searchStaffMember("Role","doctor");
 			while (!rs.isLast()) {
 				rs.next();
 				counter++;
@@ -30,12 +30,12 @@ public class AdminTestSearch {
 	public void getStaffMemberTest1 () {
 		int counter = 0;
 		try {
-			ResultSet rs = admin.getStaffMember("TELEPHONE","2");
+			ResultSet rs = admin.searchStaffMember("TELEPHONE","-1");
 			while (!rs.isLast()) {
 				rs.next();
 				counter++;
 			}
-			assertEquals(1, counter);
+			assertEquals(0, counter);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
