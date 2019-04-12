@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +24,7 @@ import model.users.Admin;
 public class EditStaffController implements Initializable {
 
 	@FXML // fx:id="editStaffRole"
-	private TextField editStaffRole;
+	private ComboBox<String> editStaffRole;
 
 	@FXML // fx:id="editStaffName"
 	private TextField editStaffName;
@@ -41,12 +43,16 @@ public class EditStaffController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
+		ObservableList<String> searchAttributes = FXCollections.observableArrayList("Admin", "Manager", "Doctor",
+				"Receptionist");
+		editStaffRole.setItems(searchAttributes);
+
 		editStaffName.setText(AdminController.selectedRecord.getName());
-		editStaffRole.setText(String.valueOf(AdminController.selectedRecord.getRole()));
+		editStaffRole.setValue(String.valueOf(AdminController.selectedRecord.getRole()));
 		editStaffSalary.setText(String.valueOf(AdminController.selectedRecord.getSalary()));
 		editStaffTele.setText(AdminController.selectedRecord.getTelephone());
-		
+
 	}
 
 	@FXML
@@ -55,22 +61,35 @@ public class EditStaffController implements Initializable {
 		if (validateInput()) {
 			warningLabel.setText("Enter all required fields");
 			warningLabel.setVisible(true);
-			
+
 		} else {
-			
-			//validate input type
+
+			// validate input type
 			try {
-			StaffRecord record = new StaffRecord(editStaffName.getText(), Integer.parseInt(editStaffRole.getText()),
-					editStaffTele.getText(), Double.parseDouble(editStaffSalary.getText()), editStaffPass.getText());
-			
-			System.out.println(((Admin) LoginController.loggedIn).editStaffMember("id",
-					String.valueOf(AdminController.selectedRecord.getId()), record));
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-			show("/view/AdminScene.fxml", event);
-			}catch(NumberFormatException e){
+				StaffRecord record = new StaffRecord(editStaffName.getText(), editStaffRole.getValue(),
+						editStaffTele.getText(), Double.parseDouble(editStaffSalary.getText()),
+						editStaffPass.getText());
+
+				if (Double.parseDouble(editStaffSalary.getText()) < 0)
+					throw new NumberFormatException();
+				
+				int result = ((Admin) LoginController.loggedIn).editStaffMember("id",
+						String.valueOf(AdminController.selectedRecord.getId()), record);
+				if (result == -1) {
+					throw new Exception();
+				}
+
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+
+				show("/view/AdminScene.fxml", event);
+			} catch (NumberFormatException e) {
 				warningLabel.setText("invalid input");
 				warningLabel.setVisible(true);
+			} catch (Exception e) {
+				warningLabel.setText("Invalid Input");
+				warningLabel.setVisible(true);
+
 			}
 		}
 	}
@@ -94,10 +113,9 @@ public class EditStaffController implements Initializable {
 	private boolean validateInput() {
 
 		// check that all fields are not empty for now
-		
-		boolean check = editStaffName.getText().trim().isEmpty() || editStaffRole.getText().trim().isEmpty()
-				|| editStaffSalary.getText().trim().isEmpty() || editStaffPass.getText().trim().isEmpty()
-				|| editStaffTele.getText().trim().isEmpty();
+
+		boolean check = editStaffName.getText().trim().isEmpty() || editStaffSalary.getText().trim().isEmpty()
+				|| editStaffPass.getText().trim().isEmpty() || editStaffTele.getText().trim().isEmpty();
 
 		return check;
 	}

@@ -26,8 +26,8 @@
             <Button fx:id="cancelStaffButton" layoutX="220.0" layoutY="356.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
             <Label layoutX="35.0" layoutY="265.0" text="Password" />
             <TextField fx:id="editStaffPass" layoutX="121.0" layoutY="260.0" prefHeight="25.0" prefWidth="225.0" />
-            <TextField fx:id="editStaffRole" layoutX="121.0" layoutY="306.0" prefHeight="25.0" prefWidth="225.0" />
             <Label fx:id="warningLabel" layoutX="35.0" layoutY="80.0" prefHeight="22.0" prefWidth="179.0" text="Enter all fields values" textFill="#f50000" visible="false" />
+            <ComboBox fx:id="editStaffRole" layoutX="122.0" layoutY="306.0" prefHeight="25.0" prefWidth="165.0" />
          </children>
       </Pane>
    </children>

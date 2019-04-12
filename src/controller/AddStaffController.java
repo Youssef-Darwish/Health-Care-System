@@ -2,8 +2,13 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.mysql.jdbc.SQLError;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -23,7 +29,7 @@ import model.users.Admin;
 public class AddStaffController implements Initializable {
 
 	@FXML // fx:id="addStaffRole"
-	private TextField addStaffRole;
+	private ComboBox<String> addStaffRole;
 
 	@FXML // fx:id="addStaffName"
 	private TextField addStaffName;
@@ -42,7 +48,10 @@ public class AddStaffController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		ObservableList<String> searchAttributes = FXCollections.observableArrayList("Admin", "Manager", "Doctor",
+				"Receptionist");
+		addStaffRole.setItems(searchAttributes);
+		addStaffRole.setValue("Receptionist");
 
 	}
 
@@ -55,15 +64,29 @@ public class AddStaffController implements Initializable {
 
 		} else {
 			try {
-				Record record = new StaffRecord(addStaffName.getText(), Integer.parseInt(addStaffRole.getText()),
-						addStaffTele.getText(), Integer.parseInt(addStaffSalary.getText()), addStaffPass.getText());
+				Record record = new StaffRecord(addStaffName.getText(), addStaffRole.getValue(), addStaffTele.getText(),
+						Integer.parseInt(addStaffSalary.getText()), addStaffPass.getText());
+				
+				if (Double.parseDouble(addStaffSalary.getText()) < 0)
+					throw new NumberFormatException();
 
-				((Admin) LoginController.loggedIn).addStaffMember(record);
+				int result = ((Admin) LoginController.loggedIn).addStaffMember(record);
+				
+				if(result == -1){
+					throw new Exception();
+				}
+
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				stage.close();
 
+				
+
 				show("/view/AdminScene.fxml", event);
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException e ) {
+				warningLabel.setText("Invalid Input");
+				warningLabel.setVisible(true);
+
+			} catch(Exception e){
 				warningLabel.setText("Invalid Input");
 				warningLabel.setVisible(true);
 
@@ -91,9 +114,8 @@ public class AddStaffController implements Initializable {
 	private boolean validateInput() {
 
 		// check that all fields are not empty for now
-		boolean check = addStaffName.getText().trim().isEmpty() || addStaffRole.getText().trim().isEmpty()
-				|| addStaffSalary.getText().trim().isEmpty() || addStaffPass.getText().trim().isEmpty()
-				|| addStaffTele.getText().trim().isEmpty();
+		boolean check = addStaffName.getText().trim().isEmpty() || addStaffSalary.getText().trim().isEmpty()
+				|| addStaffPass.getText().trim().isEmpty() || addStaffTele.getText().trim().isEmpty();
 
 		return check;
 	}

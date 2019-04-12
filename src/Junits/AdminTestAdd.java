@@ -12,19 +12,19 @@ public class AdminTestAdd {
 	@Test
 	public void addStaffMemberTest1 () {
 		
-		int output = admin.addStaffMember(new StaffRecord(1,"Ahmed",2,"012012",250));
+		int output = admin.addStaffMember(new StaffRecord("Ahmed","Admin","012012",250,"pass"));
 		assertEquals(1, output);
 	}
 	@Test
 	public void addStaffMemberTest2 () {
-		int output = admin.addStaffMember(new StaffRecord(1,"Ahmed",2,"2",250));
+		int output = admin.addStaffMember(new StaffRecord("Ahmed","Admin","012012",250,"pass2"));
 		//duplicate entry
 		assertEquals(-1, output);
 	}
 	@Test
 	public void addStaffMemberTest3 () {
 		
-		int output = admin.addStaffMember(new StaffRecord(1,"Ahmed",2,"3",250));
+		int output = admin.addStaffMember(new StaffRecord("Ahmed","Doctor","3",250,"pass3"));
 		assertEquals(1, output);
 	}
 	

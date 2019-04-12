@@ -33,11 +33,12 @@ import model.users.Manager;
 import model.users.Receptionist;
 import model.users.User;
 
+
 public class LoginController implements Initializable {
 	public static Database db = new Database();
 	public static Connection con = db.getCon();
 	private HelperPlugin plugin = new HelperPlugin();
-
+	  
 	// change it in login
 	public static User loggedIn;
 
@@ -61,7 +62,7 @@ public class LoginController implements Initializable {
 			try {
 				Statement stat = con.createStatement();
 				String query = "";
-				query += "select Role from STAFF where Name = '" + emailText.getText() + "' and pass = MD5('"
+				query += "select * from STAFF where Name = '" + emailText.getText() + "' and pass = MD5('"
 						+ passwordText.getText() + "');";
 
 				ResultSet result = (ResultSet) stat.executeQuery(query);
@@ -69,16 +70,17 @@ public class LoginController implements Initializable {
 					warningLabel.setVisible(true);
 				}
 
-				int Role = result.getInt("Role");
-
-				if (Role == 1) {
+				String R = result.getString(3);
+				System.out.println(R);
+				String role = R.toLowerCase();
+				if (role.equals("admin")) {
 					pageParent = FXMLLoader.load(getClass().getResource("/view/AdminScene.fxml"));
 					loggedIn = new Admin();
-				} else if (Role == 2) {
+				} else if (role.equals("manager")) {
 					loggedIn = new Manager();
-				} else if (Role == 3) {
+				} else if (role.equals("doctor")) {
 					loggedIn = new Doctor();
-				} else if (Role == 4) {
+				} else if (role.equals("receptionist")) {
 					loggedIn = new Receptionist();
 				}
 

@@ -76,8 +76,8 @@ public class AdminController implements Initializable {
 		ObservableList<Record> data = FXCollections.observableArrayList();
 
 		while (rs.next()) {
-
-			data.add(new StaffRecord(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getDouble(5)));
+			
+			data.add(new StaffRecord(rs.getInt(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getDouble(5)));
 		}
 
 		staffid.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -164,5 +164,6 @@ public class AdminController implements Initializable {
 		adminSearchTextField.setText("");
 		buildStaffTable(admin.getAll());
 	}
+	
 
 }

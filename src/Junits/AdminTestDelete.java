@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.records.StaffRecord;
 import model.users.Admin;
 
 public class AdminTestDelete {
@@ -11,13 +12,8 @@ public class AdminTestDelete {
 
 	@Test
 	public void deleteStaffMemberTest4 () {
-		int output = admin.deleteStaffMember("TELEPHONE", "2");
-		// one row affected
-		assertEquals(1, output);
-	}
-	@Test
-	public void deleteStaffMemberTest1 () {
-		int output = admin.deleteStaffMember("TELEPHONE", "3");
+		int add = admin.addStaffMember(new StaffRecord("user2","Admin","012012",250,"pass"));
+		int output = admin.deleteStaffMember("NAME", "user2");
 		// one row affected
 		assertEquals(1, output);
 	}
@@ -27,11 +23,5 @@ public class AdminTestDelete {
 		// no rows affected
 		assertEquals(0, output);
 	}
-	@Test
-	public void deleteStaffMemberTest3 () {
-		int output = admin.deleteStaffMember("nn", "1000");
-		// no column nn
-		assertEquals(-1, output);
-	}
-
+	
 }

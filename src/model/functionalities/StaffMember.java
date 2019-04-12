@@ -21,14 +21,13 @@ public class StaffMember extends Functionality {
 					.prepareStatement("INSERT INTO STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS) Values(?,?,?,?,MD5(?));");
 
 			stmt.setString(1, r.getName());
-			stmt.setInt(2, r.getRole());
+			stmt.setString(2, r.getRole());
 			stmt.setString(3, r.getTelephone());
 			stmt.setDouble(4, r.getSalary());
 			stmt.setString(5, r.getPassword());
 			return stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println(e.toString());
 			return -1;
 		}
 
@@ -42,7 +41,7 @@ public class StaffMember extends Functionality {
 					+ "TELEPHONE = ? , SALARY = ? " + " WHERE " + key + " = ? ;");
 
 			stmt.setString(1, r.getName());
-			stmt.setInt(2, r.getRole());
+			stmt.setString(2, r.getRole());
 			stmt.setString(3, r.getTelephone());
 			stmt.setDouble(4, r.getSalary());
 			stmt.setString(5, value);
