@@ -12,7 +12,7 @@ public class AdminTestAdd {
 	@Test
 	public void addStaffMemberTest1 () {
 		
-		int output = admin.addStaffMember(new StaffRecord(1,"Ahmed",2,"2",250));
+		int output = admin.addStaffMember(new StaffRecord(1,"Ahmed",2,"012012",250));
 		assertEquals(1, output);
 	}
 	@Test

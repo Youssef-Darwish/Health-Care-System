@@ -54,14 +54,20 @@ public class AddStaffController implements Initializable {
 			warningLabel.setVisible(true);
 
 		} else {
-			Record record = new StaffRecord(addStaffName.getText(), Integer.parseInt(addStaffRole.getText()),
-					addStaffTele.getText(), Integer.parseInt(addStaffSalary.getText()), addStaffPass.getText());
+			try {
+				Record record = new StaffRecord(addStaffName.getText(), Integer.parseInt(addStaffRole.getText()),
+						addStaffTele.getText(), Integer.parseInt(addStaffSalary.getText()), addStaffPass.getText());
 
-			((Admin) LoginController.loggedIn).addStaffMember(record);
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
+				((Admin) LoginController.loggedIn).addStaffMember(record);
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
 
-			show("/view/AdminScene.fxml", event);
+				show("/view/AdminScene.fxml", event);
+			} catch (NumberFormatException e) {
+				warningLabel.setText("Invalid Input");
+				warningLabel.setVisible(true);
+
+			}
 		}
 
 	}

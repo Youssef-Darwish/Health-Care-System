@@ -55,18 +55,24 @@ public class AdminController implements Initializable {
 	@FXML // fx:id="deleteStaffButton
 	private Button deleteStaffButton;
 
+	@FXML // fx:id="adminSearchButton
+	private Button adminSearchButton;
+
+	@FXML // fx:id="adminCancelButton
+	private Button adminCancelButton;
+
+	@FXML // fx:id="adminSearchTextField
+	private TextField adminSearchTextField;
+
+	@FXML // fx:id="adminSearchOptions
+	private ComboBox<String> adminSearchOptions;
+
 	public static StaffRecord selectedRecord;
 
 	private Admin admin = new Admin();
-	public void buildStaffTable() throws SQLException {
 
-		// button.disableProperty().bind(Bindings.isEmpty(tableView.getSelectionModel().getSelectedItems()));
+	public void buildStaffTable(ResultSet rs) throws SQLException {
 
-		String SQL = "SELECT * from STAFF";
-		// ResultSet
-		
-		ResultSet rs = (ResultSet) admin.getStaffMember("sdf", "sdfs");
-//		ResultSet rs = (ResultSet) LoginController.con.createStatement().executeQuery(SQL);
 		ObservableList<Record> data = FXCollections.observableArrayList();
 
 		while (rs.next()) {
@@ -90,14 +96,21 @@ public class AdminController implements Initializable {
 
 		editStaffButton.disableProperty().bind(Bindings.isEmpty(staffTable.getSelectionModel().getSelectedItems()));
 		deleteStaffButton.disableProperty().bind(Bindings.isEmpty(staffTable.getSelectionModel().getSelectedItems()));
+		
+		ObservableList<String> searchAttributes = FXCollections.observableArrayList("ID", "NAME", "ROLE", "SALARY",
+				"TELEPHONE");
+		adminSearchOptions.setItems(searchAttributes);
+		adminSearchOptions.setValue("ID");
+
+		ResultSet rs = (ResultSet) admin.getAll();
 
 		try {
-			this.buildStaffTable();
+			this.buildStaffTable(rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -121,7 +134,7 @@ public class AdminController implements Initializable {
 
 		selectedRecord = (StaffRecord) staffTable.getSelectionModel().getSelectedItem();
 		((Admin) LoginController.loggedIn).deleteStaffMember("id", String.valueOf(selectedRecord.getId()));
-		this.buildStaffTable();
+		this.buildStaffTable(admin.getAll());
 	}
 
 	@FXML
@@ -134,6 +147,22 @@ public class AdminController implements Initializable {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 		show("/view/Login.fxml", event);
+	}
+
+	@FXML
+	public void search(ActionEvent event) throws SQLException {
+
+		String key = adminSearchOptions.getValue();
+		String value = adminSearchTextField.getText();
+		ResultSet rs = admin.searchStaffMember(key, value);
+		buildStaffTable((rs));
+
+	}
+
+	@FXML
+	public void cancelSearch(ActionEvent e) throws SQLException {
+		adminSearchTextField.setText("");
+		buildStaffTable(admin.getAll());
 	}
 
 }

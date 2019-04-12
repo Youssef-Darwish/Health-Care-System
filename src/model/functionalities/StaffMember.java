@@ -69,26 +69,25 @@ public class StaffMember extends Functionality {
 	}
 	
 	@Override
-	public ResultSet search (String value) {
+	public ResultSet search (String key,String value) {
 
 		try {
-			Statement stat = (Statement) con.createStatement();
-			String query = "";
-			query += "SELECT * from STAFF WHERE NAME = " +value+ " OR ROLE = " + value + ""
-					+ " OR TELEPHONE = "+value +" OR SALARY = "+value+" ;";
-			
-			
-			ResultSet result = (ResultSet) stat.executeQuery(query);
-			//System.out.println(query+ "   "+result.getRow());
-			//result.getFetchSize()
-			return result;
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM STAFF " 
+			+ " WHERE " + key + " = ? ;");
+			stmt.setString(1, value);
+			return (ResultSet)stmt.executeQuery();
+////			ResultSet result = (ResultSet) stat.executeQuery(query);
+////			//System.out.println(query+ "   "+result.getRow());
+////			//result.getFetchSize()
+//			return result;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
 
 	@Override
-	public ResultSet get(String key, String value) {
+	public ResultSet getAll() {
 
 		try {
 			Statement stat = (Statement) con.createStatement();

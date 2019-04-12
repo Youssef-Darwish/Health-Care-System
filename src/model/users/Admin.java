@@ -23,14 +23,14 @@ public class Admin implements User {
 		return f.add(record);
 	}
 	
-	public ResultSet getStaffMember(String key, String value){
+	public ResultSet getAll(){
 		
-		return f.get(key, value);
+		return f.getAll();
 	}
 	
-	public ResultSet searchStaffMember(String value){
+	public ResultSet searchStaffMember(String key,String value){
 		
-		return f.search(value);
+		return f.search(key,value);
 	}
 	
 

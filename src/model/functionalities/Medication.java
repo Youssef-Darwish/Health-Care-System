@@ -28,13 +28,13 @@ public class Medication extends Functionality {
 	}
 
 	@Override
-	public ResultSet get(String key, String value) {
+	public ResultSet getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultSet search(String value) {
+	public ResultSet search(String key,String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

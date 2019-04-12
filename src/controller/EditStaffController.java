@@ -46,7 +46,6 @@ public class EditStaffController implements Initializable {
 		editStaffRole.setText(String.valueOf(AdminController.selectedRecord.getRole()));
 		editStaffSalary.setText(String.valueOf(AdminController.selectedRecord.getSalary()));
 		editStaffTele.setText(AdminController.selectedRecord.getTelephone());
-		editStaffPass.setText(AdminController.selectedRecord.getPassword());
 		
 	}
 
@@ -54,20 +53,25 @@ public class EditStaffController implements Initializable {
 	public void editInDB(ActionEvent event) throws IOException {
 
 		if (validateInput()) {
+			warningLabel.setText("Enter all required fields");
 			warningLabel.setVisible(true);
 			
 		} else {
 			
 			//validate input type
-			
+			try {
 			StaffRecord record = new StaffRecord(editStaffName.getText(), Integer.parseInt(editStaffRole.getText()),
 					editStaffTele.getText(), Double.parseDouble(editStaffSalary.getText()), editStaffPass.getText());
-
+			
 			System.out.println(((Admin) LoginController.loggedIn).editStaffMember("id",
 					String.valueOf(AdminController.selectedRecord.getId()), record));
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.close();
 			show("/view/AdminScene.fxml", event);
+			}catch(NumberFormatException e){
+				warningLabel.setText("invalid input");
+				warningLabel.setVisible(true);
+			}
 		}
 	}
 

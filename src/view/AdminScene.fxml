@@ -11,7 +11,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="staffTable" layoutX="6.0" layoutY="7.0" prefHeight="420.0" prefWidth="464.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="staffTable" layoutX="6.0" layoutY="7.0" prefHeight="390.0" prefWidth="483.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="staffid" editable="false" prefWidth="38.0" text="ID" />
                         <TableColumn fx:id="staffname" editable="false" prefWidth="171.99996185302734" sortable="false" text="Name" />
@@ -24,6 +24,10 @@
                   <Button fx:id="editStaffButton" disable="true" layoutX="107.0" layoutY="442.0" mnemonicParsing="false" onAction="#editStaffMember" prefHeight="25.0" prefWidth="86.0" text="Edit" />
                   <Button fx:id="deleteStaffButton" disable="true" layoutX="203.0" layoutY="442.0" mnemonicParsing="false" onAction="#deleteStaffMember" prefHeight="25.0" prefWidth="77.0" text="Delete" />
                   <Button fx:id="staffLogout" layoutX="387.0" layoutY="442.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="73.0" text="Log out" />
+                  <ComboBox fx:id="adminSearchOptions" layoutX="14.0" layoutY="402.0" prefWidth="150.0" />
+                  <TextField fx:id="adminSearchTextField" layoutX="179.0" layoutY="402.0" prefHeight="25.0" prefWidth="135.0" />
+                  <Button fx:id="adminSearchButton" layoutX="326.0" layoutY="402.0" mnemonicParsing="false" onAction="#search" text="Search" />
+                  <Button fx:id="adminCancelButton" layoutX="398.0" layoutY="402.0" mnemonicParsing="false" onAction="#cancelSearch" text="Cancel" />
                </children>
             </AnchorPane>
          </content>

@@ -10,7 +10,6 @@ import model.users.Admin;
 public class AdminTest {
 	Admin admin = new Admin();
 	
-	//some problems and conflicts in schema 
 	
 	@Test
 	public void addStaffMemberTest1 () {
