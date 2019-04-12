@@ -1,5 +1,7 @@
 package model.functionalities;
 
+import com.mysql.jdbc.ResultSet;
+
 import model.records.Record;
 
 public class PatientCase extends Functionality {
@@ -23,7 +25,7 @@ public class PatientCase extends Functionality {
 	}
 
 	@Override
-	public Record get(String key, String value) {
+	public ResultSet get(String key, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

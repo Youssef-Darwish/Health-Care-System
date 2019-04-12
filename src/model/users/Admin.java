@@ -1,5 +1,7 @@
 package model.users;
 
+import com.mysql.jdbc.ResultSet;
+
 import model.functionalities.Functionality;
 import model.functionalities.StaffMember;
 import model.records.Record;
@@ -20,5 +22,11 @@ public class Admin implements User {
 		System.out.println("in admin");
 		return f.add(record);
 	}
+	
+	public ResultSet getStaffMember(String key, String value){
+		
+		return f.get(key, value);
+	}
+	
 
 }

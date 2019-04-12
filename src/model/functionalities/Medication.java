@@ -2,6 +2,7 @@ package model.functionalities;
 
 import java.sql.SQLException;
 
+import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
 import model.records.Record;
@@ -27,7 +28,7 @@ public class Medication extends Functionality {
 	}
 
 	@Override
-	public Record get(String key, String value) {
+	public ResultSet get(String key, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

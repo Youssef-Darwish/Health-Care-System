@@ -57,13 +57,16 @@ public class AdminController implements Initializable {
 
 	public static StaffRecord selectedRecord;
 
+	private Admin admin = new Admin();
 	public void buildStaffTable() throws SQLException {
 
 		// button.disableProperty().bind(Bindings.isEmpty(tableView.getSelectionModel().getSelectedItems()));
 
 		String SQL = "SELECT * from STAFF";
 		// ResultSet
-		ResultSet rs = (ResultSet) LoginController.con.createStatement().executeQuery(SQL);
+		
+		ResultSet rs = (ResultSet) admin.getStaffMember("sdf", "sdfs");
+//		ResultSet rs = (ResultSet) LoginController.con.createStatement().executeQuery(SQL);
 		ObservableList<Record> data = FXCollections.observableArrayList();
 
 		while (rs.next()) {
@@ -84,9 +87,6 @@ public class AdminController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// ObservableList<String> choices =
-		// FXCollections.observableArrayList("Doctor", "Receptionist",
-		// "Manager");
 
 		editStaffButton.disableProperty().bind(Bindings.isEmpty(staffTable.getSelectionModel().getSelectedItems()));
 		deleteStaffButton.disableProperty().bind(Bindings.isEmpty(staffTable.getSelectionModel().getSelectedItems()));
@@ -97,8 +97,7 @@ public class AdminController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// role.setItems(choices);
-
+		
 	}
 
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -113,7 +112,6 @@ public class AdminController implements Initializable {
 
 	@FXML
 	public void editStaffMember(ActionEvent event) throws IOException {
-		System.out.println("here");
 		selectedRecord = (StaffRecord) staffTable.getSelectionModel().getSelectedItem();
 		show("/view/EditStaffMember.fxml", event);
 	}
