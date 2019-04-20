@@ -1,9 +1,6 @@
 package model.functionalities;
 
-import java.sql.SQLException;
-
 import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.Statement;
 
 import model.records.Record;
 

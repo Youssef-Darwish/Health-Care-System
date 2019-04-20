@@ -80,6 +80,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `hospital_db`.`MEDICATION` (
   `PRICE` INT NOT NULL,
   `NAME` VARCHAR(20) NOT NULL,
+  `MINI`  INT NOT NULL,
+  `MAXM` INT NOT NULL,
   PRIMARY KEY (`NAME`))
 ENGINE = InnoDB;
 
@@ -107,6 +109,35 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTCASE` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `hospital_db`.`PATIENTALERGIES`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTALERGIES`(
+	`PATIENTID` INT NOT NULL,
+	`PATIENTALERGIE` VARCHAR(45) NOT NULL,	
+	PRIMARY KEY (`PATIENTID`, `PATIENTALERGIE`),
+	CONSTRAINT `fk_PATIENTALERGIES_1`
+    FOREIGN KEY (`PATIENTID`)
+    REFERENCES `hospital_db`.`Patient` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+	
+)
+ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `hospital_db`.`SIDEEFFECTS`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital_db`.`SIDEEFFECTS` (
+	`NAME` VARCHAR(20) NOT NULL,
+	`MEDCOMP` VARCHAR(20) NOT NULL,
+	PRIMARY KEY (`NAME`,`MEDCOMP`),
+	CONSTRAINT `fk_SIDEEFFECTS_1`
+    FOREIGN KEY (`NAME`)
+    REFERENCES `hospital_db`.`MEDICATION` (`NAME`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
