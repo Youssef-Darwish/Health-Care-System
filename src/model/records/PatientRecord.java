@@ -10,6 +10,14 @@ public class PatientRecord implements Record {
 	private int id;
 	private Date registrationDate;
 
+	public PatientRecord(int id, String name, String gender, String telephone, Date regDate) {
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.telephone = telephone;
+		this.registrationDate = regDate;
+	}
+
 	public String getName() {
 		return name;
 	}

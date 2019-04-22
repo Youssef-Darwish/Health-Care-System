@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReceptionistController">
+  <tabs>
+    <Tab text="Patients">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="patientsTable" layoutX="132.0" layoutY="160.0" prefHeight="385.0" prefWidth="550.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="patientIdColumn" prefWidth="43.0" text="ID" />
+                      <TableColumn fx:id="patientNameColumn" prefWidth="197.0" text="Name" />
+                        <TableColumn fx:id="patientGenderColumn" minWidth="7.0" prefWidth="76.0" text="Gender" />
+                        <TableColumn fx:id="patientTelephoneColumn" prefWidth="104.0" text="Telephone" />
+                        <TableColumn fx:id="pateintRegisterationColumn" prefWidth="128.0" text="Registeration Date" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="addPatientButton" layoutX="26.0" layoutY="429.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="25.0" prefWidth="66.0" text="Add" />
+                  <Button fx:id="editPatientButton" layoutX="118.0" layoutY="428.0" mnemonicParsing="false" onAction="#editPatient" prefHeight="25.0" prefWidth="64.0" text="Edit" />
+                  <Button fx:id="deletePatientButton" layoutX="205.0" layoutY="428.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="25.0" prefWidth="72.0" text="Delete" />
+                  <Button fx:id="searchPatientButton" layoutX="385.0" layoutY="394.0" mnemonicParsing="false" onAction="#searchPatient" text="Search" />
+                  <Button fx:id="cancelSearchButton" layoutX="467.0" layoutY="393.0" mnemonicParsing="false" onAction="#cancelSearch" text="Cancel" />
+                  <ComboBox fx:id="patientSearchOptions" layoutX="18.0" layoutY="393.0" prefWidth="150.0" />
+                  <TextField fx:id="patientSearchField" layoutX="190.0" layoutY="393.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Appointments">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView prefHeight="384.0" prefWidth="550.0">
+                    <columns>
+                      <TableColumn prefWidth="101.0" text="Patient ID" />
+                      <TableColumn prefWidth="124.0" text="Doctor ID" />
+                        <TableColumn prefWidth="181.0" text="Appointment Date" />
+                        <TableColumn prefWidth="138.0" text="Hour" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Doctor's Availabilities">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

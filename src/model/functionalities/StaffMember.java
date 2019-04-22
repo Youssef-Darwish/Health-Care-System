@@ -46,7 +46,6 @@ public class StaffMember extends Functionality {
 			stmt.setDouble(4, r.getSalary());
 			stmt.setString(5, value);
 			return stmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -66,19 +65,14 @@ public class StaffMember extends Functionality {
 			return -1;
 		}
 	}
-	
+
 	@Override
-	public ResultSet search (String key,String value) {
+	public ResultSet search(String key, String value) {
 
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT * FROM STAFF " 
-			+ " WHERE " + key + " = ? ;");
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM STAFF " + " WHERE " + key + " = ? ;");
 			stmt.setString(1, value);
-			return (ResultSet)stmt.executeQuery();
-////			ResultSet result = (ResultSet) stat.executeQuery(query);
-////			//System.out.println(query+ "   "+result.getRow());
-////			//result.getFetchSize()
-//			return result;
+			return (ResultSet) stmt.executeQuery();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
@@ -91,8 +85,9 @@ public class StaffMember extends Functionality {
 		try {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
-			//check select all query
-//			query += "SELECT * from STAFF WHERE " + key + " = " + value + ";";
+			// check select all query
+			// query += "SELECT * from STAFF WHERE " + key + " = " + value +
+			// ";";
 			query += "SELECT * from STAFF;";
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;
@@ -100,13 +95,13 @@ public class StaffMember extends Functionality {
 			return null;
 		}
 	}
-	
+
 	public ResultSet getAllStaff() {
 
 		try {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
-			//check select all query
+			// check select all query
 			query += "SELECT * from STAFF;";
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;

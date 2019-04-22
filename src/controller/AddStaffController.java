@@ -67,6 +67,7 @@ public class AddStaffController implements Initializable {
 				Record record = new StaffRecord(addStaffName.getText(), addStaffRole.getValue(), addStaffTele.getText(),
 						Integer.parseInt(addStaffSalary.getText()), addStaffPass.getText());
 				
+				
 				if (Double.parseDouble(addStaffSalary.getText()) < 0)
 					throw new NumberFormatException();
 
