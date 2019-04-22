@@ -9,9 +9,7 @@ import model.records.PatientCaseRecord;
 import model.records.Record;
 
 public class PatientCase extends Functionality {
-
-	@Override
-	public int add(Record record) {
+	private int validate (Record record) {
 		PatientCaseRecord r = (PatientCaseRecord) record;
 		System.out.println("entered");
 
@@ -21,10 +19,10 @@ public class PatientCase extends Functionality {
 			stmt1.setString(1, r.getMedication());
 			//System.out.println(">>"+stmt1);
 			ResultSet rs = (ResultSet)stmt1.executeQuery();
-//			System.out.println(rs.getString("NAME"));
+			// no medication 
 			if (rs.next() == false)
 				return -1;
-			//System.out.println(rs.getString("MINI"));
+			//high amount
 			if (r.getAmount() < rs.getInt("MINI") || r.getAmount() > rs.getInt("MAXM"))
 				return -2;
 			
@@ -34,9 +32,25 @@ public class PatientCase extends Functionality {
 					+ "WHERE NAME = ? and PATIENTID = " + r.getPatientId() +" ;");
 			stmt2.setString(1, r.getMedication());
 			ResultSet rs2 = (ResultSet)stmt2.executeQuery();
-			
+			//this medication doesn't suit patient
 			if (rs2.next() == true)
 				return -3;
+
+			return 1;
+		} catch (SQLException e) {
+			System.out.println(e);
+			return -1;
+		}
+	}
+	@Override
+	public int add(Record record) {
+		PatientCaseRecord r = (PatientCaseRecord) record;
+		System.out.println("entered");
+
+		try {
+			int x = validate (record);
+			if (x != 1)
+				return x;
 
 			PreparedStatement stmt = con
 					.prepareStatement("INSERT INTO PATIENTCASE (ID, PATIENTID, DISEASE, MEDICATION, AMOUNT) Values(1,?,?,?,?) ;");
@@ -56,14 +70,38 @@ public class PatientCase extends Functionality {
 
 	@Override
 	public int edit(String key, String value,  Record record) {
-		// TODO Auto-generated method stub
-		return 0;
+		PatientCaseRecord r = (PatientCaseRecord) record;
+		try {
+			int x = validate (record);
+			if (x != 1)
+				return x;
+			PreparedStatement stmt = con.prepareStatement("Update PATIENTCASE SET  DISEASE = ?, "
+					+ "MEDICATION = ?, AMOUNT = ?  WHERE " + key + " = ? ;");
+
+			stmt.setString(1, r.getDisease());
+			stmt.setString(2, r.getMedication());
+			stmt.setInt(3, r.getAmount());
+			stmt.setString(5, value);
+			return stmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			return -1;
+		}
 	}
 
 	@Override
 	public int delete(String key, String value) {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM PATIENTCASE " + " WHERE " + key + " = ? ;");
+			stmt.setString(1, value);
+			return stmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			return -1;
+		}
 	}
 
 	@Override
