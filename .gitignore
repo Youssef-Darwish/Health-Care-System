@@ -43,7 +43,8 @@ tmp/
 *~.nib
 local.properties
 .loadpath
-
+/src/Main.java
+/src/controller/Database.java
 ##########################
 ## NetBeans
 ##########################
@@ -60,3 +61,5 @@ nb-configuration.xml
 ##########################
 .DS_Store
 Sign up for free
+
+
