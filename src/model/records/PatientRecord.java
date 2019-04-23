@@ -10,12 +10,14 @@ public class PatientRecord implements Record {
 	private int id;
 	private Date registrationDate;
 
-	public PatientRecord(int id, String name, String gender, String telephone, Date regDate) {
+	public PatientRecord(int id, String name,  String telephone,String gender, Date regDate) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.telephone = telephone;
 		this.registrationDate = regDate;
+		System.out.println("ID  " + String.valueOf(id));
+		System.out.println("Date  " + String.valueOf(registrationDate));
 	}
 
 	public String getName() {

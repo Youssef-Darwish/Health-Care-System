@@ -15,9 +15,9 @@
                     <columns>
                       <TableColumn fx:id="patientIdColumn" prefWidth="43.0" text="ID" />
                       <TableColumn fx:id="patientNameColumn" prefWidth="197.0" text="Name" />
-                        <TableColumn fx:id="patientGenderColumn" minWidth="7.0" prefWidth="76.0" text="Gender" />
                         <TableColumn fx:id="patientTelephoneColumn" prefWidth="104.0" text="Telephone" />
-                        <TableColumn fx:id="pateintRegisterationColumn" prefWidth="128.0" text="Registeration Date" />
+                        <TableColumn fx:id="patientGenderColumn" minWidth="7.0" prefWidth="76.0" text="Gender" />
+                        <TableColumn fx:id="patientRegisterationColumn" prefWidth="128.0" text="Registeration Date" />
                     </columns>
                   </TableView>
                   <Button fx:id="addPatientButton" layoutX="26.0" layoutY="429.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="25.0" prefWidth="66.0" text="Add" />

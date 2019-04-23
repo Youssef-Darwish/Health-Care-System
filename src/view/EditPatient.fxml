@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="422.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditPatientController">
+   <children>
+      <Label layoutX="43.0" layoutY="157.0" text="ID *" />
+      <Label layoutX="43.0" layoutY="205.0" text="Name *" />
+      <Label layoutX="182.0" layoutY="86.0" prefHeight="25.0" prefWidth="104.0" text="Edit Patient">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="251.0" text="Gender *" />
+      <Label layoutX="38.0" layoutY="293.0" text="Telephone" />
+      <Label layoutX="38.0" layoutY="338.0" prefHeight="39.0" prefWidth="122.0" text="Registeration Date" wrapText="true" />
+      <DatePicker fx:id="editPatientDate" layoutX="147.0" layoutY="338.0" />
+      <TextField fx:id="editPatientId" layoutX="143.0" layoutY="152.0" />
+      <TextField fx:id="editPatientName" layoutX="143.0" layoutY="200.0" />
+      <TextField fx:id="editPatientTele" layoutX="143.0" layoutY="288.0" />
+      <RadioButton fx:id="maleButton" layoutX="141.0" layoutY="250.0" mnemonicParsing="false" text="Male">
+         <toggleGroup>
+            <ToggleGroup fx:id="grp" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="femaleButton" layoutX="268.0" layoutY="251.0" mnemonicParsing="false" text="Female" toggleGroup="$grp" />
+      <Button fx:id="editPatientButton" layoutX="102.0" layoutY="399.0" mnemonicParsing="false" onAction="#editInDB" text="Edit" />
+      <Button fx:id="cancelPatientButton" layoutX="234.0" layoutY="399.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+   </children>
+</Pane>

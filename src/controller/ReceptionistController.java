@@ -45,7 +45,7 @@ public class ReceptionistController implements Initializable {
 	@FXML // fx:id="patientTelephoneColumn"
 	private TableColumn<Record, String> patientTelephoneColumn;
 
-	@FXML // fx:id="patientRegisterationColumn"
+	@FXML // fx:id="patientRegisterationColumn" 
 	private TableColumn<Record, String> patientRegisterationColumn;
 
 	@FXML // fx:id="editPatientButton
@@ -82,7 +82,7 @@ public class ReceptionistController implements Initializable {
 
 			data.add(new PatientRecord(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5)));
 		}
-
+		System.out.println(((PatientRecord)(data.get(0))).getRegistrationDate());
 		patientIdColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
 		patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
 		patientGenderColumn.setCellValueFactory(new PropertyValueFactory<>("Gender"));
@@ -131,7 +131,7 @@ public class ReceptionistController implements Initializable {
 	public void editPatient(ActionEvent event) throws IOException {
 		selectedRecord = (PatientRecord) patientsTable.getSelectionModel().getSelectedItem();
 		// EditPatient
-		show("/view/EditStaffMember.fxml", event);
+		show("/view/EditPatient.fxml", event);
 	}
 
 	@FXML
@@ -145,7 +145,7 @@ public class ReceptionistController implements Initializable {
 	@FXML
 	public void addPatient(ActionEvent event) throws IOException {
 		// views not yet
-		show("/view/AddStaffMember.fxml", event);
+		show("/view/AddPatient.fxml", event);
 	}
 
 	@FXML
@@ -156,7 +156,7 @@ public class ReceptionistController implements Initializable {
 	}
 
 	@FXML
-	public void search(ActionEvent event) throws SQLException {
+	public void searchPatient(ActionEvent event) throws SQLException {
 
 		String key = patientSearchOptions.getValue();
 		String value = patientSearchField.getText();

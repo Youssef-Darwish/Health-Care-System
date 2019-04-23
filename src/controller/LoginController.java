@@ -81,7 +81,9 @@ public class LoginController implements Initializable {
 				} else if (role.equals("doctor")) {
 					loggedIn = new Doctor();
 				} else if (role.equals("receptionist")) {
+					System.out.println(" receptionist is signed in!");
 					loggedIn = new Receptionist();
+					pageParent = FXMLLoader.load(getClass().getResource("/view/ReceptionistScene.fxml"));
 				}
 
 			} catch (SQLException e) {
