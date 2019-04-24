@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.records.AppointmentRecord;
 import model.records.PatientRecord;
 import model.records.Record;
 import model.users.Receptionist;
@@ -47,6 +48,18 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="patientRegisterationColumn" 
 	private TableColumn<Record, String> patientRegisterationColumn;
+
+	@FXML // fx:id="appPatientIdColumn"
+	private TableColumn<Record, Integer> appPatientIdColumn;
+
+	@FXML // fx:id="appDoctorIdColumn"
+	private TableColumn<Record, String> appDoctorIdColumn;
+
+	@FXML // fx:id="appDateColumn"
+	private TableColumn<Record, Integer> appDateColumn;
+
+	@FXML // fx:id="appHourColumn"
+	private TableColumn<Record, String> appHourColumn;
 
 	@FXML // fx:id="editPatientButton
 	private Button editPatientButton;
@@ -73,7 +86,7 @@ public class ReceptionistController implements Initializable {
 
 	private Receptionist receptionist = new Receptionist();
 
-	public void buildStaffTable(ResultSet rs) throws SQLException {
+	public void buildPatientTable(ResultSet rs) throws SQLException {
 
 		ObservableList<Record> data = FXCollections.observableArrayList();
 
@@ -109,7 +122,7 @@ public class ReceptionistController implements Initializable {
 		ResultSet rs = (ResultSet) receptionist.getAllPatients();
 
 		try {
-			this.buildStaffTable(rs);
+			this.buildPatientTable(rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,7 +152,7 @@ public class ReceptionistController implements Initializable {
 
 		selectedRecord = (PatientRecord) patientsTable.getSelectionModel().getSelectedItem();
 		((Receptionist) LoginController.loggedIn).deletePatient("id", String.valueOf(selectedRecord.getId()));
-		this.buildStaffTable(receptionist.getAllPatients());
+		this.buildPatientTable(receptionist.getAllPatients());
 	}
 
 	@FXML
@@ -161,14 +174,42 @@ public class ReceptionistController implements Initializable {
 		String key = patientSearchOptions.getValue();
 		String value = patientSearchField.getText();
 		ResultSet rs = receptionist.searchPatient(key, value);
-		buildStaffTable((rs));
+		buildPatientTable((rs));
 
 	}
 
 	@FXML
 	public void cancelSearch(ActionEvent e) throws SQLException {
 		patientSearchField.setText("");
-		buildStaffTable(receptionist.getAllPatients());
+		buildPatientTable(receptionist.getAllPatients());
 	}
+	
+	
+	@FXML
+	public void changeTab(ActionEvent e) throws SQLException{
+		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
+		buildAppTable(rs);
+		
+	}
+	
+	public void buildAppTable(ResultSet rs) throws SQLException {
+
+		ObservableList<Record> data = FXCollections.observableArrayList();
+
+		// check fields of patient
+		while (rs.next()) {
+
+			data.add(new AppointmentRecord(rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5)));
+		}
+		appPatientIdColumn.setCellValueFactory(new PropertyValueFactory<>("Patient ID"));
+		appDoctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("Doctor ID"));
+		appDateColumn.setCellValueFactory(new PropertyValueFactory<>("Appointment Date"));
+		appHourColumn.setCellValueFactory(new PropertyValueFactory<>("Hour"));
+
+		patientsTable.setItems(data);
+
+	}
+	
+
 
 }

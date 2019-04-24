@@ -30,16 +30,16 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Appointments">
+    <Tab onSelectionChanged="#changeTab" text="Appointments">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TableView prefHeight="384.0" prefWidth="550.0">
                     <columns>
-                      <TableColumn prefWidth="101.0" text="Patient ID" />
-                      <TableColumn prefWidth="124.0" text="Doctor ID" />
-                        <TableColumn prefWidth="181.0" text="Appointment Date" />
-                        <TableColumn prefWidth="138.0" text="Hour" />
+                      <TableColumn fx:id="appPatientIdColumn" prefWidth="101.0" text="Patient ID" />
+                      <TableColumn fx:id="appDoctorIdColumn" prefWidth="124.0" text="Doctor ID" />
+                        <TableColumn fx:id="appDateColumn" prefWidth="181.0" text="Appointment Date" />
+                        <TableColumn fx:id="appHourColumn" prefWidth="138.0" text="Hour" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
