@@ -111,9 +111,15 @@ public class PatientCase extends Functionality {
 	}
 
 	@Override
-	public ResultSet search(String key,String value) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultSet search(String key, String value) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM PATIENTCASE " + " WHERE " + key + " = ? ;");
+			stmt.setString(1, value);
+			return (ResultSet) stmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 
 }
