@@ -16,8 +16,6 @@ public class PatientRecord implements Record {
 		this.gender = gender;
 		this.telephone = telephone;
 		this.registrationDate = regDate;
-		System.out.println("ID  " + String.valueOf(id));
-		System.out.println("Date  " + String.valueOf(registrationDate));
 	}
 
 	public String getName() {

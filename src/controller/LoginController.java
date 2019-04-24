@@ -37,7 +37,6 @@ import model.users.User;
 public class LoginController implements Initializable {
 	public static Database db = new Database();
 	public static Connection con = db.getCon();
-	private HelperPlugin plugin = new HelperPlugin();
 	  
 	// change it in login
 	public static User loggedIn;
@@ -71,7 +70,6 @@ public class LoginController implements Initializable {
 				}
 
 				String R = result.getString(3);
-				System.out.println(R);
 				String role = R.toLowerCase();
 				if (role.equals("admin")) {
 					pageParent = FXMLLoader.load(getClass().getResource("/view/AdminScene.fxml"));
@@ -81,7 +79,6 @@ public class LoginController implements Initializable {
 				} else if (role.equals("doctor")) {
 					loggedIn = new Doctor();
 				} else if (role.equals("receptionist")) {
-					System.out.println(" receptionist is signed in!");
 					loggedIn = new Receptionist();
 					pageParent = FXMLLoader.load(getClass().getResource("/view/ReceptionistScene.fxml"));
 				}

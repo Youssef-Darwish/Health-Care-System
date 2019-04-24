@@ -49,6 +49,8 @@ public class ReceptionistController implements Initializable {
 	@FXML // fx:id="patientRegisterationColumn" 
 	private TableColumn<Record, String> patientRegisterationColumn;
 
+	
+	
 	@FXML // fx:id="appPatientIdColumn"
 	private TableColumn<Record, Integer> appPatientIdColumn;
 
@@ -96,11 +98,12 @@ public class ReceptionistController implements Initializable {
 			data.add(new PatientRecord(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5)));
 		}
 		System.out.println(((PatientRecord)(data.get(0))).getRegistrationDate());
-		patientIdColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+		System.out.println(((PatientRecord)(data.get(0))).getId());
+		patientIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 		patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
 		patientGenderColumn.setCellValueFactory(new PropertyValueFactory<>("Gender"));
 		patientTelephoneColumn.setCellValueFactory(new PropertyValueFactory<>("Telephone"));
-		patientRegisterationColumn.setCellValueFactory(new PropertyValueFactory<>("RegisterationDate"));
+		patientRegisterationColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
 
 		patientsTable.setItems(data);
 
