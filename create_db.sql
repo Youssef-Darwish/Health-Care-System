@@ -48,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`STAFF` (
   
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `hospital_db`.`APPOINTMENT`
 -- -----------------------------------------------------
@@ -106,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTCASE` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
