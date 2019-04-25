@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
+import javafx.beans.property.SimpleStringProperty;
 import model.records.Record;
 import model.records.PatientRecord;
 
@@ -84,7 +85,6 @@ public class PatientRegistry extends Functionality {
 
 	@Override
 	public ResultSet search(String key, String value) {
-
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM Patient " + " WHERE " + key + " = ? ;");
 			stmt.setString(1, value);
