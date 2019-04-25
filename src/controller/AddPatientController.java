@@ -2,6 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -18,6 +21,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import model.records.PatientRecord;
+import model.records.Record;
+import model.users.Admin;
+import model.users.Receptionist;
 
 public class AddPatientController implements Initializable {
 
@@ -84,6 +91,34 @@ public class AddPatientController implements Initializable {
 
 	@FXML
 	public void addInDB(ActionEvent event) throws IOException {
+		
+		// validate input
+		
+		
+		
+		RadioButton selectedRadioButton = (RadioButton) grp.getSelectedToggle();
+		String gender = selectedRadioButton.getText();
+//		System.out.println(gender);
+		
+		LocalDate localDate = addPatientDate.getValue();
+//		System.out.println(localDate + "\n");
+			
+		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		try {
+			Record record = new PatientRecord(Integer.valueOf(addPatientId.getText()), addPatientName.getText(),
+					addPatientTele.getText(), gender,sqlDate);
+			
+			int result = ((Receptionist) LoginController.loggedIn).addPatient(record);
+			
+			if(result != -1)
+				System.out.println("inserted");
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
 
 	}
 

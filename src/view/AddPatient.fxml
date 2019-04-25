@@ -14,7 +14,7 @@
       <Label layoutX="48.0" layoutY="129.0" text="ID *" />
       <Label layoutX="45.0" layoutY="180.0" text="Name *" />
       <Label layoutX="45.0" layoutY="224.0" text="Gender *" />
-      <RadioButton fx:id="maleButton" layoutX="146.0" layoutY="222.0" mnemonicParsing="false" text="Male">
+      <RadioButton fx:id="maleButton" layoutX="146.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="grp" />
          </toggleGroup></RadioButton>

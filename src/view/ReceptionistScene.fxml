@@ -5,16 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReceptionistController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="586.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReceptionistController">
   <tabs>
-    <Tab text="Patients">
+    <Tab fx:id="patientsTab" text="Patients">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="patientsTable" layoutX="132.0" layoutY="160.0" prefHeight="385.0" prefWidth="550.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="patientIdColumn" prefWidth="43.0" text="ID" />
-                      <TableColumn fx:id="patientNameColumn" prefWidth="197.0" text="Name" />
+                      <TableColumn fx:id="patientIdColumn" prefWidth="94.0" text="ID" />
+                      <TableColumn fx:id="patientNameColumn" prefWidth="146.0" text="Name" />
                         <TableColumn fx:id="patientTelephoneColumn" prefWidth="104.0" text="Telephone" />
                         <TableColumn fx:id="patientGenderColumn" minWidth="7.0" prefWidth="76.0" text="Gender" />
                         <TableColumn fx:id="patientRegisterationColumn" prefWidth="128.0" text="Registeration Date" />
@@ -30,11 +30,11 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab onSelectionChanged="#changeTab" text="Appointments">
+    <Tab fx:id="appTab" onSelectionChanged="#selectAppTab" text="Appointments">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView prefHeight="384.0" prefWidth="550.0">
+                  <TableView fx:id="appTable" prefHeight="384.0" prefWidth="550.0">
                     <columns>
                       <TableColumn fx:id="appPatientIdColumn" prefWidth="101.0" text="Patient ID" />
                       <TableColumn fx:id="appDoctorIdColumn" prefWidth="124.0" text="Doctor ID" />

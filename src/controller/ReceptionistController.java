@@ -11,6 +11,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +20,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -34,6 +37,9 @@ public class ReceptionistController implements Initializable {
 	@FXML // fx:id="patientsTable"
 	private TableView<Record> patientsTable;
 
+	@FXML //fx:id="appTable"
+	private TableView<Record> appTable;
+	
 	@FXML // fx:id="patientIdColumn"
 	private TableColumn<Record, Integer> patientIdColumn;
 
@@ -47,6 +53,18 @@ public class ReceptionistController implements Initializable {
 	private TableColumn<Record, String> patientTelephoneColumn;
 
 	@FXML // fx:id="patientRegisterationColumn" 
+	private TabPane tabPane;
+	
+	
+	@FXML // fx:id="patientsTab" 
+	private Tab patientsTab;
+	
+	@FXML // fx:id="appTab" 
+	private Tab appTab;
+	
+	
+
+	@FXML // fx:id="tabPane" 
 	private TableColumn<Record, String> patientRegisterationColumn;
 
 	
@@ -97,8 +115,6 @@ public class ReceptionistController implements Initializable {
 
 			data.add(new PatientRecord(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5)));
 		}
-		System.out.println(((PatientRecord)(data.get(0))).getRegistrationDate());
-		System.out.println(((PatientRecord)(data.get(0))).getId());
 		patientIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 		patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
 		patientGenderColumn.setCellValueFactory(new PropertyValueFactory<>("Gender"));
@@ -111,6 +127,7 @@ public class ReceptionistController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 
 		editPatientButton.disableProperty()
 				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
@@ -118,7 +135,7 @@ public class ReceptionistController implements Initializable {
 				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
 
 		ObservableList<String> searchAttributes = FXCollections.observableArrayList("ID", "Name", "Gender", "Telephone",
-				"Registeration Date");
+				"REGISTERATIONDATE");
 		patientSearchOptions.setItems(searchAttributes);
 		patientSearchOptions.setValue("ID");
 
@@ -189,27 +206,39 @@ public class ReceptionistController implements Initializable {
 	
 	
 	@FXML
-	public void changeTab(ActionEvent e) throws SQLException{
-		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
-		buildAppTable(rs);
-		
+	public void selectAppTab(Event e) throws SQLException{
+//		tabPane.getSelectionModel().select(1);
+		if (patientsTab.isSelected()){
+			System.out.println("patients tab selected");
+			ResultSet rs = (ResultSet) receptionist.getAllPatients();
+			buildPatientTable(rs);
+
+		}
+		else if(appTab.isSelected()){
+			System.out.println("app tab selected");
+			ResultSet rs = (ResultSet) receptionist.getAllAppointments();
+			buildAppTable(rs);
+
+		}
+//		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
+//		buildAppTable(rs);
+//		
 	}
 	
 	public void buildAppTable(ResultSet rs) throws SQLException {
 
 		ObservableList<Record> data = FXCollections.observableArrayList();
-
 		// check fields of patient
 		while (rs.next()) {
 
-			data.add(new AppointmentRecord(rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5)));
+			data.add(new AppointmentRecord(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getDate(5)));
 		}
-		appPatientIdColumn.setCellValueFactory(new PropertyValueFactory<>("Patient ID"));
-		appDoctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("Doctor ID"));
-		appDateColumn.setCellValueFactory(new PropertyValueFactory<>("Appointment Date"));
+		appPatientIdColumn.setCellValueFactory(new PropertyValueFactory<>("patientId"));
+		appDoctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
+		appDateColumn.setCellValueFactory(new PropertyValueFactory<>("AppointmentDate"));
 		appHourColumn.setCellValueFactory(new PropertyValueFactory<>("Hour"));
 
-		patientsTable.setItems(data);
+		appTable.setItems(data);
 
 	}
 	
