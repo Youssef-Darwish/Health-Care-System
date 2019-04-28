@@ -9,30 +9,28 @@ import model.records.PatientCaseRecord;
 import model.records.Record;
 
 public class PatientCase extends Functionality {
-	private int validate (Record record) {
+	private int validate(Record record) {
 		PatientCaseRecord r = (PatientCaseRecord) record;
 		System.out.println("entered");
 
 		try {
-			PreparedStatement stmt1 = con.prepareStatement("SELECT * FROM MEDICATION "
-					+ "WHERE NAME = ? ;");
+			PreparedStatement stmt1 = con.prepareStatement("SELECT * FROM MEDICATION " + "WHERE NAME = ? ;");
 			stmt1.setString(1, r.getMedication());
-			//System.out.println(">>"+stmt1);
-			ResultSet rs = (ResultSet)stmt1.executeQuery();
-			// no medication 
+			// System.out.println(">>"+stmt1);
+			ResultSet rs = (ResultSet) stmt1.executeQuery();
+			// no medication
 			if (rs.next() == false)
 				return -1;
-			//high amount
+			// high amount
 			if (r.getAmount() < rs.getInt("MINI") || r.getAmount() > rs.getInt("MAXM"))
 				return -2;
-			
+
 			PreparedStatement stmt2 = con.prepareStatement("SELECT MEDCOMP FROM MEDCOMPONENTS "
-					+ "JOIN PATIENTALERGIES ON "
-					+ "MEDCOMPONENTS.MEDCOMP = PATIENTALERGIES.PATIENTALERGIE "
-					+ "WHERE NAME = ? and PATIENTID = " + r.getPatientId() +" ;");
+					+ "JOIN PATIENTALERGIES ON " + "MEDCOMPONENTS.MEDCOMP = PATIENTALERGIES.PATIENTALERGIE "
+					+ "WHERE NAME = ? and PATIENTID = " + r.getPatientId() + " ;");
 			stmt2.setString(1, r.getMedication());
-			ResultSet rs2 = (ResultSet)stmt2.executeQuery();
-			//this medication doesn't suit patient
+			ResultSet rs2 = (ResultSet) stmt2.executeQuery();
+			// this medication doesn't suit patient
 			if (rs2.next() == true)
 				return -3;
 
@@ -42,18 +40,19 @@ public class PatientCase extends Functionality {
 			return -1;
 		}
 	}
+
 	@Override
 	public int add(Record record) {
 		PatientCaseRecord r = (PatientCaseRecord) record;
 		System.out.println("entered");
 
 		try {
-			int x = validate (record);
+			int x = validate(record);
 			if (x != 1)
 				return x;
 
-			PreparedStatement stmt = con
-					.prepareStatement("INSERT INTO PATIENTCASE (ID, PATIENTID, DISEASE, MEDICATION, AMOUNT) Values(1,?,?,?,?) ;");
+			PreparedStatement stmt = con.prepareStatement(
+					"INSERT INTO PATIENTCASE (ID, PATIENTID, DISEASE, MEDICATION, AMOUNT) Values(1,?,?,?,?) ;");
 
 			stmt.setInt(1, r.getPatientId());
 			stmt.setString(2, r.getDisease());
@@ -61,7 +60,7 @@ public class PatientCase extends Functionality {
 			stmt.setInt(4, r.getAmount());
 
 			return stmt.executeUpdate();
-			//return 0;
+			// return 0;
 		} catch (SQLException e) {
 			System.out.println(e);
 			return -1;
@@ -69,21 +68,20 @@ public class PatientCase extends Functionality {
 	}
 
 	@Override
-	public int edit(String key, String value,  Record record) {
+	public int edit(String key, String value, Record record) {
 		PatientCaseRecord r = (PatientCaseRecord) record;
 		try {
-			int x = validate (record);
+			int x = validate(record);
 			if (x != 1)
 				return x;
-			PreparedStatement stmt = con.prepareStatement("Update PATIENTCASE SET  DISEASE = ?, "
-					+ "MEDICATION = ?, AMOUNT = ?  WHERE " + key + " = ? ;");
+			PreparedStatement stmt = con.prepareStatement(
+					"Update PATIENTCASE SET  DISEASE = ?, " + "MEDICATION = ?, AMOUNT = ?  WHERE " + key + " = ? ;");
 
 			stmt.setString(1, r.getDisease());
 			stmt.setString(2, r.getMedication());
 			stmt.setInt(3, r.getAmount());
 			stmt.setString(5, value);
 			return stmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 			System.out.println(e.toString());
@@ -117,6 +115,20 @@ public class PatientCase extends Functionality {
 			stmt.setString(1, value);
 			return (ResultSet) stmt.executeQuery();
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+	public ResultSet getDoctorsPatient(int doctorId) {
+
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT patient.ID,patient.NAME FROM appointment "
+					+ "JOIN patient ON " + "appointment.patientID = patient.ID " + "WHERE DoctorId = ?" + " ;");
+
+			stmt.setInt(1, doctorId);
+			return (ResultSet) stmt.executeQuery();
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			return null;
 		}

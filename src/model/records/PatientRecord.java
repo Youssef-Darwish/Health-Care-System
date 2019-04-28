@@ -1,6 +1,6 @@
 package model.records;
 
-import java.util.*;
+import java.util.Date;
 
 public class PatientRecord implements Record {
 
@@ -10,12 +10,17 @@ public class PatientRecord implements Record {
 	private int id;
 	private Date registrationDate;
 
-	public PatientRecord(int id, String name,  String telephone,String gender, Date regDate) {
+	public PatientRecord(int id, String name, String telephone, String gender, Date regDate) {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.telephone = telephone;
 		this.registrationDate = regDate;
+	}
+
+	public PatientRecord(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public String getName() {

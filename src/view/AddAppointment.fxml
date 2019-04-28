@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAppointmentController">
    <children>
-      <Label layoutX="43.0" layoutY="150.0" prefHeight="15.0" prefWidth="92.0" text="Patient ID *" />
-      <Label layoutX="41.0" layoutY="210.0" prefHeight="15.0" prefWidth="92.0" text="Doctor ID *" />
-      <Label layoutX="56.0" layoutY="324.0" text="Date" />
-      <Label layoutX="56.0" layoutY="272.0" text="Hour" />
+      <Label layoutX="46.0" layoutY="150.0" prefHeight="15.0" prefWidth="92.0" text="Patient Name*" />
+      <Label layoutX="47.0" layoutY="210.0" prefHeight="15.0" prefWidth="92.0" text="Doctor Name *" />
+      <Label layoutX="50.0" layoutY="324.0" text="Date" />
+      <Label layoutX="50.0" layoutY="272.0" text="Time" />
       <Button fx:id="addAppointmentButton" layoutX="106.0" layoutY="376.0" mnemonicParsing="false" onAction="#addInDB" prefHeight="25.0" prefWidth="62.0" text="Add" />
       <Button fx:id="cancelAppointmentButton" layoutX="224.0" layoutY="376.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-      <TextField fx:id="addPatientId" layoutX="138.0" layoutY="145.0" prefHeight="25.0" prefWidth="197.0" />
-      <TextField fx:id="addDoctorId" layoutX="137.0" layoutY="211.0" prefHeight="25.0" prefWidth="197.0" />
+      <TextField fx:id="addPatientName" layoutX="138.0" layoutY="145.0" prefHeight="25.0" prefWidth="197.0" />
+      <TextField fx:id="addDoctorName" layoutX="137.0" layoutY="211.0" prefHeight="25.0" prefWidth="197.0" />
       <TextField fx:id="addHour" layoutX="135.0" layoutY="267.0" prefHeight="25.0" prefWidth="197.0" />
       <Label layoutX="140.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" text="New Appointment">
          <font>

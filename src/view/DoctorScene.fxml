@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="476.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DoctorController">
+  <tabs>
+    <Tab fx:id="patientsTab" text="Patients">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="patientsTable" layoutX="47.0" layoutY="35.0" prefHeight="324.0" prefWidth="476.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="patientIdColumn" prefWidth="109.0" text="ID" />
+                      <TableColumn fx:id="patientNameColumn" prefWidth="363.0" text="Name" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="showCaseButton" layoutX="22.0" layoutY="332.0" mnemonicParsing="false" onAction="#showCase" prefHeight="25.0" prefWidth="144.0" text="Show case" />
+                  <Button fx:id="showAllergiesButton" layoutX="295.0" layoutY="332.0" mnemonicParsing="false" onAction="#showAllergies" prefHeight="25.0" prefWidth="144.0" text="Show Allergies" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="medicinesTab" text="Medicines">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

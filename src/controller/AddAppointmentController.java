@@ -2,7 +2,12 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
+
+import org.controlsfx.control.textfield.TextFields;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,10 +26,10 @@ public class AddAppointmentController implements Initializable {
 	
 
 	@FXML // fx:id="addPatientId"
-	private TextField addPatientId;
+	private TextField addPatientName;
 
 	@FXML // fx:id="addDoctorId"
-	private TextField addDoctorId;
+	private TextField addDoctorName;
 	
 	@FXML // fx:id="addHour"
 	private TextField addHour;
@@ -40,10 +45,12 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML // fx:id="warningLabel"
 	private Label warningLabel;
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		TextFields.bindAutoCompletion(addPatientName, "");
 
 	}
 
@@ -60,8 +67,9 @@ public class AddAppointmentController implements Initializable {
 	private boolean validateInput() {
 
 		// check that all fields are not empty for now
-		boolean check = addHour.getText().trim().isEmpty() || addDoctorId.getText().trim().isEmpty()
-				|| addPatientId.getText().trim().isEmpty();
+		boolean check = addHour.getText().trim().isEmpty() || addDoctorName.getText().trim().isEmpty()
+				|| addPatientName.getText().trim().isEmpty();
+		
 
 		return check;
 	}
@@ -74,7 +82,17 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML
 	public void addInDB(ActionEvent event) throws IOException {
-
+		String patientName = addPatientName.getText();
+		
+		String doctorName = addDoctorName.getText();
+		String time = addHour.getText();
+		
+		LocalDate localDate = addDate.getValue();
+		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+		
+		
+		
 	}
 
 }

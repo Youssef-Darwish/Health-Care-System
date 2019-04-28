@@ -1,6 +1,7 @@
 package model.functionalities;
 
 import com.mysql.jdbc.ResultSet;
+import com.mysql.jdbc.Statement;
 
 import model.records.Record;
 
@@ -26,8 +27,15 @@ public class Medication extends Functionality {
 
 	@Override
 	public ResultSet getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Statement stat = (Statement) con.createStatement();
+			String query = "";
+			query += "SELECT * from Medication;";
+			ResultSet result = (ResultSet) stat.executeQuery(query);
+			return result;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override

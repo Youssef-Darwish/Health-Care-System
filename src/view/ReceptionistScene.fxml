@@ -7,11 +7,11 @@
 
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="586.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReceptionistController">
   <tabs>
-    <Tab fx:id="patientsTab" text="Patients">
+    <Tab fx:id="patientsTab" onSelectionChanged="#selectPatientTab" text="Patients">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="patientsTable" layoutX="132.0" layoutY="160.0" prefHeight="385.0" prefWidth="550.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="patientsTable" layoutX="132.0" layoutY="160.0" prefHeight="393.0" prefWidth="586.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="patientIdColumn" prefWidth="94.0" text="ID" />
                       <TableColumn fx:id="patientNameColumn" prefWidth="146.0" text="Name" />
@@ -20,13 +20,13 @@
                         <TableColumn fx:id="patientRegisterationColumn" prefWidth="128.0" text="Registeration Date" />
                     </columns>
                   </TableView>
-                  <Button fx:id="addPatientButton" layoutX="26.0" layoutY="429.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="25.0" prefWidth="66.0" text="Add" />
-                  <Button fx:id="editPatientButton" layoutX="118.0" layoutY="428.0" mnemonicParsing="false" onAction="#editPatient" prefHeight="25.0" prefWidth="64.0" text="Edit" />
-                  <Button fx:id="deletePatientButton" layoutX="205.0" layoutY="428.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="25.0" prefWidth="72.0" text="Delete" />
-                  <Button fx:id="searchPatientButton" layoutX="385.0" layoutY="394.0" mnemonicParsing="false" onAction="#searchPatient" text="Search" />
-                  <Button fx:id="cancelSearchButton" layoutX="467.0" layoutY="393.0" mnemonicParsing="false" onAction="#cancelSearch" text="Cancel" />
-                  <ComboBox fx:id="patientSearchOptions" layoutX="18.0" layoutY="393.0" prefWidth="150.0" />
-                  <TextField fx:id="patientSearchField" layoutX="190.0" layoutY="393.0" />
+                  <Button fx:id="addPatientButton" layoutX="19.0" layoutY="434.0" mnemonicParsing="false" onAction="#addPatient" prefHeight="25.0" prefWidth="66.0" text="Add" />
+                  <Button fx:id="editPatientButton" layoutX="95.0" layoutY="433.0" mnemonicParsing="false" onAction="#editPatient" prefHeight="25.0" prefWidth="64.0" text="Edit" />
+                  <Button fx:id="deletePatientButton" layoutX="170.0" layoutY="433.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="25.0" prefWidth="72.0" text="Delete" />
+                  <Button fx:id="searchPatientButton" layoutX="385.0" layoutY="400.0" mnemonicParsing="false" onAction="#searchPatient" text="Search" />
+                  <Button fx:id="cancelSearchButton" layoutX="467.0" layoutY="399.0" mnemonicParsing="false" onAction="#cancelSearch" text="Cancel" />
+                  <ComboBox fx:id="patientSearchOptions" layoutX="18.0" layoutY="399.0" prefWidth="150.0" />
+                  <TextField fx:id="patientSearchField" layoutX="190.0" layoutY="399.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -34,7 +34,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="appTable" prefHeight="384.0" prefWidth="550.0">
+                  <TableView fx:id="appTable" prefHeight="408.0" prefWidth="586.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="appPatientIdColumn" prefWidth="101.0" text="Patient ID" />
                       <TableColumn fx:id="appDoctorIdColumn" prefWidth="124.0" text="Doctor ID" />
@@ -42,13 +42,11 @@
                         <TableColumn fx:id="appHourColumn" prefWidth="138.0" text="Hour" />
                     </columns>
                   </TableView>
+                  <Button fx:id="addApp" layoutX="24.0" layoutY="427.0" mnemonicParsing="false" onAction="#addAppointment" prefHeight="25.0" prefWidth="117.0" text="Add Appointment" />
+                  <Button fx:id="editApp" layoutX="155.0" layoutY="427.0" mnemonicParsing="false" onAction="#editAppointment" prefHeight="25.0" prefWidth="116.0" text="Edit Appointment" />
+                  <Button fx:id="deleteApp" layoutX="444.0" layoutY="427.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="25.0" prefWidth="129.0" text="Delete Appointment" />
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab text="Doctor's Availabilities">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
   </tabs>
 </TabPane>

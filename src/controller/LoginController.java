@@ -9,8 +9,6 @@ import java.util.ResourceBundle;
 
 import com.mysql.jdbc.ResultSet;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,13 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.records.Record;
-import model.records.StaffRecord;
 import model.users.Admin;
 import model.users.Doctor;
 import model.users.Manager;
@@ -54,6 +47,8 @@ public class LoginController implements Initializable {
 	public int login(ActionEvent event) throws IOException, SQLException {
 		Parent pageParent = null;
 
+		System.out.println(emailText.getText());
+		System.out.println(passwordText.getText());
 		if (validateInput()) {
 
 			warningLabel.setVisible(true);
@@ -65,12 +60,16 @@ public class LoginController implements Initializable {
 						+ passwordText.getText() + "');";
 
 				ResultSet result = (ResultSet) stat.executeQuery(query);
+				System.out.println(result);
 				if (!result.next()) { // empty set
+					System.out.println("hiii");
 					warningLabel.setVisible(true);
 				}
 
+				System.out.println(result.getString(3));
 				String R = result.getString(3);
 				String role = R.toLowerCase();
+				System.out.println(role);
 				if (role.equals("admin")) {
 					pageParent = FXMLLoader.load(getClass().getResource("/view/AdminScene.fxml"));
 					loggedIn = new Admin();
@@ -78,6 +77,8 @@ public class LoginController implements Initializable {
 					loggedIn = new Manager();
 				} else if (role.equals("doctor")) {
 					loggedIn = new Doctor();
+					((Doctor)(loggedIn)).setId(result.getInt(1));
+					pageParent = FXMLLoader.load(getClass().getResource("/view/DoctorScene.fxml"));
 				} else if (role.equals("receptionist")) {
 					loggedIn = new Receptionist();
 					pageParent = FXMLLoader.load(getClass().getResource("/view/ReceptionistScene.fxml"));
