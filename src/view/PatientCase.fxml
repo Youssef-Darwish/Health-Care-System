@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowCaseController">
+   <children>
+      <TableView fx:id="patientCaseTable" layoutY="-1.0" prefHeight="339.0" prefWidth="523.0">
+        <columns>
+          <TableColumn fx:id="caseIdColumn" prefWidth="102.0" text="ID" />
+            <TableColumn fx:id="doctorIdColumn" prefWidth="106.0" text="Doctor ID" />
+            <TableColumn fx:id="diseaseColumn" prefWidth="140.0" text="Disease" />
+            <TableColumn fx:id="medicationColumn" prefWidth="174.0" text="Medication" />
+        </columns>
+      </TableView>
+      <Button fx:id="addPatientCaseButton" layoutX="70.0" layoutY="351.0" mnemonicParsing="false" onAction="#addPatientCase" prefHeight="25.0" prefWidth="119.0" text="Add Patient Case" />
+   </children>
+</Pane>

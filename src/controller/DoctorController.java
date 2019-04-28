@@ -55,6 +55,8 @@ public class DoctorController implements Initializable {
 	private Tab patientsTab;
 
 	private Doctor doctor = new Doctor();
+	public static PatientRecord selectedRecord;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -77,8 +79,10 @@ public class DoctorController implements Initializable {
 	}
 
 	@FXML
-	private void showCase() {
+	private void showCase(ActionEvent event) throws IOException {
 
+		selectedRecord = (PatientRecord) patientsTable.getSelectionModel().getSelectedItem();
+		show("/view/PatientCase.fxml", event);
 	}
 
 	@FXML
