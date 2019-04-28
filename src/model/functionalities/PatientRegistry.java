@@ -16,9 +16,7 @@ public class PatientRegistry extends Functionality {
 	@Override
 	public int add(Record record) {
 		PatientRecord r = (PatientRecord) record;
-		// ///////////////////////////////////////
-		// ID of patient shoud be inserted manually?
-		//////////////////////////////////////////
+
 		try {
 			PreparedStatement stmt = con.prepareStatement(
 					"INSERT INTO Patient (ID,NAME,TELEPHONE,Gender,REGISTERATIONDATE) Values(?,?,?,?,?);");
@@ -40,7 +38,7 @@ public class PatientRegistry extends Functionality {
 	public int edit(String key, String value, Record record) {
 		PatientRecord r = (PatientRecord) record;
 		try {
-			PreparedStatement stmt = con.prepareStatement("Update STAFF SET  NAME = ? , TELEPHONE = ?, "
+			PreparedStatement stmt = con.prepareStatement("Update Patient SET  NAME = ? , TELEPHONE = ?, "
 					+ "GENDER = ? , REGISTERATIONDATE = ? " + " WHERE " + key + " = ? ;");
 
 			stmt.setString(1, r.getName());

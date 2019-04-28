@@ -2,6 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -18,6 +21,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.records.PatientRecord;
+import model.records.StaffRecord;
+import model.users.Admin;
+import model.users.Receptionist;
 
 public class EditPatientController implements Initializable {
 
@@ -45,10 +52,19 @@ public class EditPatientController implements Initializable {
 	
 	
 
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		//get data from receptionist scene
+		editPatientName.setText(ReceptionistController.selectedRecord.getName());
+		editPatientId.setText(String.valueOf(ReceptionistController.selectedRecord.getId()));
+		editPatientTele.setText(String.valueOf(ReceptionistController.selectedRecord.getTelephone()));
+        java.util.Date utilDate = new java.util.Date(ReceptionistController.selectedRecord.getRegistrationDate().getTime());
+		LocalDate date = utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+
+		editPatientDate.setValue(date);
 		
 	}
 
@@ -63,20 +79,35 @@ public class EditPatientController implements Initializable {
 
 			// validate input type
 			try {
-
-				// 
+				LocalDate localDate = editPatientDate.getValue();
+//				System.out.println(localDate + "\n");
+					
+				Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 				
+				System.out.println(ReceptionistController.selectedRecord.getGender());
+				PatientRecord record = new PatientRecord(Integer.valueOf(editPatientId.getText()), editPatientName.getText(),
+						editPatientTele.getText(),ReceptionistController.selectedRecord.getGender(), sqlDate);
+
+				
+				int result = ((Receptionist) LoginController.loggedIn).editPatient("id",
+						String.valueOf(ReceptionistController.selectedRecord.getId()), record);
+				if (result == -1) {
+					throw new Exception();
+				}
+
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+
 				show("/view/ReceptionistScene.fxml", event);
-			} catch (NumberFormatException e) {
-				warningLabel.setText("invalid input");
-				warningLabel.setVisible(true);
 			} catch (Exception e) {
-				warningLabel.setText("Invalid Input");
-				warningLabel.setVisible(true);
+				 System.out.println(e.getMessage());
+//				warningLabel.setVisible(true);
 
 			}
 		}
 	}
+
 
 	@FXML
 	public void cancel(ActionEvent event) throws IOException {
