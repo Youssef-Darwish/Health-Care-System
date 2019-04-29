@@ -14,6 +14,20 @@ public class PatientCaseRecord implements Record {
 		this.medication = medication;
 		this.amount = amount;
 	}
+	public PatientCaseRecord(int caseId, String disease, String medication) {
+		this.caseId = caseId;
+		this.disease = disease;
+		this.medication = medication;
+		
+	}
+
+	public PatientCaseRecord( String disease, int patientId, String medication) {
+		this.patientId = patientId;
+		this.disease = disease;
+		this.medication = medication;
+		
+	}
+	
 	public int getAmount() {
 		return amount;
 	}

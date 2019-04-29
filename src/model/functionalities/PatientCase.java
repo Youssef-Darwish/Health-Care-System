@@ -47,20 +47,20 @@ public class PatientCase extends Functionality {
 		System.out.println("entered");
 
 		try {
-			int x = validate(record);
-			if (x != 1)
-				return x;
+//			int x = validate(record);
+//			if (x != 1)
+//				return x;
 
 			PreparedStatement stmt = con.prepareStatement(
-					"INSERT INTO PATIENTCASE (ID, PATIENTID, DISEASE, MEDICATION, AMOUNT) Values(1,?,?,?,?) ;");
+					"INSERT INTO PATIENTCASE (PATIENTID, DISEASE, MEDICATION) Values(?,?,?) ;");
 
 			stmt.setInt(1, r.getPatientId());
 			stmt.setString(2, r.getDisease());
 			stmt.setString(3, r.getMedication());
-			stmt.setInt(4, r.getAmount());
+			
 
 			return stmt.executeUpdate();
-			// return 0;
+			
 		} catch (SQLException e) {
 			System.out.println(e);
 			return -1;
@@ -123,7 +123,7 @@ public class PatientCase extends Functionality {
 	public ResultSet getDoctorsPatient(int doctorId) {
 
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT patient.ID,patient.NAME FROM appointment "
+			PreparedStatement stmt = con.prepareStatement("SELECT DISTINCT patient.ID,patient.NAME FROM appointment "
 					+ "JOIN patient ON " + "appointment.patientID = patient.ID " + "WHERE DoctorId = ?" + " ;");
 
 			stmt.setInt(1, doctorId);

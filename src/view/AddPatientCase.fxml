@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddPatienCaseController">
+   <children>
+      <TextField fx:id="diseaseField" layoutX="127.0" layoutY="53.0" prefHeight="25.0" prefWidth="237.0" />
+      <TextField fx:id="medicationField" layoutX="127.0" layoutY="86.0" prefHeight="25.0" prefWidth="237.0" />
+      <Label layoutX="31.0" layoutY="57.0" prefHeight="17.0" prefWidth="58.0" text="Disease" />
+      <Label layoutX="31.0" layoutY="90.0" prefHeight="17.0" prefWidth="69.0" text="Medication" />
+      <Button fx:id="newCaseOkButton" layoutX="104.0" layoutY="122.0" mnemonicParsing="false" onAction="#ok" prefHeight="25.0" prefWidth="51.0" text="OK" />
+      <Button fx:id="newCaseCancelButton" layoutX="213.0" layoutY="122.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="69.0" text="Cancel" />
+      <Label layoutX="147.0" layoutY="12.0" prefHeight="17.0" prefWidth="109.0" text="New Case">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="77.0" layoutY="57.0" text="*" textFill="#f20808" />
+      <Label layoutX="94.0" layoutY="89.0" text="*" textFill="#f20808" />
+      <Label fx:id="warningLabel" layoutX="31.0" layoutY="33.0" prefHeight="17.0" prefWidth="218.0" text="Enter Both Fields" textFill="#f50707" visible="false" />
+   </children>
+</Pane>

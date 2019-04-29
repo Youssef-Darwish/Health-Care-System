@@ -5,16 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowCaseController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowCaseController">
    <children>
-      <TableView fx:id="patientCaseTable" layoutY="-1.0" prefHeight="339.0" prefWidth="523.0">
+      <TableView fx:id="patientCaseTable" layoutY="-1.0" prefHeight="339.0" prefWidth="459.0">
         <columns>
           <TableColumn fx:id="caseIdColumn" prefWidth="102.0" text="ID" />
-            <TableColumn fx:id="doctorIdColumn" prefWidth="106.0" text="Doctor ID" />
             <TableColumn fx:id="diseaseColumn" prefWidth="140.0" text="Disease" />
             <TableColumn fx:id="medicationColumn" prefWidth="174.0" text="Medication" />
         </columns>
       </TableView>
-      <Button fx:id="addPatientCaseButton" layoutX="70.0" layoutY="351.0" mnemonicParsing="false" onAction="#addPatientCase" prefHeight="25.0" prefWidth="119.0" text="Add Patient Case" />
+      <Button fx:id="addPatientCaseButton" layoutX="20.0" layoutY="351.0" mnemonicParsing="false" onAction="#addPatientCase" prefHeight="25.0" prefWidth="119.0" text="Add Patient Case" />
+      <Button fx:id="editPatientCaseButton" layoutX="144.0" layoutY="351.0" mnemonicParsing="false" onAction="#editPatientCase" prefHeight="25.0" prefWidth="119.0" text="Edit Patient Case" />
+      <Button fx:id="backButton" layoutX="387.0" layoutY="351.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="73.0" text="Back" />
    </children>
 </Pane>
