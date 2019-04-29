@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.mysql.jdbc.ResultSet;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,10 +50,15 @@ public class ShowCaseController implements Initializable {
 	private TableView<Record> patientCaseTable;
 
 	private Doctor doctor = new Doctor();
+	
+	public static PatientCaseRecord selectedRecord;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
+		editPatientCaseButton.disableProperty().bind(Bindings.isEmpty(patientCaseTable.getSelectionModel().getSelectedItems()));
+
 		int id = DoctorController.selectedRecord.getId();
 		ResultSet rs = doctor.searchPatientCase("PATIENTID", String.valueOf(id));
 
@@ -79,6 +85,7 @@ public class ShowCaseController implements Initializable {
 
 	@FXML
 	public void editPatientCase(ActionEvent event) throws IOException {
+		selectedRecord = (PatientCaseRecord) patientCaseTable.getSelectionModel().getSelectedItem();
 		show("/view/EditPatientCase.fxml", event);
 	}
 

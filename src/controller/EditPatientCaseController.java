@@ -19,13 +19,13 @@ import model.records.PatientCaseRecord;
 import model.records.Record;
 import model.users.Doctor;
 
-public class AddPatienCaseController implements Initializable {
+public class EditPatientCaseController implements Initializable {
 
 	@FXML
-	private Button newCaseOkButton;
+	private Button editPatientCaseButton;
 
 	@FXML
-	private Button newCaseCancelButton;
+	private Button cancelPatientCaseButton;
 
 	@FXML
 	private TextField diseaseField;
@@ -38,33 +38,36 @@ public class AddPatienCaseController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		diseaseField.setText(ShowCaseController.selectedRecord.getDisease());
+		medicationField.setText(ShowCaseController.selectedRecord.getMedication());
 	}
 
 	@FXML
-	private void ok(ActionEvent event) throws IOException {
+	private void edit(ActionEvent event) {
 		if (validateInput()) {
 			warningLabel.setVisible(true);
-		} else {
 
+		} else {
 			try {
+
 				int id = ShowCaseController.selectedRecord.getPatientId();
 				Record record = new PatientCaseRecord(diseaseField.getText(), id, medicationField.getText());
 
-				int result = ((Doctor) LoginController.loggedIn).addPatientCase(record);
-
-				// check result val
-				if (result == -1 || result == 0)
+				int result = ((Doctor) LoginController.loggedIn).editPatientCase("id",
+						String.valueOf(ShowCaseController.selectedRecord.getCaseId()), record);
+				if (result == -1) {
 					throw new Exception();
+				}
+
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+
+				show("/view/PatientCase.fxml", event);
 
 			} catch (Exception e) {
 				warningLabel.setText("Invalid Input");
 				warningLabel.setVisible(true);
 			}
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-
-			show("/view/PatientCase.fxml", event);
 		}
 	}
 
@@ -76,12 +79,6 @@ public class AddPatienCaseController implements Initializable {
 		show("/view/PatientCase.fxml", event);
 	}
 
-	private boolean validateInput() {
-		// check that all fields are not empty for now
-		boolean check = diseaseField.getText().trim().isEmpty() || medicationField.getText().trim().isEmpty();
-		return check;
-	}
-
 	private void show(String uml, ActionEvent event) throws IOException {
 		Parent pageParent = FXMLLoader.load(getClass().getResource(uml));
 		Scene pageScene = new Scene(pageParent);
@@ -89,6 +86,13 @@ public class AddPatienCaseController implements Initializable {
 
 		stage.setScene(pageScene);
 		stage.show();
+	}
+
+	private boolean validateInput() {
+
+		// check that all fields are not empty for now
+		boolean check = diseaseField.getText().trim().isEmpty() || medicationField.getText().trim().isEmpty();
+		return check;
 	}
 
 }

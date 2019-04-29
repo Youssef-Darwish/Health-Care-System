@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="161.0" prefWidth="369.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditPatientCaseController">
+   <children>
+      <Label layoutX="157.0" layoutY="25.0" text="Edit Case">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="73.0" prefHeight="17.0" prefWidth="47.0" text="Disease" />
+      <Label layoutX="45.0" layoutY="105.0" prefHeight="17.0" prefWidth="68.0" text="Medication" />
+      <Label fx:id="warningLabel" layoutX="45.0" layoutY="46.0" prefHeight="17.0" prefWidth="293.0" text="Empty Field" textFill="#ee0b0b" visible="false" />
+      <Label layoutX="92.0" layoutY="73.0" prefHeight="17.0" prefWidth="14.0" text="*" textFill="#f20909" />
+      <Label layoutX="105.0" layoutY="101.0" prefHeight="17.0" prefWidth="14.0" text="*" textFill="#f20909" />
+      <TextField fx:id="diseaseField" layoutX="117.0" layoutY="69.0" prefHeight="25.0" prefWidth="219.0" />
+      <TextField fx:id="medicationField" layoutX="117.0" layoutY="97.0" prefHeight="25.0" prefWidth="219.0" />
+      <Button fx:id="editPatientCaseButton" layoutX="114.0" layoutY="130.0" mnemonicParsing="false" onAction="#edit" text="Edit" />
+      <Button fx:id="cancelPatientCaseButton" layoutX="192.0" layoutY="130.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+   </children>
+</Pane>

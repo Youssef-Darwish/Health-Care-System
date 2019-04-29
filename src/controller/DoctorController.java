@@ -34,16 +34,25 @@ public class DoctorController implements Initializable {
 	private Button showCaseButton;
 
 	@FXML
-	private Button showAllergiesButton;
+	private Button logoutButton;
 
 	@FXML // fx:id="patientIdColumn"
 	private TableColumn<Record, Integer> patientIdColumn;
 
 	@FXML // fx:id="patientNameColumn"
 	private TableColumn<Record, String> patientNameColumn;
+	
+	@FXML // fx:id="medicineIdColumn"
+	private TableColumn<Record, Integer> medicineIdColumn;
+
+	@FXML // fx:id="medicinePriceColumn"
+	private TableColumn<Record, Integer> medicinePriceColumn;
 
 	@FXML // fx:id="patientsTable"
 	private TableView<Record> patientsTable;
+	
+	@FXML // fx:id="medicinesTable"
+	private TableView<Record> medicinesTable;
 
 	@FXML // fx:id="tabPane"
 	private TabPane tabPane;
@@ -62,8 +71,6 @@ public class DoctorController implements Initializable {
 		// TODO Auto-generated method stub
 		showCaseButton.disableProperty()
 				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
-		showAllergiesButton.disableProperty()
-				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
 		
 		int id = ((Doctor)(LoginController.loggedIn)).getId();
 		ResultSet rs = (ResultSet) doctor.getDoctorPatients(((Doctor)(LoginController.loggedIn)).getId());
@@ -74,20 +81,19 @@ public class DoctorController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}
 
 	@FXML
 	private void showCase(ActionEvent event) throws IOException {
-
 		selectedRecord = (PatientRecord) patientsTable.getSelectionModel().getSelectedItem();
 		show("/view/PatientCase.fxml", event);
 	}
 
 	@FXML
-	private void showAllergies() {
-
+	private void logout(ActionEvent event) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+		show("/view/Login.fxml", event);
 	}
 	
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -100,6 +106,12 @@ public class DoctorController implements Initializable {
 		stage.show();
 	}
 
+//	@FXML
+//	public void selectAppTab(Event e) throws SQLException{
+//		System.out.println("app tab selected");
+//		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
+//		buildAppTable(rs);
+//	}
 
 	public void buildPatientTable(ResultSet rs) throws SQLException {
 		

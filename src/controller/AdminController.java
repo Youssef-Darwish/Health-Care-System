@@ -20,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -131,7 +130,6 @@ public class AdminController implements Initializable {
 
 	@FXML
 	public void deleteStaffMember(ActionEvent event) throws SQLException {
-
 		selectedRecord = (StaffRecord) staffTable.getSelectionModel().getSelectedItem();
 		((Admin) LoginController.loggedIn).deleteStaffMember("id", String.valueOf(selectedRecord.getId()));
 		this.buildStaffTable(admin.getAll());

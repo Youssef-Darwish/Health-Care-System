@@ -71,16 +71,15 @@ public class PatientCase extends Functionality {
 	public int edit(String key, String value, Record record) {
 		PatientCaseRecord r = (PatientCaseRecord) record;
 		try {
-			int x = validate(record);
-			if (x != 1)
-				return x;
+//			int x = validate(record);
+//			if (x != 1)
+//				return x;
 			PreparedStatement stmt = con.prepareStatement(
-					"Update PATIENTCASE SET  DISEASE = ?, " + "MEDICATION = ?, AMOUNT = ?  WHERE " + key + " = ? ;");
+					"Update PATIENTCASE SET  DISEASE = ?, " + "MEDICATION = ? WHERE " + key + " = ? ;");
 
 			stmt.setString(1, r.getDisease());
 			stmt.setString(2, r.getMedication());
-			stmt.setInt(3, r.getAmount());
-			stmt.setString(5, value);
+			stmt.setString(3, value);
 			return stmt.executeUpdate();
 
 		} catch (SQLException e) {
