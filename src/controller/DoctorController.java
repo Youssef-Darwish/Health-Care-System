@@ -112,6 +112,7 @@ public class DoctorController implements Initializable {
 //		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
 //		buildAppTable(rs);
 //	}
+	
 
 	public void buildPatientTable(ResultSet rs) throws SQLException {
 		
