@@ -18,6 +18,13 @@ public class PatientRecord implements Record {
 		this.registrationDate = regDate;
 	}
 
+	public PatientRecord(int id, String name, String telephone,  Date regDate) {
+		this.id = id;
+		this.name = name;
+		this.telephone = telephone;
+		this.registrationDate = regDate;
+	}
+
 	public PatientRecord(int id, String name) {
 		this.id = id;
 		this.name = name;

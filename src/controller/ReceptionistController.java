@@ -38,9 +38,9 @@ public class ReceptionistController implements Initializable {
 	@FXML // fx:id="patientsTable"
 	private TableView<Record> patientsTable;
 
-	@FXML //fx:id="appTable"
+	@FXML // fx:id="appTable"
 	private TableView<Record> appTable;
-	
+
 	@FXML // fx:id="patientIdColumn"
 	private TableColumn<Record, Integer> patientIdColumn;
 
@@ -53,25 +53,26 @@ public class ReceptionistController implements Initializable {
 	@FXML // fx:id="patientTelephoneColumn"
 	private TableColumn<Record, String> patientTelephoneColumn;
 
-	@FXML // fx:id="patientRegisterationColumn" 
+	@FXML // fx:id="patientRegisterationColumn"
 	private TabPane tabPane;
-	
+
 	@FXML // fx:id="medicinesTab"
 	private Tab medicinesTab;
-	
-	@FXML // fx:id="patientsTab" 
-	private Tab patientsTab;
-	
-	@FXML // fx:id="appTab" 
-	private Tab appTab;
-	
-	
 
-	@FXML // fx:id="tabPane" 
+	@FXML // fx:id="patientsTab"
+	private Tab patientsTab;
+
+	@FXML // fx:id="appTab"
+	private Tab appTab;
+
+	@FXML // fx:id="tabPane"
 	private TableColumn<Record, String> patientRegisterationColumn;
-	
+
 	@FXML // fx:id="appPatientIdColumn"
 	private TableColumn<Record, Integer> appPatientIdColumn;
+
+	@FXML // fx:id="appIdColumn"
+	private TableColumn<Record, Integer> appIdColumn;
 
 	@FXML // fx:id="appDoctorIdColumn"
 	private TableColumn<Record, String> appDoctorIdColumn;
@@ -81,7 +82,7 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="appHourColumn"
 	private TableColumn<Record, String> appHourColumn;
-	
+
 	@FXML // fx:id="medNameColumn"
 	private TableColumn<Record, Integer> medNameColumn;
 
@@ -111,31 +112,33 @@ public class ReceptionistController implements Initializable {
 
 	public static PatientRecord selectedRecord;
 
+	public static AppointmentRecord selectedAppRecord;
+
 	@FXML // fx:id="addApp"
 	private Button addApp;
-	
+
 	@FXML // fx:id="editApp"
 	private Button editApp;
-	
+
 	@FXML // fx:id="deleteApp"
 	private Button deleteApp;
-	
+
+	@FXML
+	private Button logoutButton;
+
 	private Receptionist receptionist = new Receptionist();
 	private Doctor doctor = new Doctor();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 
 		editPatientButton.disableProperty()
 				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
 		deletePatientButton.disableProperty()
 				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
 
-		editApp.disableProperty()
-				.bind(Bindings.isEmpty(appTable.getSelectionModel().getSelectedItems()));
-		deleteApp.disableProperty()
-				.bind(Bindings.isEmpty(appTable.getSelectionModel().getSelectedItems()));
+		editApp.disableProperty().bind(Bindings.isEmpty(appTable.getSelectionModel().getSelectedItems()));
+		deleteApp.disableProperty().bind(Bindings.isEmpty(appTable.getSelectionModel().getSelectedItems()));
 
 		ObservableList<String> searchAttributes = FXCollections.observableArrayList("ID", "Name", "Gender", "Telephone",
 				"REGISTERATIONDATE");
@@ -168,10 +171,11 @@ public class ReceptionistController implements Initializable {
 		selectedRecord = (PatientRecord) patientsTable.getSelectionModel().getSelectedItem();
 		show("/view/EditPatient.fxml", event);
 	}
-	
+
 	@FXML
 	public void editAppointment(ActionEvent event) throws IOException {
-		selectedRecord = (PatientRecord) appTable.getSelectionModel().getSelectedItem();
+		selectedAppRecord = (AppointmentRecord) appTable.getSelectionModel().getSelectedItem();
+		System.out.println(selectedAppRecord==null);
 		show("/view/EditAppointment.fxml", event);
 	}
 
@@ -181,11 +185,11 @@ public class ReceptionistController implements Initializable {
 		((Receptionist) LoginController.loggedIn).deletePatient("id", String.valueOf(selectedRecord.getId()));
 		this.buildPatientTable(receptionist.getAllPatients());
 	}
-	
+
 	@FXML
 	public void deleteAppointment(ActionEvent event) throws SQLException {
-		selectedRecord = (PatientRecord) appTable.getSelectionModel().getSelectedItem();
-		((Receptionist) LoginController.loggedIn).deleteAppointment("id", String.valueOf(selectedRecord.getId()));
+		selectedAppRecord = (AppointmentRecord) appTable.getSelectionModel().getSelectedItem();
+		((Receptionist) LoginController.loggedIn).deleteAppointment("id", String.valueOf(selectedAppRecord.getAppointmentId()));
 		this.buildAppTable(receptionist.getAllAppointments());
 	}
 
@@ -193,7 +197,7 @@ public class ReceptionistController implements Initializable {
 	public void addPatient(ActionEvent event) throws IOException {
 		show("/view/AddPatient.fxml", event);
 	}
-	
+
 	@FXML
 	public void addAppointment(ActionEvent event) throws IOException {
 		show("/view/AddAppointment.fxml", event);
@@ -221,39 +225,21 @@ public class ReceptionistController implements Initializable {
 		patientSearchField.setText("");
 		buildPatientTable(receptionist.getAllPatients());
 	}
-	
-	
+
 	@FXML
-	public void selectAppTab(Event e) throws SQLException{
+	public void selectAppTab(Event e) throws SQLException {
 		System.out.println("app tab selected");
 		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
 		buildAppTable(rs);
 	}
-	
+
 	@FXML
-	public void selectPatientTab(Event e) throws SQLException{
+	public void selectPatientTab(Event e) throws SQLException {
 		System.out.println("patients tab selected");
 		ResultSet rs = (ResultSet) receptionist.getAllPatients();
 		buildPatientTable(rs);
 	}
-	
-	public void buildMedTable(ResultSet rs) throws SQLException {
-		
-		ObservableList<Record> data = FXCollections.observableArrayList();
-		// check fields of Medicines
-		while (rs.next()) {
-			//data.add(new MedicationRecord(rs.getInt(2), rs.getInt(3));
-		}
-		
-		appPatientIdColumn.setCellValueFactory(new PropertyValueFactory<>("patientId"));
-		appDoctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
-		appDateColumn.setCellValueFactory(new PropertyValueFactory<>("AppointmentDate"));
-		appHourColumn.setCellValueFactory(new PropertyValueFactory<>("Hour"));
 
-		appTable.setItems(data);
-		
-	}
-	
 	public void buildPatientTable(ResultSet rs) throws SQLException {
 
 		ObservableList<Record> data = FXCollections.observableArrayList();
@@ -263,7 +249,7 @@ public class ReceptionistController implements Initializable {
 
 			data.add(new PatientRecord(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5)));
 		}
-		
+
 		patientIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 		patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
 		patientGenderColumn.setCellValueFactory(new PropertyValueFactory<>("Gender"));
@@ -273,15 +259,16 @@ public class ReceptionistController implements Initializable {
 		patientsTable.setItems(data);
 
 	}
-	
+
 	public void buildAppTable(ResultSet rs) throws SQLException {
 
 		ObservableList<Record> data = FXCollections.observableArrayList();
 		// check fields of patient
 		while (rs.next()) {
-			data.add(new AppointmentRecord(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getDate(5)));
+			data.add(new AppointmentRecord(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5)));
 		}
-		
+
+		appIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
 		appPatientIdColumn.setCellValueFactory(new PropertyValueFactory<>("patientId"));
 		appDoctorIdColumn.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
 		appDateColumn.setCellValueFactory(new PropertyValueFactory<>("AppointmentDate"));
@@ -290,7 +277,5 @@ public class ReceptionistController implements Initializable {
 		appTable.setItems(data);
 
 	}
-	
-
 
 }

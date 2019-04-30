@@ -9,12 +9,21 @@ public class AppointmentRecord implements Record {
 	private Date appointmentDate;
 	private String hour;
 
-	public AppointmentRecord(int patientId,int doctorId,String hour,Date date){
+	public AppointmentRecord(int patientId, int doctorId, String hour, Date date) {
 		this.patientId = patientId;
 		this.doctorId = doctorId;
 		this.hour = hour;
 		this.appointmentDate = date;
 	}
+
+	public AppointmentRecord(int appId,int patientId, int doctorId, String hour, Date date) {
+		this.patientId = patientId;
+		this.doctorId = doctorId;
+		this.hour = hour;
+		this.appointmentDate = date;
+		this.appointmentId = appId;
+	}
+
 	public int getPatientId() {
 		return patientId;
 	}
@@ -46,5 +55,15 @@ public class AppointmentRecord implements Record {
 	public void setHour(String hour) {
 		this.hour = hour;
 	}
+
+	public int getAppointmentId() {
+		return appointmentId;
+	}
+
+	public void setAppointmentId(int appointmentId) {
+		this.appointmentId = appointmentId;
+	}
+
+	private int appointmentId;
 
 }

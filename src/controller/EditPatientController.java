@@ -87,11 +87,12 @@ public class EditPatientController implements Initializable {
 				
 				System.out.println(ReceptionistController.selectedRecord.getGender());
 				PatientRecord record = new PatientRecord(Integer.valueOf(editPatientId.getText()), editPatientName.getText(),
-						editPatientTele.getText(),ReceptionistController.selectedRecord.getGender(), sqlDate);
+						editPatientTele.getText(), sqlDate);
 
 				
-				int result = ((Receptionist) LoginController.loggedIn).editPatient("id",
+				int result = ((Receptionist) LoginController.loggedIn).editPatient("ID",
 						String.valueOf(ReceptionistController.selectedRecord.getId()), record);
+				System.out.println(result);
 				if (result == -1) {
 					throw new Exception();
 				}

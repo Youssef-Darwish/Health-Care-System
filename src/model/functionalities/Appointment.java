@@ -28,6 +28,7 @@ public class Appointment extends Functionality {
 			return stmt.executeUpdate();
 
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 			return -1;
 		}
 
@@ -38,7 +39,7 @@ public class Appointment extends Functionality {
 		AppointmentRecord r = (AppointmentRecord) record;
 		try {
 			PreparedStatement stmt = con.prepareStatement("Update APPOINTMENT SET  PATIENTID = ? , DOCTORID = ?, "
-					+ "HOUR = ? , DATE = ? " + " WHERE " + key + " = ? ;");
+					+ "HOUR = ? , APPOINTMENTDATE = ? " + " WHERE " + key + " = ? ;");
 
 			stmt.setInt(1, r.getPatientId());
 			stmt.setInt(2, r.getDoctorId());

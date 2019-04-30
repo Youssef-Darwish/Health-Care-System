@@ -7,7 +7,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,16 +19,19 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.records.AppointmentRecord;
+import model.records.PatientRecord;
+import model.records.Record;
+import model.users.Receptionist;
 
 public class AddAppointmentController implements Initializable {
-	
 
 	@FXML // fx:id="addPatientId"
-	private TextField addPatientName;
+	private TextField addPatientId;
 
 	@FXML // fx:id="addDoctorId"
-	private TextField addDoctorName;
-	
+	private TextField addDoctorId;
+
 	@FXML // fx:id="addHour"
 	private TextField addHour;
 
@@ -44,12 +46,9 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML // fx:id="warningLabel"
 	private Label warningLabel;
-	
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
 
 	}
 
@@ -66,9 +65,8 @@ public class AddAppointmentController implements Initializable {
 	private boolean validateInput() {
 
 		// check that all fields are not empty for now
-		boolean check = addHour.getText().trim().isEmpty() || addDoctorName.getText().trim().isEmpty()
-				|| addPatientName.getText().trim().isEmpty();
-		
+		boolean check = addHour.getText().trim().isEmpty() || addDoctorId.getText().trim().isEmpty()
+				|| addPatientId.getText().trim().isEmpty();
 
 		return check;
 	}
@@ -81,17 +79,34 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML
 	public void addInDB(ActionEvent event) throws IOException {
-		String patientName = addPatientName.getText();
-		
-		String doctorName = addDoctorName.getText();
+		String patientID = addPatientId.getText();
+
+		String doctorId = addDoctorId.getText();
 		String time = addHour.getText();
-		
+
 		LocalDate localDate = addDate.getValue();
 		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		
-		
-		
+
+		try {
+			Record record = new AppointmentRecord(Integer.valueOf(patientID), Integer.valueOf(doctorId), time, sqlDate);
+
+			int result = ((Receptionist) LoginController.loggedIn).addAppointment(record);
+
+			if (result != -1)
+				System.out.println("inserted");
+
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+			show("/view/ReceptionistScene.fxml", event);
+
+		} catch (NumberFormatException e) {
+
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 }

@@ -38,12 +38,12 @@ public class PatientRegistry extends Functionality {
 	public int edit(String key, String value, Record record) {
 		PatientRecord r = (PatientRecord) record;
 		try {
-			PreparedStatement stmt = con.prepareStatement("Update Patient SET  NAME = ? , TELEPHONE = ?, "
-					+ "GENDER = ? , REGISTERATIONDATE = ? " + " WHERE " + key + " = ? ;");
+			PreparedStatement stmt = con.prepareStatement("Update Patient SET ID = ?, NAME = ? , TELEPHONE = ?, "
+					+ " REGISTERATIONDATE = ? " + " WHERE " + key + " = ? ;");
 
-			stmt.setString(1, r.getName());
-			stmt.setString(2, r.getTelephone());
-			stmt.setString(3, r.getGender());
+			stmt.setInt(1, r.getId());
+			stmt.setString(2, r.getName());
+			stmt.setString(3, r.getTelephone());
 			stmt.setDate(4, (Date) r.getRegistrationDate());
 			stmt.setString(5, value);
 			return stmt.executeUpdate();

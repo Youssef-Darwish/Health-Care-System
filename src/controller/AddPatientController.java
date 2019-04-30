@@ -113,6 +113,11 @@ public class AddPatientController implements Initializable {
 			
 			if(result != -1)
 				System.out.println("inserted");
+			
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.close();
+			show("/view/ReceptionistScene.fxml", event);
+
 		}catch (Exception e){
 			System.out.println(e.getMessage());
 		}
