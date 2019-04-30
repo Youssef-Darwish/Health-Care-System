@@ -72,6 +72,7 @@ public class ShowCaseController implements Initializable {
 
 	@FXML
 	public void addPatientCase(ActionEvent event) throws IOException {
+		selectedRecord = (PatientCaseRecord) patientCaseTable.getSelectionModel().getSelectedItem();
 		show("/view/AddPatientCase.fxml", event);
 
 	}

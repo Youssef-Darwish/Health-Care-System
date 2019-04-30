@@ -11,6 +11,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.records.MedicationRecord;
 import model.records.PatientRecord;
 import model.records.Record;
 import model.users.Doctor;
@@ -42,11 +44,11 @@ public class DoctorController implements Initializable {
 	@FXML // fx:id="patientNameColumn"
 	private TableColumn<Record, String> patientNameColumn;
 	
-	@FXML // fx:id="medicineIdColumn"
-	private TableColumn<Record, Integer> medicineIdColumn;
+	@FXML // fx:id="medicineNameColumn"
+	private TableColumn<Record, String> medicineNameColumn;
 
-	@FXML // fx:id="medicinePriceColumn"
-	private TableColumn<Record, Integer> medicinePriceColumn;
+	@FXML // fx:id="medicinepriceColumn"
+	private TableColumn<Record, Integer> medicinepriceColumn;
 
 	@FXML // fx:id="patientsTable"
 	private TableView<Record> patientsTable;
@@ -72,11 +74,8 @@ public class DoctorController implements Initializable {
 		showCaseButton.disableProperty()
 				.bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
 		
-		int id = ((Doctor)(LoginController.loggedIn)).getId();
-		ResultSet rs = (ResultSet) doctor.getDoctorPatients(((Doctor)(LoginController.loggedIn)).getId());
-		System.out.println(rs==null);
 		try {
-			this.buildPatientTable(rs);
+			this.buildPatientTable();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,8 +113,11 @@ public class DoctorController implements Initializable {
 //	}
 	
 
-	public void buildPatientTable(ResultSet rs) throws SQLException {
+	public void buildPatientTable() throws SQLException {
 		
+		int id = ((Doctor)(LoginController.loggedIn)).getId();
+		ResultSet rs = (ResultSet) doctor.getDoctorPatients(id);
+
 		ObservableList<Record> data = FXCollections.observableArrayList();
 		
 		// check fields of Medicines
@@ -132,5 +134,41 @@ public class DoctorController implements Initializable {
 		
 		
 	}
+	
+	public void buildMedTable() throws SQLException {
+		
+	
+		ResultSet rs = (ResultSet) doctor.getAllMedicines();
+
+		ObservableList<Record> data = FXCollections.observableArrayList();
+		
+		// check fields of Medicines
+		while (rs.next()) {
+	
+			data.add(new MedicationRecord( rs.getString(2),rs.getInt(1)));
+		}
+		
+		medicineNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		medicinepriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		System.out.println("size  " + String.valueOf(data.size()));
+		medicinesTable.setItems(data);
+		
+		
+	}
+
+	@FXML
+	public void selectPatientCaseTab(Event e) throws SQLException{
+		System.out.println("app tab selected");
+		
+		buildPatientTable();
+	}
+	
+	@FXML
+	public void selectMedTab(Event e) throws SQLException{
+		System.out.println("patients tab selected");
+		buildMedTable();
+	}
+
 
 }

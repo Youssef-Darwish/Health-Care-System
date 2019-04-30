@@ -7,7 +7,7 @@
 
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="324.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DoctorController">
   <tabs>
-    <Tab fx:id="patientsTab" text="Patients">
+    <Tab fx:id="patientsTab" onSelectionChanged="#selectPatientCaseTab" text="Patients">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -22,14 +22,14 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="medicinesTab" text="Medicines">
+    <Tab fx:id="medicinesTab" onSelectionChanged="#selectMedTab" text="Medicines">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="medicinesTableView" layoutY="7.0" prefHeight="372.0" prefWidth="324.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="medicinesTable" layoutY="7.0" prefHeight="372.0" prefWidth="324.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="medicineIdColumn" prefWidth="109.0" text="ID" />
-                      <TableColumn fx:id="priceIdColumn" prefWidth="214.0" text="Price" />
+                      <TableColumn fx:id="medicineNameColumn" prefWidth="109.0" text="Name" />
+                      <TableColumn fx:id="medicinepriceColumn" prefWidth="214.0" text="Price" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

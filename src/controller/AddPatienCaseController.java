@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -43,28 +44,36 @@ public class AddPatienCaseController implements Initializable {
 
 	@FXML
 	private void ok(ActionEvent event) throws IOException {
+		
 		if (validateInput()) {
 			warningLabel.setVisible(true);
+			System.out.println("hna tyb?");
 		} else {
 
+			System.out.println("entered");
 			try {
-				int id = ShowCaseController.selectedRecord.getPatientId();
+				int id = DoctorController.selectedRecord.getId();
 				Record record = new PatientCaseRecord(diseaseField.getText(), id, medicationField.getText());
 
 				int result = ((Doctor) LoginController.loggedIn).addPatientCase(record);
-
+				System.out.println("called b2a");
+				System.out.println("patientcase insertion result : " + String.valueOf(result));
 				// check result val
 				if (result == -1 || result == 0)
-					throw new Exception();
+					throw new SQLException();
+				
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
 
-			} catch (Exception e) {
+				show("/view/PatientCase.fxml", event);
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
 				warningLabel.setText("Invalid Input");
 				warningLabel.setVisible(true);
+				
 			}
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-
-			show("/view/PatientCase.fxml", event);
+			
 		}
 	}
 

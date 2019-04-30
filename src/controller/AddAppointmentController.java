@@ -7,7 +7,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import org.controlsfx.control.textfield.TextFields;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +49,7 @@ public class AddAppointmentController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		TextFields.bindAutoCompletion(addPatientName, "");
+	
 
 	}
 

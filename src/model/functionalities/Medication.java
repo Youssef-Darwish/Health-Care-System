@@ -30,7 +30,7 @@ public class Medication extends Functionality {
 		try {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
-			query += "SELECT * from Medication;";
+			query += "SELECT * from MEDICATION;";
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;
 		} catch (Exception e) {

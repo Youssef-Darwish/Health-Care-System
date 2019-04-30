@@ -122,8 +122,8 @@ public class PatientCase extends Functionality {
 	public ResultSet getDoctorsPatient(int doctorId) {
 
 		try {
-			PreparedStatement stmt = con.prepareStatement("SELECT DISTINCT patient.ID,patient.NAME FROM appointment "
-					+ "JOIN patient ON " + "appointment.patientID = patient.ID " + "WHERE DoctorId = ?" + " ;");
+			PreparedStatement stmt = con.prepareStatement("SELECT DISTINCT Patient.ID,Patient.NAME FROM APPOINTMENT "
+					+ "JOIN Patient ON " + "APPOINTMENT.patientID = Patient.ID " + "WHERE DoctorId = ?" + " ;");
 
 			stmt.setInt(1, doctorId);
 			return (ResultSet) stmt.executeQuery();
