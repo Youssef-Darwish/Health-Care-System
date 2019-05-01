@@ -75,11 +75,14 @@ public class PatientCase extends Functionality {
 //			if (x != 1)
 //				return x;
 			PreparedStatement stmt = con.prepareStatement(
-					"Update PATIENTCASE SET  DISEASE = ?, " + "MEDICATION = ? WHERE " + key + " = ? ;");
+					"Update PATIENTCASE SET  DISEASE = ?, " + "MEDICATION = ? WHERE " + key + " = ? AND"
+							+ " PATIENTID = ? ;");
 
 			stmt.setString(1, r.getDisease());
 			stmt.setString(2, r.getMedication());
 			stmt.setString(3, value);
+			stmt.setInt(4, r.getPatientId());
+			System.out.println(stmt);
 			return stmt.executeUpdate();
 
 		} catch (SQLException e) {
