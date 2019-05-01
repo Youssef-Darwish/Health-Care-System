@@ -23,5 +23,6 @@
          </font>
       </Label>
       <DatePicker fx:id="addDate" layoutX="135.0" layoutY="319.0" />
+      <Label fx:id="warningLabel" layoutX="48.0" layoutY="111.0" prefHeight="15.0" prefWidth="266.0" text="Invalid Input" />
    </children>
 </Pane>

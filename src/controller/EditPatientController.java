@@ -28,7 +28,6 @@ import model.users.Receptionist;
 
 public class EditPatientController implements Initializable {
 
-
 	@FXML // fx:id="editPatientId"
 	private TextField editPatientId;
 
@@ -43,29 +42,28 @@ public class EditPatientController implements Initializable {
 
 	@FXML // fx:id="warningLabel"
 	private Label warningLabel;
-	
-	@FXML //fx:id="editPatientButton"
+
+	@FXML // fx:id="editPatientButton"
 	private Button editPatientButton;
-	
-	@FXML //fx:id="cancelPatientButton"
+
+	@FXML // fx:id="cancelPatientButton"
 	private Button cancelPatientButton;
 	
-	
 
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		//get data from receptionist scene
+		// get data from receptionist scene
+		warningLabel.setVisible(false);
 		editPatientName.setText(ReceptionistController.selectedRecord.getName());
 		editPatientId.setText(String.valueOf(ReceptionistController.selectedRecord.getId()));
 		editPatientTele.setText(String.valueOf(ReceptionistController.selectedRecord.getTelephone()));
-        java.util.Date utilDate = new java.util.Date(ReceptionistController.selectedRecord.getRegistrationDate().getTime());
+		java.util.Date utilDate = new java.util.Date(
+				ReceptionistController.selectedRecord.getRegistrationDate().getTime());
 		LocalDate date = utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-
 		editPatientDate.setValue(date);
-		
+
 	}
 
 	@FXML
@@ -80,16 +78,16 @@ public class EditPatientController implements Initializable {
 			// validate input type
 			try {
 				LocalDate localDate = editPatientDate.getValue();
-//				System.out.println(localDate + "\n");
-					
+				// System.out.println(localDate + "\n");
+
 				Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-				
-				System.out.println(ReceptionistController.selectedRecord.getGender());
-				PatientRecord record = new PatientRecord(Integer.valueOf(editPatientId.getText()), editPatientName.getText(),
-						editPatientTele.getText(), sqlDate);
 
+				System.out.println(ReceptionistController.selectedRecord.getGender());
 				
+				PatientRecord record = new PatientRecord(Integer.valueOf(editPatientId.getText()),
+						editPatientName.getText(), editPatientTele.getText(), sqlDate);
+
 				int result = ((Receptionist) LoginController.loggedIn).editPatient("ID",
 						String.valueOf(ReceptionistController.selectedRecord.getId()), record);
 				System.out.println(result);
@@ -102,13 +100,12 @@ public class EditPatientController implements Initializable {
 
 				show("/view/ReceptionistScene.fxml", event);
 			} catch (Exception e) {
-				 System.out.println(e.getMessage());
-//				warningLabel.setVisible(true);
+				System.out.println(e.getMessage());
+				 warningLabel.setVisible(true);
 
 			}
 		}
 	}
-
 
 	@FXML
 	public void cancel(ActionEvent event) throws IOException {
@@ -131,7 +128,7 @@ public class EditPatientController implements Initializable {
 		// check that all fields are not empty for now
 
 		boolean check = editPatientName.getText().trim().isEmpty() || editPatientId.getText().trim().isEmpty()
-				||  editPatientTele.getText().trim().isEmpty();
+				|| editPatientTele.getText().trim().isEmpty();
 
 		return check;
 	}

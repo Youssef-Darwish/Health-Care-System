@@ -1,0 +1,39 @@
+
+use hospital_db;
+insert into MEDICATION values(10,"meda");
+insert into MEDICATION values(100,"medc");
+insert into MEDICATION values(150,"medd");
+insert into MEDICATION values(30,"mede");
+insert into MEDICATION values(40,"medf");
+insert into MEDICATION values(20,"medg");
+
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
+values('youssef','Admin','122222',12222,md5('pass1'));
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
+values('Rowan','Manager','0123456612',12222,md5('pass1'));
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
+values('user','Receptionist','0345432432',40000,md5('pass1'));
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
+values('Haya','Doctor','0114451351',50000,md5('pass1'));
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
+values('Amira','Doctor','0343432432',40000,md5('pass1'));
+
+insert into Patient (ID,NAME,TELEPHONE,GENDER,REGISTERATIONDATE)
+values(1111130,'patient2','0345432431','male','2017-10-20');
+insert into Patient (ID,NAME,TELEPHONE,GENDER,REGISTERATIONDATE)
+values(1111133,'patient3','0345432433','female','2017-10-10');
+insert into Patient (ID,NAME,TELEPHONE,GENDER,REGISTERATIONDATE)
+values(1111135,'patient4','0345432434','female','2018-8-12');
+insert into Patient (ID,NAME,TELEPHONE,GENDER,REGISTERATIONDATE)
+values(1111137,'patient5','0345432435','female','2018-5-17');
+
+insert into APPOINTMENT (PATIENTID,DOCTORID,HOUR,APPOINTMENTDATE)
+values('1111130','4','14:30','2018-12-20');
+insert into APPOINTMENT (PATIENTID,DOCTORID,HOUR,APPOINTMENTDATE)
+values('1111130','4','14:30','2018-12-20');
+insert into PATIENTCASE (PATIENTID,DISEASE,MEDICATION)
+values('1111130','diabetes','meda');
+insert into PATIENTCASE (PATIENTID,DISEASE,MEDICATION)
+values('1111130','bla bal','medb');
+
+

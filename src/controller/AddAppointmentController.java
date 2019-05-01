@@ -50,6 +50,8 @@ public class AddAppointmentController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		warningLabel.setVisible(false);
+		
 	}
 
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -79,32 +81,47 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML
 	public void addInDB(ActionEvent event) throws IOException {
-		String patientID = addPatientId.getText();
 
-		String doctorId = addDoctorId.getText();
-		String time = addHour.getText();
+		if (validateInput()) {
+			warningLabel.setText("Enter all required fields");
+			warningLabel.setVisible(true);
+		} else {
+			String patientID = addPatientId.getText();
 
-		LocalDate localDate = addDate.getValue();
-		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			String doctorId = addDoctorId.getText();
+			String time = addHour.getText();
 
-		try {
-			Record record = new AppointmentRecord(Integer.valueOf(patientID), Integer.valueOf(doctorId), time, sqlDate);
 
-			int result = ((Receptionist) LoginController.loggedIn).addAppointment(record);
+			try {
+				LocalDate localDate = addDate.getValue();
+				Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-			if (result != -1)
-				System.out.println("inserted");
+				Record record = new AppointmentRecord(Integer.valueOf(patientID), Integer.valueOf(doctorId), time,
+						sqlDate);
 
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-			show("/view/ReceptionistScene.fxml", event);
+				int result = ((Receptionist) LoginController.loggedIn).addAppointment(record);
 
-		} catch (NumberFormatException e) {
+				if (result != -1)
+					System.out.println("inserted");
 
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+				show("/view/ReceptionistScene.fxml", event);
+
+			} catch (NumberFormatException e) {
+
+				System.out.println(e.getMessage());
+				warningLabel.setText("invalid input");
+				warningLabel.setVisible(true);
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				warningLabel.setText("invalid input");
+				warningLabel.setVisible(true);
+
+			}
+
 		}
 
 	}

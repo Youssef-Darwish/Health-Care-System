@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 -- Table `hospital_db`.`APPOINTMENT`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hospital_db`.`APPOINTMENT` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `PATIENTID` INT NOT NULL,
   `DOCTORID` INT NOT NULL,
   `HOUR` VARCHAR(10) NULL,
@@ -63,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`APPOINTMENT` (
   CONSTRAINT `fk_APPOINTMENT_1`
     FOREIGN KEY (`PATIENTID`)
     REFERENCES `hospital_db`.`Patient` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE cascade
+    ON UPDATE cascade,
   CONSTRAINT `fk_APPOINTMENT_2`
     FOREIGN KEY (`DOCTORID`)
     REFERENCES `hospital_db`.`STAFF` (`ID`)
@@ -87,7 +87,7 @@ ENGINE = InnoDB;
 -- Table `hospital_db`.`PATIENTCASE`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTCASE` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `PATIENTID` INT NOT NULL,
   `DISEASE` VARCHAR(45) NOT NULL,
   `MEDICATION` VARCHAR(20) NOT NULL,
@@ -97,13 +97,13 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTCASE` (
   CONSTRAINT `fk_PATIENTCASE_1`
     FOREIGN KEY (`PATIENTID`)
     REFERENCES `hospital_db`.`Patient` (`ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE cascade
+    ON UPDATE cascade,
   CONSTRAINT `fk_PATIENTCASE_2`
     FOREIGN KEY (`MEDICATION`)
     REFERENCES `hospital_db`.`MEDICATION` (`NAME`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE cascade
+    ON UPDATE cascade)
 ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;

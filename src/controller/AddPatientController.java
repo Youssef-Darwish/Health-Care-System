@@ -61,6 +61,7 @@ public class AddPatientController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		warningLabel.setVisible(false);
 
 	}
 
@@ -78,7 +79,7 @@ public class AddPatientController implements Initializable {
 
 		// check that all fields are not empty for now
 		boolean check = addPatientName.getText().trim().isEmpty() || addPatientTele.getText().trim().isEmpty()
-				|| addPatientId.getText().trim().isEmpty();
+				|| addPatientId.getText().trim().isEmpty() || addPatientDate.getValue()==null;
 
 		return check;
 	}
@@ -91,39 +92,45 @@ public class AddPatientController implements Initializable {
 
 	@FXML
 	public void addInDB(ActionEvent event) throws IOException {
-		
-		// validate input
-		
-		
-		
-		RadioButton selectedRadioButton = (RadioButton) grp.getSelectedToggle();
-		String gender = selectedRadioButton.getText();
-//		System.out.println(gender);
-		
-		LocalDate localDate = addPatientDate.getValue();
-//		System.out.println(localDate + "\n");
-			
-		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-		try {
-			Record record = new PatientRecord(Integer.valueOf(addPatientId.getText()), addPatientName.getText(),
-					addPatientTele.getText(), gender,sqlDate);
-			
-			int result = ((Receptionist) LoginController.loggedIn).addPatient(record);
-			
-			if(result != -1)
-				System.out.println("inserted");
-			
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.close();
-			show("/view/ReceptionistScene.fxml", event);
 
-		}catch (Exception e){
-			System.out.println(e.getMessage());
+		// validate input
+		if (validateInput()) {
+
+			warningLabel.setText("Enter all required fields");
+			warningLabel.setVisible(true);
+		} else {
+
+			RadioButton selectedRadioButton = (RadioButton) grp.getSelectedToggle();
+			String gender = selectedRadioButton.getText();
+			// System.out.println(gender);
+
+			LocalDate localDate = addPatientDate.getValue();
+					
+			// System.out.println(localDate + "\n");
+			
+			Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+			java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			try {
+				Record record = new PatientRecord(Integer.valueOf(addPatientId.getText()), addPatientName.getText(),
+						addPatientTele.getText(), gender, sqlDate);
+				
+				Integer.parseInt(addPatientTele.getText());
+				int result = ((Receptionist) LoginController.loggedIn).addPatient(record);
+
+				if (result != -1)
+					System.out.println("inserted");
+
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.close();
+				show("/view/ReceptionistScene.fxml", event);
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				warningLabel.setText("Invalid input");
+				warningLabel.setVisible(true);
+			}
+
 		}
-		
-		
-		
 
 	}
 
