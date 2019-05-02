@@ -52,7 +52,7 @@ public class EditPatientCaseController implements Initializable {
 
 				int id = ShowCaseController.selectedRecord.getPatientId();
 				Record record = new PatientCaseRecord(diseaseField.getText(), id, medicationField.getText());
-
+				System.out.println("patient id : " + String.valueOf(id));
 				int result = ((Doctor) LoginController.loggedIn).editPatientCase("id",
 						String.valueOf(ShowCaseController.selectedRecord.getCaseId()), record);
 				if (result == -1) {
