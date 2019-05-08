@@ -15,7 +15,7 @@ public class AppointmentTestEdit {
 	Appointment a = new Appointment();
 	@Test
 	public void test() {
-		int output = a.edit("id", "1",new AppointmentRecord(1111130, 4,"12:30", new Date(2018-12-20)));
+		int output = a.edit("id", "2",new AppointmentRecord(1111111, 4,"12:30", new Date(2018-12-20)));
 		assertEquals(1, output);
 	}
 	

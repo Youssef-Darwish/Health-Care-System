@@ -16,7 +16,7 @@ public class AppointmentTestDelete {
 	Appointment a = new Appointment();
 	@Test
 	public void test() {
-		int output = a.delete("id", "1");
+		int output = a.delete("id", "2");
 		assertEquals(1, output);
 	}
 	
