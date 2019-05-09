@@ -23,6 +23,5 @@
       <TextField fx:id="editDoctortId" layoutX="141.0" layoutY="198.0" />
       <TextField fx:id="editHour" layoutX="141.0" layoutY="255.0" />
       <DatePicker fx:id="editDate" layoutX="142.0" layoutY="314.0" />
-      <Label fx:id="warningLabel" layoutX="56.0" layoutY="111.0" prefHeight="15.0" prefWidth="204.0" text="Invalid Input  *" textFill="#f20202" />
    </children>
 </Pane>

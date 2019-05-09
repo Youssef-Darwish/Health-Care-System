@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportController">
+   <children>
+      <Label layoutX="108.0" layoutY="63.0" prefHeight="21.0" prefWidth="93.0" text="new patients" />
+      <Label fx:id="patients" layoutX="33.0" layoutY="63.0" prefHeight="8.0" prefWidth="50.0" text="label" />
+      <Label layoutX="33.0" layoutY="14.0" prefHeight="43.0" prefWidth="243.0" text="For the past three month we have :" />
+      <Label fx:id="appointmentsNumber" layoutX="33.0" layoutY="91.0" text="Label" />
+      <Label layoutX="108.0" layoutY="91.0" prefHeight="21.0" prefWidth="190.0" text="new appointments between" />
+      <Label fx:id="doctorsCount" layoutX="307.0" layoutY="91.0" text="Label" />
+      <Label layoutX="373.0" layoutY="91.0" text="doctors" />
+      <Label layoutX="451.0" layoutY="91.0" text="and" />
+      <Label fx:id="patientsCount" layoutX="505.0" layoutY="91.0" text="Label" />
+      <Label layoutX="576.0" layoutY="91.0" text="patients" />
+      <BarChart fx:id="barChart" layoutX="108.0" layoutY="138.0" title="Medication profits">
+        <xAxis>
+          <CategoryAxis  label="Medication" side="BOTTOM" fx:id="x" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis  fx:id="y" label="Price" side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</Pane>
