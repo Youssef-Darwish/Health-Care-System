@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -105,9 +104,7 @@ public class AddAppointmentController implements Initializable {
 
 				if (result != -1)
 					System.out.println("inserted");
-				
-				if(result == -1)
-					throw new Exception();
+
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				stage.close();
 				show("/view/ReceptionistScene.fxml", event);

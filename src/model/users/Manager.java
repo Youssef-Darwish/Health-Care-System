@@ -15,4 +15,7 @@ public class Manager implements User {
 	public ResultSet getTotalPricesOfEachMedicine () {
 		return gr.getTotalPricesOfEachMedicine();
 	}
+	public ResultSet getNumberOfNewStaff () {
+		return gr.getNumberOfNewStaff();
+	}
 }

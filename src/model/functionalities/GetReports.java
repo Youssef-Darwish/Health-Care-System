@@ -20,6 +20,20 @@ public class GetReports extends Functionality {
 			return null;
 		}
 	}
+	public ResultSet getNumberOfNewStaff () {
+		try {
+			Statement stat = (Statement) con.createStatement();
+			String query = "";
+			query += "select count(ID) as c from hospital_db.staff where "
+					+ "HIRINGDATE > DATE(NOW() - INTERVAL 3 MONTH) group by role;";
+			ResultSet result = (ResultSet) stat.executeQuery(query);
+			
+			return result;
+					
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	public ResultSet getNumberOfNewAppointments () {
 		try {
 			Statement stat = (Statement) con.createStatement();
@@ -38,13 +52,14 @@ public class GetReports extends Functionality {
 		try {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
+			System.out.println("here");
 			query += "select medication , price*count(medication) from patientCase "
 					+ "join hospital_db.medication "
 					+ "on"
 					+ " patientCase.medication = hospital_db.medication.name "
 					+ "where patientCase.CaseDate > DATE(NOW() - INTERVAL 3 MONTH)"
-					+ "group by medication"
-;
+					+ "group by medication";
+			System.out.println(query);
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;
 			

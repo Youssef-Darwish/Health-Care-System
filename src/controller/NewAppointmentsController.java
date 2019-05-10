@@ -13,50 +13,34 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.Axis;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.users.Manager;
 
-public class ReportController implements Initializable {
-	@FXML
-	private CategoryAxis x = new CategoryAxis();
-	@FXML
-	private NumberAxis y = new NumberAxis();
-	@FXML
-	private BarChart <?,?> barChart = new BarChart<>(x,y);
+public class NewAppointmentsController implements Initializable {
 	@FXML
 	private Label patientsCount;
 	@FXML
 	private Label doctorsCount;
 	@FXML
 	private Label appointmentsNumber;
-	@FXML
-	private Label patients;
-	
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		XYChart.Series series = new XYChart.Series<>();
-		ResultSet rs = ((Manager) LoginController.loggedIn).getTotalPricesOfEachMedicine();
-		
+	public void initialize(URL location, ResourceBundle resources) {
+		ResultSet rs1 = ((Manager) LoginController.loggedIn).getNumberOfNewAppointments();
 		try {
-			while (!rs.isLast()) {
-				rs.next();
-				series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getDouble(2)));
+			while (!rs1.isLast()) {
+			rs1.next();
+			System.out.println(rs1.getInt(1));
+			patientsCount.setText(String.valueOf(rs1.getInt(3)));
+			doctorsCount.setText(String.valueOf(rs1.getInt(2)));
+			appointmentsNumber.setText(String.valueOf(rs1.getInt(1)));
 			}
-			barChart.getData().addAll(series);
-			
-			
 		} catch (SQLException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		
 	}
 	@FXML
 	public void logout (ActionEvent event) throws IOException {
@@ -76,5 +60,4 @@ public class ReportController implements Initializable {
 
 		stage.show();
 	}
-
 }

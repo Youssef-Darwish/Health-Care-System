@@ -51,7 +51,6 @@ public class EditAppointmentController implements Initializable {
 
 		System.out.println("in init edit");
 		// get data from receptionist scene
-		warningLabel.setVisible(false);
 		System.out.println(ReceptionistController.selectedAppRecord == null);
 		editPatientId.setText(String.valueOf(ReceptionistController.selectedAppRecord.getPatientId()));
 		editDoctortId.setText(String.valueOf(ReceptionistController.selectedAppRecord.getDoctorId()));
@@ -99,8 +98,8 @@ public class EditAppointmentController implements Initializable {
 				warningLabel.setText("invalid input");
 				warningLabel.setVisible(true);
 			} catch (Exception e) {
-				warningLabel.setText("Invalid Input");
-				warningLabel.setVisible(true);
+//				warningLabel.setText("Invalid Input");
+//				warningLabel.setVisible(true);
 				System.out.println(e.getMessage());
 
 			}

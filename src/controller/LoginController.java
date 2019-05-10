@@ -75,6 +75,7 @@ public class LoginController implements Initializable {
 					loggedIn = new Admin();
 				} else if (role.equals("manager")) {
 					loggedIn = new Manager();
+					pageParent = FXMLLoader.load(getClass().getResource("/view/ReportButtons.fxml"));
 				} else if (role.equals("doctor")) {
 					loggedIn = new Doctor();
 					((Doctor)(loggedIn)).setId(result.getInt(1));

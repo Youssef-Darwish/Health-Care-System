@@ -27,5 +27,7 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="out" layoutX="676.0" layoutY="507.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button fx:id="back" layoutX="37.0" layoutY="507.0" mnemonicParsing="false" onAction="#goBack" text="back" />
    </children>
 </Pane>

@@ -15,7 +15,7 @@ public class PatientTestEdit {
 	//int id, String name, String telephone, String gender, Date regDate
 	@Test
 	public void editTest1() {
-		int output = pr.edit("TELEPHONE", "0122200862",new PatientRecord (550, "elewa", "01328200862", "male", new Date(5-5-1995)));
+		int output = pr.edit("TELEPHONE", "01228200862",new PatientRecord (550, "elewa", "01328200862", "male", new Date(5-5-1995)));
 		assertEquals(1, output);
 	}
 	@Test
