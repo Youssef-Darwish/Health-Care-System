@@ -1,11 +1,13 @@
 package model.functionalities;
 
+import java.sql.PreparedStatement;
+
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.Statement;
 
 import model.records.Record;
 
-public class DoctorAvailablities extends Functionality{
+public class DoctorAvailablities extends Functionality {
 
 	@Override
 	public int add(Record record) {
@@ -37,11 +39,17 @@ public class DoctorAvailablities extends Functionality{
 			return null;
 		}
 	}
-
+	
 	@Override
 	public ResultSet search(String key, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM AVAILABILITY " + " WHERE DOCTORID  = ? ;");
+			stmt.setString(1, value);
+			return (ResultSet) stmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 
 }

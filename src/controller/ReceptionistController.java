@@ -190,7 +190,6 @@ public class ReceptionistController implements Initializable {
 	@FXML
 	public void editAppointment(ActionEvent event) throws IOException {
 		selectedAppRecord = (AppointmentRecord) appTable.getSelectionModel().getSelectedItem();
-		System.out.println(selectedAppRecord==null);
 		show("/view/EditAppointment.fxml", event);
 	}
 
@@ -243,14 +242,12 @@ public class ReceptionistController implements Initializable {
 
 	@FXML
 	public void selectAppTab(Event e) throws SQLException {
-		System.out.println("app tab selected");
 		ResultSet rs = (ResultSet) receptionist.getAllAppointments();
 		buildAppTable(rs);
 	}
 
 	@FXML
 	public void selectPatientTab(Event e) throws SQLException {
-		System.out.println("patients tab selected");
 		ResultSet rs = (ResultSet) receptionist.getAllPatients();
 		buildPatientTable(rs);
 	}

@@ -32,6 +32,22 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`Patient` (
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `hospital_db`.`PATIENTALERGIES`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTALERGIES`(
+	`PATIENTID` INT NOT NULL,
+	`PATIENTALERGIE` VARCHAR(45) NOT NULL,	
+	PRIMARY KEY (`PATIENTID`, `PATIENTALERGIE`),
+	CONSTRAINT `fk_PATIENTALERGIES_1`
+    FOREIGN KEY (`PATIENTID`)
+    REFERENCES `hospital_db`.`Patient` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+	
+)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `hospital_db`.`STAFF`
@@ -106,7 +122,21 @@ CREATE TABLE IF NOT EXISTS `hospital_db`.`PATIENTCASE` (
     ON UPDATE cascade)
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `hospital_db`.`AVAILABILITY` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `DOCTORID` INT NOT NULL,
+  `DATE` date NOT NULL,
+  `HOUR` time NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `fk_AVAILABILITY_1`
+    FOREIGN KEY (`DOCTORID`)
+    REFERENCES `hospital_db`.`STAFF` (`ID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE )
+ENGINE = InnoDB;
+
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-

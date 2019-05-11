@@ -16,7 +16,8 @@ public class AppointmentRecord implements Record {
 		this.appointmentDate = date;
 	}
 
-	public AppointmentRecord(int appId,int patientId, int doctorId, String hour, Date date) {
+
+	public AppointmentRecord(int appId, int patientId, int doctorId, String hour, Date date) {
 		this.patientId = patientId;
 		this.doctorId = doctorId;
 		this.hour = hour;
@@ -27,7 +28,6 @@ public class AppointmentRecord implements Record {
 	public int getPatientId() {
 		return patientId;
 	}
-	
 
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;

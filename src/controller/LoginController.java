@@ -66,10 +66,10 @@ public class LoginController implements Initializable {
 					warningLabel.setVisible(true);
 				}
 
-				System.out.println(result.getString(3));
+//				System.out.println(result.getString(3));
 				String R = result.getString(3);
 				String role = R.toLowerCase();
-				System.out.println(role);
+//				System.out.println(role);
 				if (role.equals("admin")) {
 					pageParent = FXMLLoader.load(getClass().getResource("/view/AdminScene.fxml"));
 					loggedIn = new Admin();

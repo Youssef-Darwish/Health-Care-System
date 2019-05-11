@@ -23,6 +23,7 @@ public class Appointment extends Functionality {
 
 			stmt.setInt(1, r.getPatientId());
 			stmt.setInt(2, r.getDoctorId());
+			System.out.println("doctor's ID" + String.valueOf(r.getDoctorId()));
 			stmt.setString(3, r.getHour());
 			stmt.setDate(4, (Date) r.getAppointmentDate());
 			return stmt.executeUpdate();

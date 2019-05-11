@@ -3,7 +3,9 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.TextFields;
@@ -45,22 +47,39 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML // fx:id="warningLabel"
 	private Label warningLabel;
-	
+
 	@FXML // fx:id="checkAvailablityButton"
 	private Button checkAvailablityButton;
+
+	public static String doctorID = "";
+
+	public static String patientID = "";
+
+	public static String appointmentDate = "";
+
+	public static String appointmentTime = "";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		addDate.setText(appointmentDate);
+		addDoctorId.setText(doctorID);
+		addHour.setText(appointmentTime);
+		addPatientId.setText(patientID);
+
 		warningLabel.setVisible(false);
-		ArrayList<String> names = null;
+		ArrayList<String> patientNames = null;
+		ArrayList<String> doctorNames = null;
+
 		try {
-			names = ((Receptionist) LoginController.loggedIn).getPatientsNames();
+			patientNames = ((Receptionist) LoginController.loggedIn).getPatientsNames();
+			doctorNames = ((Receptionist) LoginController.loggedIn).getDoctorNames();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		TextFields.bindAutoCompletion(addPatientId,names);	
+		TextFields.bindAutoCompletion(addPatientId, patientNames);
+		TextFields.bindAutoCompletion(addDoctorId, doctorNames);
 	}
 
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -83,9 +102,25 @@ public class AddAppointmentController implements Initializable {
 	}
 
 	public void cancel(ActionEvent event) throws IOException {
+		doctorID = "";
+		patientID = "";
+		appointmentDate = "";
+		appointmentTime = "";
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 		show("/view/ReceptionistScene.fxml", event);
+	}
+
+	@FXML
+	public void openAvailabilityDates(ActionEvent event) throws IOException {
+
+		doctorID = addDoctorId.getText();
+		patientID = addPatientId.getText();
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+		show("/view/Availability.fxml", event);
+
 	}
 
 	@FXML
@@ -96,25 +131,38 @@ public class AddAppointmentController implements Initializable {
 			warningLabel.setVisible(true);
 		} else {
 			String patientID = addPatientId.getText();
-
 			String doctorId = addDoctorId.getText();
+
+			String[] splittedPatient = patientID.split("id: ");
+			splittedPatient[1] = splittedPatient[1].substring(0, splittedPatient[1].length() - 1);
+
+			String[] splittedDoctor = doctorId.split("id: ");
+			splittedDoctor[1] = splittedDoctor[1].substring(0, splittedDoctor[1].length() - 1);
+
 			String time = addHour.getText();
 
-
 			try {
-				//LocalDate localDate = addDate.getValue();
-				//Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-				//java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+				// LocalDate localDate = addDate.getValue();
+				// Date date =
+				// Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-				Record record = new AppointmentRecord(Integer.valueOf(patientID), Integer.valueOf(doctorId), time,
-						sqlDate);
+				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(addDate.getText());
+				java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
+				Record record = new AppointmentRecord(Integer.valueOf(splittedPatient[1]),
+						Integer.valueOf(splittedDoctor[1]), time, sqlDate);
 
 				int result = ((Receptionist) LoginController.loggedIn).addAppointment(record);
 
 				if (result != -1)
 					System.out.println("inserted");
 
+				doctorID = "";
+				patientID = "";
+				appointmentDate = "";
+				appointmentTime = "";
+				
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
 				stage.close();
 				show("/view/ReceptionistScene.fxml", event);
 
@@ -123,7 +171,7 @@ public class AddAppointmentController implements Initializable {
 				System.out.println(e.getMessage());
 				warningLabel.setText("invalid input");
 				warningLabel.setVisible(true);
-				
+
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				warningLabel.setText("invalid input");
