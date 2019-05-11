@@ -2,10 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import org.controlsfx.control.textfield.TextFields;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,12 +16,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.records.AppointmentRecord;
-import model.records.PatientRecord;
 import model.records.Record;
 import model.users.Receptionist;
 
@@ -33,10 +32,10 @@ public class AddAppointmentController implements Initializable {
 	private TextField addDoctorId;
 
 	@FXML // fx:id="addHour"
-	private TextField addHour;
+	private Label addHour;
 
 	@FXML // fx:id="addDate"
-	private DatePicker addDate;
+	private Label addDate;
 
 	@FXML // fx:id="addPatientButton"
 	private Button addAppointmentButton;
@@ -46,12 +45,22 @@ public class AddAppointmentController implements Initializable {
 
 	@FXML // fx:id="warningLabel"
 	private Label warningLabel;
+	
+	@FXML // fx:id="checkAvailablityButton"
+	private Button checkAvailablityButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		warningLabel.setVisible(false);
-		
+		ArrayList<String> names = null;
+		try {
+			names = ((Receptionist) LoginController.loggedIn).getPatientsNames();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		TextFields.bindAutoCompletion(addPatientId,names);	
 	}
 
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -93,9 +102,9 @@ public class AddAppointmentController implements Initializable {
 
 
 			try {
-				LocalDate localDate = addDate.getValue();
-				Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+				//LocalDate localDate = addDate.getValue();
+				//Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+				//java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
 				Record record = new AppointmentRecord(Integer.valueOf(patientID), Integer.valueOf(doctorId), time,
 						sqlDate);

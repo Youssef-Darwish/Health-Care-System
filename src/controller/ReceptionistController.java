@@ -40,6 +40,9 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="appTable"
 	private TableView<Record> appTable;
+	
+	@FXML // fx:id="availTable"
+	private TableView<Record> availTable;
 
 	@FXML // fx:id="patientIdColumn"
 	private TableColumn<Record, Integer> patientIdColumn;
@@ -64,6 +67,9 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="appTab"
 	private Tab appTab;
+	
+	@FXML // fx:id="availTab"
+	private Tab availTab;
 
 	@FXML // fx:id="tabPane"
 	private TableColumn<Record, String> patientRegisterationColumn;
@@ -88,6 +94,15 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="priceColumn"
 	private TableColumn<Record, String> priceColumn;
+	
+	@FXML // fx:id="doctorAvailColumn"
+	private TableColumn<Record, String> doctorAvailColumn;
+	
+	@FXML // fx:id="dateAvailColumn"
+	private TableColumn<Record, String> dateAvailColumn;
+	
+	@FXML // fx:id="timeAvailColumn"
+	private TableColumn<Record, String> timeAvailColumn;
 
 	@FXML // fx:id="editPatientButton
 	private Button editPatientButton;
@@ -243,10 +258,8 @@ public class ReceptionistController implements Initializable {
 	public void buildPatientTable(ResultSet rs) throws SQLException {
 
 		ObservableList<Record> data = FXCollections.observableArrayList();
-
 		// check fields of patient
 		while (rs.next()) {
-
 			data.add(new PatientRecord(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5)));
 		}
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="doctorNameLabel" layoutX="25.0" layoutY="22.0" prefHeight="25.0" prefWidth="159.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TableView fx:id="availabilityTable" layoutX="25.0" layoutY="61.0" prefHeight="136.0" prefWidth="332.0">
+        <columns>
+          <TableColumn fx:id="dateColumn" prefWidth="197.0" text="Date" />
+          <TableColumn fx:id="timeColumn" prefWidth="134.0" text="Time" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>

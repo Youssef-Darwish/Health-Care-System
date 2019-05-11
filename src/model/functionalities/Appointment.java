@@ -79,7 +79,7 @@ public class Appointment extends Functionality {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public ResultSet getAll() {
 

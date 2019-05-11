@@ -15,14 +15,15 @@
       <Button fx:id="addAppointmentButton" layoutX="106.0" layoutY="376.0" mnemonicParsing="false" onAction="#addInDB" prefHeight="25.0" prefWidth="62.0" text="Add" />
       <Button fx:id="cancelAppointmentButton" layoutX="224.0" layoutY="376.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
       <TextField fx:id="addPatientId" layoutX="138.0" layoutY="145.0" prefHeight="25.0" prefWidth="197.0" />
-      <TextField fx:id="addDoctorId" layoutX="137.0" layoutY="211.0" prefHeight="25.0" prefWidth="197.0" />
-      <TextField fx:id="addHour" layoutX="135.0" layoutY="267.0" prefHeight="25.0" prefWidth="197.0" />
+      <TextField fx:id="addDoctorId" layoutX="137.0" layoutY="211.0" prefHeight="25.0" prefWidth="140.0" />
       <Label layoutX="140.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" text="New Appointment">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <DatePicker fx:id="addDate" layoutX="135.0" layoutY="319.0" />
-      <Label fx:id="warningLabel" layoutX="48.0" layoutY="111.0" prefHeight="15.0" prefWidth="266.0" text="Invalid Input" />
+      <Label fx:id="warningLabel" layoutX="48.0" layoutY="111.0" prefHeight="15.0" prefWidth="266.0" text="Invalid Input" visible="false" />
+      <Label fx:id="addHour" layoutX="137.0" layoutY="268.0" prefHeight="25.0" prefWidth="197.0" text="hh:mm" />
+      <Label fx:id="addDate" layoutX="137.0" layoutY="319.0" prefHeight="25.0" prefWidth="197.0" text="dd-mm-yyyy" />
+      <Button fx:id="checkAvailabilityButton" layoutX="288.0" layoutY="211.0" mnemonicParsing="false" onAction="#openAvailabilityDates" prefHeight="25.0" prefWidth="108.0" text="Check availability" />
    </children>
 </Pane>

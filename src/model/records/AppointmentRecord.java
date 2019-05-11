@@ -1,6 +1,6 @@
 package model.records;
 
-import java.util.*;
+import java.util.Date;
 
 public class AppointmentRecord implements Record {
 
@@ -27,6 +27,7 @@ public class AppointmentRecord implements Record {
 	public int getPatientId() {
 		return patientId;
 	}
+	
 
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;

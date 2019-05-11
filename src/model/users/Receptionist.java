@@ -1,8 +1,12 @@
 package model.users;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.mysql.jdbc.ResultSet;
 
 import model.functionalities.Appointment;
+import model.functionalities.DoctorAvailablities;
 import model.functionalities.Functionality;
 import model.functionalities.PatientRegistry;
 import model.records.Record;
@@ -10,9 +14,20 @@ import model.records.Record;
 public class Receptionist implements User {
 	Functionality patientF = new PatientRegistry();
 	Functionality AppointmentF = new Appointment();
+	Functionality availablityF = new DoctorAvailablities();
 
 	public int editPatient(String key, String value, Record record) {
 		return patientF.edit(key, value, record);
+	}
+	
+	public ArrayList<String> getPatientsNames() throws SQLException {
+		ResultSet rs = patientF.getAll();
+		ArrayList<String> names = new ArrayList<>();
+	
+		while (rs.next())
+			names.add(rs.getString(2) + " (id: " + rs.getInt(1) + ")");
+		
+		return names;
 	}
 
 	public int deletePatient(String key, String value) {
@@ -24,12 +39,14 @@ public class Receptionist implements User {
 	}
 
 	public ResultSet getAllPatients() {
-
 		return patientF.getAll();
+	}
+	
+	public ResultSet getAllDoctorsAvails() {
+		return availablityF.getAll();
 	}
 
 	public ResultSet searchPatient(String key, String value) {
-
 		return patientF.search(key, value);
 	}
 
