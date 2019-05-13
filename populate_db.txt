@@ -36,4 +36,10 @@ values('1111130','diabetes','meda');
 insert into PATIENTCASE (PATIENTID,DISEASE,MEDICATION)
 values('1111130','bla bal','medb');
 
+insert into AVAILABILITY (DOCTORID,DATE,HOUR)
+values ('4','2018-12-20','14:30');
+
+insert into AVAILABILITY (DOCTORID,DATE,HOUR)
+values ('4','2018-12-20','15:30');
+
 

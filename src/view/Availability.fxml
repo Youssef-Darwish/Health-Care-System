@@ -6,14 +6,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Availability">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="264.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Availability">
    <children>
-      <TableView fx:id="availabilityTable" layoutX="25.0" layoutY="61.0" prefHeight="136.0" prefWidth="332.0">
+      <TableView fx:id="availabilityTable" layoutX="42.0" layoutY="61.0" prefHeight="136.0" prefWidth="332.0">
         <columns>
           <TableColumn fx:id="dateColumn" prefWidth="197.0" text="Date" />
           <TableColumn fx:id="timeColumn" prefWidth="134.0" text="Time" />
         </columns>
       </TableView>
-      <Button fx:id="selectButton" layoutX="280.0" layoutY="225.0" mnemonicParsing="false" onAction="#select" prefHeight="25.0" prefWidth="77.0" text="Select" />
+      <Button fx:id="selectButton" layoutX="290.0" layoutY="225.0" mnemonicParsing="false" onAction="#select" prefHeight="25.0" prefWidth="77.0" text="Select" />
+      <Button fx:id="cancelButton" layoutX="48.0" layoutY="224.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="71.0" text="Cancel" />
    </children>
 </Pane>

@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.records.AppointmentRecord;
+import model.records.AvailablityRecord;
 import model.records.PatientRecord;
 import model.records.Record;
 import model.users.Doctor;
@@ -40,7 +41,7 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="appTable"
 	private TableView<Record> appTable;
-	
+
 	@FXML // fx:id="availTable"
 	private TableView<Record> availTable;
 
@@ -67,7 +68,7 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="appTab"
 	private Tab appTab;
-	
+
 	@FXML // fx:id="availTab"
 	private Tab availTab;
 
@@ -94,13 +95,13 @@ public class ReceptionistController implements Initializable {
 
 	@FXML // fx:id="priceColumn"
 	private TableColumn<Record, String> priceColumn;
-	
+
 	@FXML // fx:id="doctorAvailColumn"
 	private TableColumn<Record, String> doctorAvailColumn;
-	
+
 	@FXML // fx:id="dateAvailColumn"
 	private TableColumn<Record, String> dateAvailColumn;
-	
+
 	@FXML // fx:id="timeAvailColumn"
 	private TableColumn<Record, String> timeAvailColumn;
 
@@ -203,7 +204,13 @@ public class ReceptionistController implements Initializable {
 	@FXML
 	public void deleteAppointment(ActionEvent event) throws SQLException {
 		selectedAppRecord = (AppointmentRecord) appTable.getSelectionModel().getSelectedItem();
-		((Receptionist) LoginController.loggedIn).deleteAppointment("id", String.valueOf(selectedAppRecord.getAppointmentId()));
+		((Receptionist) LoginController.loggedIn).deleteAppointment("id",
+				String.valueOf(selectedAppRecord.getAppointmentId()));
+
+		Record r = new AvailablityRecord(selectedAppRecord.getDoctorId(), selectedAppRecord.getAppointmentDate(),
+				selectedAppRecord.getHour());
+
+		doctor.addAvailableTime(r);
 		this.buildAppTable(receptionist.getAllAppointments());
 	}
 

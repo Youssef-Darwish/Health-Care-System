@@ -8,7 +8,7 @@ public class AvailablityRecord implements Record {
 	private Date date;
 	private String time;
 
-	public AvailablityRecord(int id, String time, Date date) {
+	public AvailablityRecord(int id, Date date ,String time ) {
 
 		this.date = date;
 		this.doctorId = id;

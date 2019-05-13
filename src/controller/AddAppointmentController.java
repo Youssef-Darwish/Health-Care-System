@@ -153,14 +153,21 @@ public class AddAppointmentController implements Initializable {
 
 				int result = ((Receptionist) LoginController.loggedIn).addAppointment(record);
 
-				if (result != -1)
+				if (result != -1){
 					System.out.println("inserted");
-
+				
+				int res2 = ((Receptionist) LoginController.loggedIn).deleteAvailability("DATE",
+						sqlDate.toString(), "HOUR",time );
+				if(res2!= -1)
+					System.out.println("avail deleted");
+				}
+				
+				
 				doctorID = "";
 				patientID = "";
 				appointmentDate = "";
 				appointmentTime = "";
-				
+
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 				stage.close();

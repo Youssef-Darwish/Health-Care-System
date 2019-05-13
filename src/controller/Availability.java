@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.mysql.jdbc.ResultSet;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -45,6 +46,9 @@ public class Availability implements Initializable {
 	@FXML // fx:id="selectButton"
 	private Button selectButton;
 
+	@FXML // fx:id="cancelButton"
+	private Button cancelButton;
+
 	private Receptionist receptionist = new Receptionist();
 
 	public void buildAvailTable(ResultSet rs) throws SQLException {
@@ -66,9 +70,11 @@ public class Availability implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
-		
+		selectButton.disableProperty().bind(Bindings.isEmpty(availabilityTable.getSelectionModel().getSelectedItems()));
+
 		String id = AddAppointmentController.doctorID;
 		String []splittedDoctor = id.split("id: ");
+				
 		splittedDoctor[1]=splittedDoctor[1].substring(0, splittedDoctor[1].length()-1); 
 
 		ResultSet rs = receptionist.getAvailability(splittedDoctor[1]);
@@ -103,5 +109,19 @@ public class Availability implements Initializable {
 		show("/view/AddAppointment.fxml", event);
 
 	}
+	
+	@FXML
+	public void cancel(ActionEvent event) throws IOException{
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+		show("/view/AddAppointment.fxml", event);
+
+	}
+	
+	
+	
+	
+	
+	
 
 }

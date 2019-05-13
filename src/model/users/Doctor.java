@@ -2,6 +2,7 @@ package model.users;
 
 import com.mysql.jdbc.ResultSet;
 
+import model.functionalities.DoctorAvailablities;
 import model.functionalities.Functionality;
 import model.functionalities.Medication;
 import model.functionalities.PatientCase;
@@ -12,6 +13,7 @@ public class Doctor implements User {
 	Functionality f = new PatientCase();
 	Medication m = new Medication();
 	PatientCase patientCase = new PatientCase();
+	Functionality availablityF = new DoctorAvailablities();
 
 	public int editPatientCase(String key, String value, Record record) {
 		return f.edit(key, value, record);
@@ -25,6 +27,10 @@ public class Doctor implements User {
 	public int addPatientCase(Record record) {
 		System.out.println("in doctor");
 		return f.add(record);
+	}
+	
+	public int addAvailableTime(Record record){
+		return availablityF.add(record);
 	}
 
 	public ResultSet getAllMedicines() {
@@ -47,4 +53,12 @@ public class Doctor implements User {
 	public int getId() {
 		return id;
 	}
+
+	public ResultSet getAvailability(String id) {
+
+		return availablityF.search("", id);
+
+	}
+	
+
 }

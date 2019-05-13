@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAvailController">
+   <children>
+      <Pane prefHeight="283.0" prefWidth="359.0">
+         <children>
+            <Label layoutX="74.0" layoutY="33.0" prefHeight="35.0" prefWidth="237.0" text="Add new Available date and time" wrapText="true" />
+            <TextField fx:id="addAvailTime" layoutX="107.0" layoutY="117.0" prefHeight="25.0" prefWidth="197.0" />
+            <DatePicker fx:id="addAvailDate" layoutX="107.0" layoutY="193.0" />
+            <Label layoutX="23.0" layoutY="122.0" text="Time" />
+            <Label layoutX="23.0" layoutY="198.0" text="Date" />
+            <Button fx:id="addButton" layoutX="68.0" layoutY="244.0" mnemonicParsing="false" onAction="#addInDb" text="Add" />
+            <Button fx:id="cancelButton" layoutX="224.0" layoutY="244.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+            <Label fx:id="warningLabel" layoutX="22.0" layoutY="68.0" prefHeight="25.0" prefWidth="289.0" text="Invalid time" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

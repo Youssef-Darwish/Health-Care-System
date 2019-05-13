@@ -15,7 +15,7 @@ import model.records.Record;
 public class Receptionist implements User {
 	Functionality patientF = new PatientRegistry();
 	Functionality AppointmentF = new Appointment();
-	Functionality availablityF = new DoctorAvailablities();
+	DoctorAvailablities availablityF = new DoctorAvailablities();
 	Functionality staffF = new StaffMember();
 
 	public int editPatient(String key, String value, Record record) {
@@ -77,6 +77,12 @@ public class Receptionist implements User {
 	public ResultSet getAvailability(String id) {
 
 		return availablityF.search("", id);
+
+	}
+
+	public int deleteAvailability(String key1,String value1,String key2,String value2) {
+
+		return availablityF.deleteComposite(key1, value1, key2, value2);
 
 	}
 

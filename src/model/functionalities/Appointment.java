@@ -15,8 +15,6 @@ public class Appointment extends Functionality {
 	@Override
 	public int add(Record record) {
 		AppointmentRecord r = (AppointmentRecord) record;
-		System.out.println("entered");
-
 		try {
 			PreparedStatement stmt = con.prepareStatement(
 					"INSERT INTO APPOINTMENT (PATIENTID,DOCTORID,HOUR,APPOINTMENTDATE) Values(?,?,?,?);");
