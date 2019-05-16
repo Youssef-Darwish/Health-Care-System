@@ -192,6 +192,7 @@ public class DoctorController implements Initializable {
 //		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //		stage.close();
 		show("/view/AddAvailTime.fxml", event);
+		
 
 	}
 	
