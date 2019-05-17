@@ -15,7 +15,7 @@ public class ReportTest {
 	public void test1() throws SQLException {
 		ResultSet rs = m.getNumberOfNewAppointments();
 		while (rs.next()) {
-			assertEquals(2, rs.getInt(1));
+			assertEquals(1, rs.getInt(1));
 		}
 	}
 	@Test

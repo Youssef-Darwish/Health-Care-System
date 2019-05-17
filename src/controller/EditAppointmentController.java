@@ -2,10 +2,15 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+
+import org.controlsfx.control.textfield.TextFields;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,27 +20,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.records.AppointmentRecord;
-import model.records.PatientRecord;
 import model.users.Receptionist;
 
 public class EditAppointmentController implements Initializable {
 
 	@FXML // fx:id="editPatientId"
-	private TextField editPatientId;
+	private Label editPatientId;
 
 	@FXML // fx:id="editDoctortId"
 	private TextField editDoctortId;
 
 	@FXML // fx:id="editHour"
-	private TextField editHour;
+	private Label editHour;
 
 	@FXML // fx:id="editDate"
-	private DatePicker editDate;
+	private Label editDate;
 
 	@FXML // fx:id="warningLabel"
 	private Label warningLabel;
@@ -46,20 +49,58 @@ public class EditAppointmentController implements Initializable {
 	@FXML // fx:id="cancelAppointment"
 	private Button cancelAppointment;
 
+	public static String doctorID = "";
+
+	public static String patientID = "";
+
+	public static String appointmentDate = "";
+
+	public static String appointmentTime = "";
+
+	public static boolean fromAvailTable = false;
+
+	@FXML
+	private Button openAvailButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		System.out.println("in init edit");
-		// get data from receptionist scene
-		System.out.println(ReceptionistController.selectedAppRecord == null);
-		editPatientId.setText(String.valueOf(ReceptionistController.selectedAppRecord.getPatientId()));
-		editDoctortId.setText(String.valueOf(ReceptionistController.selectedAppRecord.getDoctorId()));
-		editHour.setText(String.valueOf(ReceptionistController.selectedAppRecord.getHour()));
-		java.util.Date utilDate = new java.util.Date(
-				ReceptionistController.selectedAppRecord.getAppointmentDate().getTime());
-		LocalDate date = utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		ArrayList<String> doctorNames = null;
 
-		editDate.setValue(date);
+		try {
+			doctorNames = ((Receptionist) LoginController.loggedIn).getDoctorNames();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		TextFields.bindAutoCompletion(editDoctortId, doctorNames);
+
+		// get data from receptionist scene
+		if (!fromAvailTable) {
+			editPatientId.setText(String.valueOf(ReceptionistController.selectedAppRecord.getPatientId()));
+
+			editHour.setText(String.valueOf(ReceptionistController.selectedAppRecord.getHour()));
+			java.util.Date utilDate = new java.util.Date(
+					ReceptionistController.selectedAppRecord.getAppointmentDate().getTime());
+			LocalDate date = utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+			editDate.setText(date.toString());
+
+			editDoctortId.setText(doctorID);
+		} else {
+			editPatientId.setText(String.valueOf(ReceptionistController.selectedAppRecord.getPatientId()));
+
+			editHour.setText(appointmentTime);
+			java.util.Date utilDate = new java.util.Date(
+					ReceptionistController.selectedAppRecord.getAppointmentDate().getTime());
+			LocalDate date = utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+			editDate.setText(appointmentDate);
+
+			editDoctortId.setText(doctorID);
+
+		}
 
 	}
 
@@ -75,10 +116,8 @@ public class EditAppointmentController implements Initializable {
 			// validate input type
 			try {
 
-				LocalDate localDate = editDate.getValue();
-
-				Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+				Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(editDate.getText());
+				java.sql.Date sqlDate = new java.sql.Date(date1.getTime());
 
 				AppointmentRecord record = new AppointmentRecord(Integer.valueOf(editPatientId.getText()),
 						Integer.valueOf(editDoctortId.getText()), editHour.getText(), sqlDate);
@@ -87,19 +126,20 @@ public class EditAppointmentController implements Initializable {
 						String.valueOf(ReceptionistController.selectedAppRecord.getAppointmentId()), record);
 				if (result == -1) {
 					throw new Exception();
-				}
-
+				} else if (result == 0)
+					System.out.println("no match");
+				EditAppointmentController.doctorID = "";
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				stage.close();
-
+				fromAvailTable = false;
 				show("/view/ReceptionistScene.fxml", event);
 
 			} catch (NumberFormatException e) {
 				warningLabel.setText("invalid input");
 				warningLabel.setVisible(true);
 			} catch (Exception e) {
-//				warningLabel.setText("Invalid Input");
-//				warningLabel.setVisible(true);
+				// warningLabel.setText("Invalid Input");
+				// warningLabel.setVisible(true);
 				System.out.println(e.getMessage());
 
 			}
@@ -130,6 +170,20 @@ public class EditAppointmentController implements Initializable {
 				|| editHour.getText().trim().isEmpty();
 
 		return check;
+	}
+
+	@FXML
+	public void openAvailabilityDates(ActionEvent event) throws IOException {
+
+		doctorID = editDoctortId.getText();
+		patientID = editPatientId.getText();
+
+		String[] splitDocId = doctorID.split(" ");
+
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.close();
+		show("/view/AvailEdit.fxml", event);
+
 	}
 
 }

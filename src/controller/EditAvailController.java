@@ -12,7 +12,6 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,7 +28,7 @@ import model.records.AvailablityRecord;
 import model.records.Record;
 import model.users.Receptionist;
 
-public class Availability implements Initializable {
+public class EditAvailController implements Initializable {
 
 	@FXML // fx:id="availabilityTable"
 	private TableView<Record> availabilityTable;
@@ -50,6 +49,8 @@ public class Availability implements Initializable {
 	private Button cancelButton;
 
 	private Receptionist receptionist = new Receptionist();
+	
+	String[] splittedDoctor;
 
 	public void buildAvailTable(ResultSet rs) throws SQLException {
 
@@ -69,17 +70,18 @@ public class Availability implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		try{
-		selectButton.disableProperty().bind(Bindings.isEmpty(availabilityTable.getSelectionModel().getSelectedItems()));
+		try {
+			selectButton.disableProperty()
+					.bind(Bindings.isEmpty(availabilityTable.getSelectionModel().getSelectedItems()));
 
-		String id = AddAppointmentController.doctorID;
-		String []splittedDoctor = id.split("id: ");
-				
-		splittedDoctor[1]=splittedDoctor[1].substring(0, splittedDoctor[1].length()-1); 
+			String id = EditAppointmentController.doctorID;
+			 splittedDoctor = id.split("id: ");
 
-		ResultSet rs = receptionist.getAvailability(splittedDoctor[1]);
-		
-		buildAvailTable(rs);
+			splittedDoctor[1] = splittedDoctor[1].substring(0, splittedDoctor[1].length() - 1);
+
+			ResultSet rs = receptionist.getAvailability(splittedDoctor[1]);
+
+			buildAvailTable(rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,27 +111,22 @@ public class Availability implements Initializable {
 	public void select(ActionEvent event) throws IOException {
 
 		AvailablityRecord selectedRecord = (AvailablityRecord) availabilityTable.getSelectionModel().getSelectedItem();
-		AddAppointmentController.appointmentDate = selectedRecord.getDate().toString();
-		AddAppointmentController.appointmentTime = selectedRecord.getTime();
-
+		EditAppointmentController.appointmentDate = selectedRecord.getDate().toString();
+		EditAppointmentController.appointmentTime = selectedRecord.getTime();
+		EditAppointmentController.doctorID = splittedDoctor[1];
+		EditAppointmentController.fromAvailTable=true;
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
-		show("/view/AddAppointment.fxml", event);
+		show("/view/EditAppointment.fxml", event);
 
 	}
-	
+
 	@FXML
-	public void cancel(ActionEvent event) throws IOException{
+	public void cancel(ActionEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
 		show("/view/AddAppointment.fxml", event);
 
 	}
-	
-	
-	
-	
-	
-	
 
 }

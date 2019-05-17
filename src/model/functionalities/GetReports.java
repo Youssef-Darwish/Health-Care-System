@@ -40,7 +40,7 @@ public class GetReports extends Functionality {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
 			query += "select DOCTORID, count(PATIENTID) from APPOINTMENT"
-					+ " where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)"
+//					+ " where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)"
 					+ " group by doctorid;";
 			System.out.println(query);
 			ResultSet result = (ResultSet) stat.executeQuery(query);
@@ -56,8 +56,8 @@ public class GetReports extends Functionality {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
 			query += "select count(ID) as TotalPatients, count(distinct(DOCTORID)) as doctor"
-					+ ", count(distinct(PATIENTID)) as patient from `hospital_db`.`APPOINTMENT` "
-					+ "where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)";
+					+ ", count(distinct(PATIENTID)) as patient from `hospital_db`.`APPOINTMENT` ";
+//					+ "where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)";
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;
 			

@@ -19,9 +19,14 @@
       <Label layoutX="58.0" layoutY="319.0" text="Date" />
       <Button fx:id="editAppointmentButton" layoutX="100.0" layoutY="366.0" mnemonicParsing="false" onAction="#editInDB" prefHeight="25.0" prefWidth="55.0" text="Edit" />
       <Button fx:id="cancelAppointment" layoutX="235.0" layoutY="366.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-      <TextField fx:id="editPatientId" layoutX="141.0" layoutY="146.0" />
       <TextField fx:id="editDoctortId" layoutX="141.0" layoutY="198.0" />
-      <TextField fx:id="editHour" layoutX="141.0" layoutY="255.0" />
-      <DatePicker fx:id="editDate" layoutX="142.0" layoutY="314.0" />
+      <Button fx:id="openAvailButton" layoutX="325.0" layoutY="184.0" mnemonicParsing="false" onAction="#openAvailabilityDates" prefHeight="59.0" prefWidth="88.0" text="Open Available time" wrapText="true">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Label fx:id="editPatientId" layoutX="146.0" layoutY="144.0" prefHeight="25.0" prefWidth="170.0" />
+      <Label fx:id="editDate" layoutX="146.0" layoutY="319.0" prefHeight="20.0" prefWidth="163.0" />
+      <Label fx:id="editHour" layoutX="143.0" layoutY="265.0" prefHeight="20.0" prefWidth="163.0" text="Label" />
    </children>
 </Pane>
