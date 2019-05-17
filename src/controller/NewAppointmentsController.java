@@ -55,9 +55,9 @@ public class NewAppointmentsController implements Initializable {
 		}
 		ResultSet rs1 = ((Manager) LoginController.loggedIn).getNumberOfNewAppointments();
 		try {
-			while (!rs1.isLast()) {
-			rs1.next();
-			System.out.println(rs1.getInt(1));
+			while (rs1.next()) {
+			
+			//System.out.println(rs1.getInt(1));
 			patientsCount.setText(String.valueOf(rs1.getInt(3)));
 			doctorsCount.setText(String.valueOf(rs1.getInt(2)));
 			appointmentsNumber.setText(String.valueOf(rs1.getInt(1)));
