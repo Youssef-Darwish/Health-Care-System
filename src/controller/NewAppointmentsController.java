@@ -43,7 +43,8 @@ public class NewAppointmentsController implements Initializable {
 		try {
 			while (rs.next()) {
 				
-				//series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getDouble(2)));
+				series.getData().add(new XYChart.Data<>(String.valueOf(rs.getInt(1))
+						, rs.getInt(2)));
 			}
 			barChart.getData().addAll(series);
 			
