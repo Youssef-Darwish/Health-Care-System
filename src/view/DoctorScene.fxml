@@ -45,7 +45,8 @@
                       <TableColumn fx:id="timeColumn" prefWidth="168.0" text="Time" />
                     </columns>
                   </TableView>
-                  <Button fx:id="addAvail" layoutX="91.0" layoutY="328.0" mnemonicParsing="false" onAction="#addAvailableTime" prefHeight="25.0" prefWidth="132.0" text="Add" />
+                  <Button fx:id="addAvail" layoutX="206.0" layoutY="328.0" mnemonicParsing="false" onAction="#addAvailableTime" prefHeight="25.0" prefWidth="106.0" text="Add" />
+                  <Button fx:id="deleteAvailButton" layoutX="14.0" layoutY="328.0" mnemonicParsing="false" onAction="#deleteAvail" prefHeight="25.0" prefWidth="98.0" text="Delete" />
                </children>
             </AnchorPane>
          </content>

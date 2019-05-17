@@ -45,10 +45,9 @@ public class ReportController implements Initializable {
 		// TODO Auto-generated method stub
 		XYChart.Series series = new XYChart.Series<>();
 		ResultSet rs = ((Manager) LoginController.loggedIn).getTotalPricesOfEachMedicine();
-		
+		System.out.println(rs==null);
 		try {
 			while (rs.next()) {
-				
 				series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getDouble(2)));
 			}
 			barChart.getData().addAll(series);

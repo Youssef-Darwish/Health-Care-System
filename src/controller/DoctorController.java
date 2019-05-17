@@ -26,11 +26,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.records.AppointmentRecord;
 import model.records.AvailablityRecord;
 import model.records.MedicationRecord;
 import model.records.PatientRecord;
 import model.records.Record;
 import model.users.Doctor;
+import model.users.Receptionist;
 
 public class DoctorController implements Initializable {
 
@@ -39,6 +41,9 @@ public class DoctorController implements Initializable {
 
 	@FXML
 	private Button logoutButton;
+	
+	@FXML
+	private Button deleteAvailButton;
 
 	@FXML // fx:id="patientIdColumn"
 	private TableColumn<Record, Integer> patientIdColumn;
@@ -84,11 +89,13 @@ public class DoctorController implements Initializable {
 
 	private Doctor doctor = new Doctor();
 	public static PatientRecord selectedRecord;
+	public static AvailablityRecord selectedAvRecord;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		showCaseButton.disableProperty().bind(Bindings.isEmpty(patientsTable.getSelectionModel().getSelectedItems()));
+		deleteAvailButton.disableProperty().bind(Bindings.isEmpty(availTable.getSelectionModel().getSelectedItems()));
 
 		try {
 			this.buildPatientTable();
@@ -196,5 +203,18 @@ public class DoctorController implements Initializable {
 
 	}
 	
+	//delete available
+	@FXML
+	public void deleteAvail(ActionEvent event) throws SQLException{
+		selectedAvRecord = (AvailablityRecord) availTable.getSelectionModel().getSelectedItem();
+		AvailablityRecord r = new AvailablityRecord( selectedAvRecord.getDate(),
+				selectedAvRecord.getTime());
+
+		doctor.deleteAvail(r);
+		int id = ((Doctor) (LoginController.loggedIn)).getId();
+		ResultSet rs = doctor.getAvailability(String.valueOf(id));
+		buildAvailTable(rs);
+
+	}
 
 }
