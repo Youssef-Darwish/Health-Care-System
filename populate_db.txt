@@ -7,16 +7,16 @@ insert into MEDICATION values(30,"mede");
 insert into MEDICATION values(40,"medf");
 insert into MEDICATION values(20,"medg");
 
-insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
-values('youssef','Admin','122222',12222,md5('pass1'));
-insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
-values('Rowan','Manager','0123456612',12222,md5('pass1'));
-insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
-values('user','Receptionist','0345432432',40000,md5('pass1'));
-insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
-values('Haya','Doctor','0114451351',50000,md5('pass1'));
-insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS)
-values('Amira','Doctor','0343432432',40000,md5('pass1'));
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS,HIRINGDATE)
+values('youssef','Admin','122222',12222,md5('pass1'),'2018-5-17');
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS,HIRINGDATE)
+values('Rowan','Manager','0123456612',12222,md5('pass1'),'2018-5-17');
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS,HIRINGDATE)
+values('user','Receptionist','0345432432',40000,md5('pass1'),'2018-5-17');
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS,HIRINGDATE)
+values('Haya','Doctor','0114451351',50000,md5('pass1'),'2018-5-17');
+insert into STAFF (NAME,ROLE,TELEPHONE,SALARY,PASS,HIRINGDATE)
+values('Amira','Doctor','0343432432',40000,md5('pass1'),'2018-5-17');
 
 insert into Patient (ID,NAME,TELEPHONE,GENDER,REGISTERATIONDATE)
 values(1111130,'patient2','0345432431','male','2017-10-20');
@@ -31,6 +31,14 @@ insert into APPOINTMENT (PATIENTID,DOCTORID,HOUR,APPOINTMENTDATE)
 values('1111130','4','14:30','2018-12-20');
 insert into APPOINTMENT (PATIENTID,DOCTORID,HOUR,APPOINTMENTDATE)
 values('1111130','4','14:30','2018-12-20');
-DELETE FROM PATIENTCASE;
-insert into PATIENTCASE (PATIENTID,DISEASE,MEDICATION, CASEDATE)
-values('1111130','diabetes','meda','2019-4-20');
+insert into PATIENTCASE (PATIENTID,DISEASE,MEDICATION,CASEDATE)
+values('1111130','diabetes','meda','2018-12-20');
+
+
+insert into AVAILABILITY (DOCTORID,DATE,HOUR)
+values ('4','2018-12-20','14:30');
+
+insert into AVAILABILITY (DOCTORID,DATE,HOUR)
+values ('4','2018-12-20','15:30');
+
+
