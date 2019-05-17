@@ -47,8 +47,6 @@ public class LoginController implements Initializable {
 	public int login(ActionEvent event) throws IOException, SQLException {
 		Parent pageParent = null;
 
-		System.out.println(emailText.getText());
-		System.out.println(passwordText.getText());
 		if (validateInput()) {
 
 			warningLabel.setVisible(true);
@@ -60,7 +58,6 @@ public class LoginController implements Initializable {
 						+ passwordText.getText() + "');";
 
 				ResultSet result = (ResultSet) stat.executeQuery(query);
-				System.out.println(result);
 				if (!result.next()) { // empty set
 					System.out.println("hiii");
 					warningLabel.setVisible(true);

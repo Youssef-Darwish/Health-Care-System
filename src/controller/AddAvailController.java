@@ -53,8 +53,13 @@ public class AddAvailController implements Initializable {
 
 	private boolean validateInput() {
 		// check that all fields are not empty for now
-		boolean check = addAvailTime.getText().trim().isEmpty();
-		return check;
+		boolean check = !(addAvailTime.getText().trim().isEmpty());
+		//^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$
+		String pattern = "^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$";
+		boolean check2 = addAvailTime.getText().matches(pattern);
+		if(!check2)
+			System.out.println("invalid time!!!!!!!!!!!!!");
+		return check && check2;
 	}
 
 	private void show(String uml, ActionEvent event) throws IOException {
@@ -69,7 +74,7 @@ public class AddAvailController implements Initializable {
 	@FXML
 	public void addInDb(ActionEvent event) {
 
-		if (validateInput()) {
+		if (!validateInput()) {
 			warningLabel.setVisible(true);
 		} else {
 

@@ -6,6 +6,7 @@ import model.functionalities.DoctorAvailablities;
 import model.functionalities.Functionality;
 import model.functionalities.Medication;
 import model.functionalities.PatientCase;
+import model.records.AvailablityRecord;
 import model.records.Record;
 
 public class Doctor implements User {
@@ -13,7 +14,7 @@ public class Doctor implements User {
 	Functionality f = new PatientCase();
 	Medication m = new Medication();
 	PatientCase patientCase = new PatientCase();
-	Functionality availablityF = new DoctorAvailablities();
+	DoctorAvailablities availablityF = new DoctorAvailablities();
 
 	public int editPatientCase(String key, String value, Record record) {
 		return f.edit(key, value, record);
@@ -28,8 +29,8 @@ public class Doctor implements User {
 		System.out.println("in doctor");
 		return f.add(record);
 	}
-	
-	public int addAvailableTime(Record record){
+
+	public int addAvailableTime(Record record) {
 		return availablityF.add(record);
 	}
 
@@ -59,6 +60,10 @@ public class Doctor implements User {
 		return availablityF.search("", id);
 
 	}
-	
+
+	public int deleteAvail(AvailablityRecord r) {
+		return availablityF.deleteComposite("DATE", r.getDate().toString(), "HOUR", r.getTime());
+
+	}
 
 }

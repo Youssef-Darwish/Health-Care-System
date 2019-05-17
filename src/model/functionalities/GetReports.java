@@ -24,13 +24,14 @@ public class GetReports extends Functionality {
 		try {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
-			query += "select count(ID) as c from hospital_db.staff where "
-					+ "HIRINGDATE > DATE(NOW() - INTERVAL 3 MONTH) group by role;";
+			query += "select count(ID) as c from hospital_db.STAFF where "
+					+ "HIRINGDATE > DATE(NOW() - INTERVAL 3 MONTH) group by ROLE;";
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			
 			return result;
 					
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
@@ -38,7 +39,7 @@ public class GetReports extends Functionality {
 		try {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
-			query += "select doctorid, count(patientID) from appointment"
+			query += "select DOCTORID, count(PATIENTID) from APPOINTMENT"
 					+ " where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)"
 					+ " group by doctorid;";
 			System.out.println(query);
@@ -46,6 +47,7 @@ public class GetReports extends Functionality {
 			return result;
 			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
@@ -54,12 +56,13 @@ public class GetReports extends Functionality {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
 			query += "select count(ID) as TotalPatients, count(distinct(DOCTORID)) as doctor"
-					+ ", count(distinct(PatientID)) as patient from `hospital_db`.`Appointment` "
+					+ ", count(distinct(PATIENTID)) as patient from `hospital_db`.`APPOINTMENT` "
 					+ "where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)";
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;
 			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
@@ -68,17 +71,18 @@ public class GetReports extends Functionality {
 			Statement stat = (Statement) con.createStatement();
 			String query = "";
 			System.out.println("here");
-			query += "select medication , price*count(medication) from patientCase "
-					+ "join hospital_db.medication "
+			query += "select MEDICATION , PRICE*count(MEDICATION) from PATIENTCASE "
+					+ "join hospital_db.MEDICATION "
 					+ "on"
-					+ " patientCase.medication = hospital_db.medication.name "
-					+ "where patientCase.CaseDate > DATE(NOW() - INTERVAL 3 MONTH)"
-					+ "group by medication";
+					+ " PATIENTCASE.MEDICATION = hospital_db.MEDICATION.NAME "
+//					+ "where PATIENTCASE.CASEDATE > DATE(NOW() - INTERVAL 3 MONTH)"
+					+ "group by MEDICATION ;";
 			System.out.println(query);
 			ResultSet result = (ResultSet) stat.executeQuery(query);
 			return result;
 			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
