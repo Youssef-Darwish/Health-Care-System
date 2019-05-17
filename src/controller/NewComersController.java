@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,8 +35,7 @@ public class NewComersController implements Initializable{
 		ResultSet rs = ((Manager) LoginController.loggedIn).getNumberOfNewPatients();
 		ResultSet rs1 = ((Manager) LoginController.loggedIn).getNumberOfNewStaff();
 		try {
-			while (!rs.isLast()) {
-				rs.next();
+			while (rs.next()) {
 				patients.setText(String.valueOf(rs.getInt(1)));
 				
 				}
@@ -46,9 +46,9 @@ public class NewComersController implements Initializable{
 			labels[3] = receptionists;
 
 			int i = 0;
-			while (!rs1.isLast()) {
-				rs1.next();
-				labels[i].setText(String.valueOf(rs1.getInt(1)));
+			while (rs1.next()) {
+					labels[i].setText(String.valueOf(rs1.getInt(1)));
+
 				i++;
 				
 				}

@@ -34,6 +34,21 @@ public class GetReports extends Functionality {
 			return null;
 		}
 	}
+	public ResultSet getAppointmentsChart() {
+		try {
+			Statement stat = (Statement) con.createStatement();
+			String query = "";
+			query += "select doctorid, count(patientID) from appointment"
+					+ " where APPOINTMENTDATE > DATE(NOW() - INTERVAL 3 MONTH)"
+					+ " group by doctorid;";
+			System.out.println(query);
+			ResultSet result = (ResultSet) stat.executeQuery(query);
+			return result;
+			
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	public ResultSet getNumberOfNewAppointments () {
 		try {
 			Statement stat = (Statement) con.createStatement();

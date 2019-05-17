@@ -1,12 +1,14 @@
 package controller;
 
-import java.awt.event.ActionEvent;
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -45,8 +47,8 @@ public class ReportController implements Initializable {
 		ResultSet rs = ((Manager) LoginController.loggedIn).getTotalPricesOfEachMedicine();
 		
 		try {
-			while (!rs.isLast()) {
-				rs.next();
+			while (rs.next()) {
+				
 				series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getDouble(2)));
 			}
 			barChart.getData().addAll(series);

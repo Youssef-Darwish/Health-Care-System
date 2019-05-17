@@ -18,4 +18,7 @@ public class Manager implements User {
 	public ResultSet getNumberOfNewStaff () {
 		return gr.getNumberOfNewStaff();
 	}
+	public ResultSet getAppointmentsChart() {
+		return gr.getAppointmentsChart();
+	}
 }

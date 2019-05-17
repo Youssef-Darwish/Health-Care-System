@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewAppointmentsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewAppointmentsController">
    <children>
       <Label layoutX="27.0" layoutY="23.0" prefHeight="35.0" prefWidth="480.0" text="Appointments Report">
          <font>
@@ -18,7 +19,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="appointmentsNumber" layoutX="348.0" layoutY="76.0" text="Label">
+      <Label fx:id="appointmentsNumber" layoutX="348.0" layoutY="76.0" text="0">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
@@ -28,32 +29,41 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="27.0" layoutY="149.0" prefHeight="27.0" prefWidth="46.0" text="Only">
+      <Label layoutX="566.0" layoutY="76.0" prefHeight="27.0" prefWidth="46.0" text="Only">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="doctorsCount" layoutX="73.0" layoutY="149.0" text="Label">
+      <Label fx:id="doctorsCount" layoutX="612.0" layoutY="76.0" text="0">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="132.0" layoutY="149.0" prefHeight="27.0" prefWidth="390.0" text="Doctors participated in those appointments with">
+      <Label layoutX="639.0" layoutY="76.0" prefHeight="27.0" prefWidth="390.0" text="Doctors participated in ">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="patientsCount" layoutX="27.0" layoutY="190.0" text="Label">
+      <Label fx:id="patientsCount" layoutX="224.0" layoutY="109.0" text="0">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="84.0" layoutY="190.0" prefHeight="21.0" prefWidth="82.0" text="Patients">
+      <Label layoutX="257.0" layoutY="109.0" prefHeight="21.0" prefWidth="82.0" text="Patients">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="27.0" layoutY="331.0" mnemonicParsing="false" onAction="#goBack" text="back" />
-      <Button fx:id="out" layoutX="490.0" layoutY="331.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Button fx:id="goBack" layoutX="20.0" layoutY="521.0" mnemonicParsing="false" onAction="#goBack" text="back" />
+      <Button fx:id="logout" layoutX="788.0" layoutY="521.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <BarChart fx:id="barChart" layoutX="146.0" layoutY="136.0" title="Doctors Visits">
+        <xAxis>
+          <CategoryAxis label="Doctors" side="BOTTOM" fx:id="x" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="y" label="Number Of Visits" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label layoutX="33.0" layoutY="112.0" text="those appointments with" />
    </children>
 </Pane>
